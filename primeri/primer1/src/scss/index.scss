@@ -1,0 +1,14 @@
+// main scss file
+
+// abstracts
+@use 'abstracts/colors';
+@use 'abstracts/variables';
+
+// base
+@use 'base/reset';
+
+// components
+@use 'components/button';
+
+// pages
+@use 'pages/home';
