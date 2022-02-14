@@ -1,7 +1,13 @@
+import Main from '../pages/Main';
+import Footer from './Footer';
+import Header from './Header';
+
 export default function App() {
     return (
-        <div>
-            <h1>App</h1>
+        <div className='app'>
+            <Header />
+            <Main />
+            <Footer />
         </div>
     );
 }
