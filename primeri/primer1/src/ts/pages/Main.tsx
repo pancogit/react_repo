@@ -11,11 +11,12 @@ import GalleryLinks from './gallery/GalleryLinks';
 import GalleryPictures from './gallery/GalleryPictures';
 import Home from './Home';
 import PageNotFound from './PageNotFound';
-import Pages1 from './pages/Pages1';
-import Pages2 from './pages/Pages2';
-import Pages3 from './pages/Pages3';
+import Projects from './pages/Projects';
+import Volunteers from './pages/Volunteers';
+import Partners from './pages/Partners';
 import ShopCart from './shop/ShopCart';
 import ShopPage from './shop/ShopPage';
+import TopBack from '../components/TopBack';
 
 export default function Main() {
     return (
@@ -27,9 +28,9 @@ export default function Main() {
                     <Route path='/' element={<Home />} />
                     <Route path='about' element={<About />} />
                     <Route path='causes' element={<Causes />} />
-                    <Route path='pages-1' element={<Pages1 />} />
-                    <Route path='pages-2' element={<Pages2 />} />
-                    <Route path='pages-3' element={<Pages3 />} />
+                    <Route path='projects' element={<Projects />} />
+                    <Route path='volunteers' element={<Volunteers />} />
+                    <Route path='partners' element={<Partners />} />
                     <Route
                         path='gallery-pictures'
                         element={<GalleryPictures />}
@@ -45,6 +46,8 @@ export default function Main() {
                     <Route path='*' element={<PageNotFound />} />
                 </Routes>
             </div>
+
+            <TopBack />
         </main>
     );
 }

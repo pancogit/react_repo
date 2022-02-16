@@ -11,11 +11,3 @@ export default function App() {
         </div>
     );
 }
-
-/*
-    <div>
-        <i className='fa-solid fa-star'></i>
-        <i className='fa-solid fa-star'></i>
-        <i className='fa-solid fa-star-half-stroke'></i>
-    </div>
-*/

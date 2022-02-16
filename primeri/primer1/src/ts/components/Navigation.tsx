@@ -22,18 +22,18 @@ export default function Navigation() {
                             {/* <i className='fa-solid fa-angle-up navigation__arrow'></i> */}
                         </li>
                         <li className='navigation__submenu-item'>
-                            <Link to='/pages-1' className='navigation__link'>
-                                Pages 1
+                            <Link to='/projects' className='navigation__link'>
+                                Projects
                             </Link>
                         </li>
                         <li className='navigation__submenu-item'>
-                            <Link to='/pages-2' className='navigation__link'>
-                                Pages 2
+                            <Link to='/volunteers' className='navigation__link'>
+                                Volunteers
                             </Link>
                         </li>
                         <li className='navigation__submenu-item'>
-                            <Link to='/pages-3' className='navigation__link'>
-                                Pages 3
+                            <Link to='/partners' className='navigation__link'>
+                                Partners
                             </Link>
                         </li>
                     </ul>
