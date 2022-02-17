@@ -1,1 +1,40 @@
 // variables
+
+// base
+$content_padding: 0.5rem;
+$content_max_width: 80rem;
+
+// app
+$app_min_width: 20rem;
+
+// social
+$social_item_border_width: 0.1rem;
+$social_item_font_size: 0.8rem;
+$social_link_padding: 1rem;
+$social_link_height: 100%;
+
+// searchbar
+$searchbar_active_padding: 0.7rem 1rem;
+$searchbar_active_width: 14rem;
+$searchbar_button_padding: 1rem;
+$searchbar_button_height: 100%;
+$searchbar_button_border_width: 0.1rem;
+$searchbar_icon_font_size: 0.8rem;
+$searchbar_input_transition: 0.7s;
+
+// header
+$header_email_margin: 0 0.9rem;
+$header_username_padding_bottom: 0.3rem;
+$header_info_screen_medium: 45.5rem;
+$header_info_screen_medium_flex: 100%;
+$header_info_screen_smaller: 39rem;
+$header_user_screen_medium_border_width: 0.1rem;
+$header_number_font_size: 0.95rem;
+$header_number_screen_medium_padding_top: 0.7rem;
+$header_number_screen_medium_padding_bottom: 1rem;
+$header_top_border_width: 0.1rem;
+$header_user_padding: 0.7rem 1.3rem;
+$header_user_font_size: 0.9rem;
+$header_user_border_width: 0.1rem;
+$header_user_screen_smaller_flex: 100%;
+$header_letter_margin_right: 1.1rem;

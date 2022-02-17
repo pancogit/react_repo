@@ -1,0 +1,54 @@
+// searchbar
+
+@use '../abstracts/colors';
+@use '../abstracts/variables';
+
+.searchbar {
+    display: flex;
+
+    // when searchbar is used, then show search input with width slide transition
+    &--active {
+        .searchbar__input {
+            padding: variables.$searchbar_active_padding;
+            width: variables.$searchbar_active_width;
+        }
+    }
+
+    &__button {
+        display: flex;
+        align-items: center;
+        padding: variables.$searchbar_button_padding;
+        height: variables.$searchbar_button_height;
+        border: none;
+        border-left-style: solid;
+        border-left-width: variables.$searchbar_button_border_width;
+        border-left-color: colors.$searchbar_button_border_color;
+        border-right-style: solid;
+        border-right-width: variables.$searchbar_button_border_width;
+        border-right-color: colors.$searchbar_button_border_color;
+        background-color: colors.$searchbar_button_background_color;
+        color: white;
+        cursor: pointer;
+        box-sizing: border-box;
+
+        &:hover {
+            background-color: colors.$searchbar_button_background_color_hover;
+        }
+    }
+
+    &__icon {
+        font-size: variables.$searchbar_icon_font_size;
+    }
+
+    &__input {
+        border: none;
+        font-style: italic;
+        outline: none;
+        min-width: 0;
+
+        // set transition on input when it's shown on page
+        width: 0;
+        padding: 0;
+        transition: variables.$searchbar_input_transition;
+    }
+}

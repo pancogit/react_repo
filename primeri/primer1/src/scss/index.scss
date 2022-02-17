@@ -9,6 +9,10 @@
 
 // components
 @use 'components/button';
+@use 'components/app';
+@use 'components/header';
+@use 'components/social';
+@use 'components/searchbar';
 
 // pages
 @use 'pages/home';

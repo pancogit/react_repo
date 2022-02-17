@@ -1,1 +1,15 @@
 // reset
+
+@use '../abstracts/variables';
+
+body {
+    margin: 0;
+}
+
+// page centered content
+.content {
+    padding-left: variables.$content_padding;
+    padding-right: variables.$content_padding;
+    margin: 0 auto;
+    max-width: variables.$content_max_width;
+}

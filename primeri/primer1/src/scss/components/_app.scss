@@ -1,0 +1,7 @@
+// app
+
+@use '../abstracts/variables';
+
+.app {
+    min-width: variables.$app_min_width;
+}

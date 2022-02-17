@@ -17,7 +17,7 @@ export default function Header() {
                         </p>
                         <div className='header__info'>
                             <div className='header__user'>
-                                <i className='fa-solid fa-envelope'></i>
+                                <i className='fa-solid fa-envelope header__letter'></i>
                                 <p className='header__email'>
                                     generosity@gmail.com
                                 </p>

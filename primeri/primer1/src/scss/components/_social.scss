@@ -1,0 +1,40 @@
+// social
+
+@use '../abstracts/colors';
+@use '../abstracts/variables';
+
+.social {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background-color: colors.$social_background_color;
+
+    &__item {
+        border-right-style: solid;
+        border-right-width: variables.$social_item_border_width;
+        border-right-color: colors.$social_item_border_color;
+
+        &--no-border {
+            border: none;
+        }
+    }
+
+    &__icon {
+        color: colors.$social_icon_color;
+        font-size: variables.$social_item_font_size;
+    }
+
+    &__link {
+        display: flex;
+        align-items: center;
+        padding: variables.$social_link_padding;
+        height: variables.$social_link_height;
+        text-decoration: none;
+        box-sizing: border-box;
+
+        &:hover {
+            background-color: colors.$social_link_background_color_hover;
+        }
+    }
+}

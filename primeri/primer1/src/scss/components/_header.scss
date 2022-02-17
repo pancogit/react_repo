@@ -1,0 +1,131 @@
+// header
+
+@use '../abstracts/colors';
+@use '../abstracts/variables';
+
+.header {
+    background-color: colors.$header_background_color;
+    color: colors.$header_color;
+
+    &__content {
+    }
+
+    &__donate {
+    }
+
+    &__email {
+        &::after {
+            content: '/';
+            margin: variables.$header_email_margin;
+        }
+    }
+
+    &__email,
+    &__username {
+        margin: 0;
+        padding-bottom: variables.$header_username_padding_bottom;
+    }
+
+    &__info {
+        display: flex;
+
+        // put into new line, move flex elements to the right edge
+        @media screen and (max-width: variables.$header_info_screen_medium) {
+            flex: variables.$header_info_screen_medium_flex;
+            justify-content: flex-end;
+        }
+
+        // wrap flex elements on small screens
+        @media screen and (max-width: variables.$header_info_screen_smaller) {
+            flex-wrap: wrap;
+        }
+
+        // and add top borders when flex elements are put into new line
+        .header__user,
+        .social,
+        .searchbar {
+            @media screen and (max-width: variables.$header_info_screen_medium) {
+                border-top-style: solid;
+                border-top-width: variables.$header_user_screen_medium_border_width;
+                border-top-color: colors.$header_user_screen_medium_border_color;
+            }
+        }
+
+        // spread flex element to the full line width for small screens
+        .header__user {
+            @media screen and (max-width: variables.$header_info_screen_smaller) {
+                flex: variables.$header_user_screen_smaller_flex;
+                justify-content: center;
+                border-bottom-style: solid;
+                border-bottom-width: variables.$header_user_screen_medium_border_width;
+                border-bottom-color: colors.$header_user_screen_medium_border_color;
+            }
+        }
+
+        // remove top borders from other flex elements for small screens
+        .social,
+        .searchbar {
+            @media screen and (max-width: variables.$header_info_screen_smaller) {
+                border-top: none;
+            }
+        }
+
+        .social {
+            @media screen and (max-width: variables.$header_info_screen_smaller) {
+                border-left-style: solid;
+                border-left-width: variables.$header_user_screen_medium_border_width;
+                border-left-color: colors.$header_user_screen_medium_border_color;
+            }
+        }
+    }
+
+    &__number {
+        margin: 0;
+        font-size: variables.$header_number_font_size;
+
+        @media screen and (max-width: variables.$header_info_screen_medium) {
+            padding-top: variables.$header_number_screen_medium_padding_top;
+            padding-bottom: variables.$header_number_screen_medium_padding_bottom;
+        }
+
+        &-bold {
+            font-weight: bold;
+        }
+    }
+
+    &__top {
+        border-bottom-style: solid;
+        border-bottom-width: variables.$header_top_border_width;
+        border-bottom-color: colors.$header_top_border_color;
+    }
+
+    &__user {
+        display: flex;
+        align-items: center;
+        padding: variables.$header_user_padding;
+        font-size: variables.$header_user_font_size;
+        background-color: colors.$header_user_background_color;
+        border-left-style: solid;
+        border-left-width: variables.$header_user_border_width;
+        border-left-color: colors.$header_user_border_color;
+        border-right-style: solid;
+        border-right-width: variables.$header_user_border_width;
+        border-right-color: colors.$header_user_border_color;
+    }
+
+    &__username {
+        font-weight: bold;
+        color: colors.$header_username_color;
+    }
+
+    &__top-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__letter {
+        margin-right: variables.$header_letter_margin_right;
+    }
+}
