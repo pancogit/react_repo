@@ -7,7 +7,7 @@ interface Props {
 
 export default function Logo({ imageWidth }: Props) {
     return (
-        <Link to='/' className='logo'>
+        <Link to='/' className='logo logo--margin'>
             <div className='logo__wrapper'>
                 <img
                     src={logoImage}
@@ -16,11 +16,11 @@ export default function Logo({ imageWidth }: Props) {
                     height='auto'
                     className='logo__image'
                 />
-                <h1 className='logo__text'>
-                    <div className='logo__heading'>Generosity</div>
-                    <div className='logo__subheading'>Share your love</div>
-                </h1>
             </div>
+            <h1 className='logo__text'>
+                <div className='logo__heading'>Generosity</div>
+                <div className='logo__subheading'>Share your love</div>
+            </h1>
         </Link>
     );
 }

@@ -1,5 +1,8 @@
 // colors
 
+// body
+$body_background_color: #2e303c;
+
 // social
 $social_background_color: #2b2d39;
 $social_item_border_color: #383a46;
@@ -19,3 +22,25 @@ $header_top_border_color: #383a46;
 $header_user_border_color: #383a46;
 $header_user_background_color: #2b2d39;
 $header_username_color: #abd34b;
+$header_donate_border_color: #393b47;
+$header_donate_color: #f7d12d;
+$header_donate_border_color_hover: #373a44;
+$header_donate_background_color_hover: #2b2d39;
+
+// main
+$main_background_color: white;
+
+// navigation
+$navigation_list_hamburger_background_color: #2e303c;
+$navigation_list_color: white;
+$navigation_list_color_hover: #e0d2d2;
+$navigation_arrow_color: #6c6f78;
+$navigation_arrow_color_hover: white;
+$navigation_hamburger_close_color_hover: #e0d2d2;
+$navigation_submenu_item_background_color: #2b2d39;
+$navigation_submenu_item_border_color: #383a46;
+$navigation_hamburger_menu_color_hover: #e0d2d2;
+
+// logo
+$Logo_text_color_hover: #e0d2d2;
+$logo_text_color: white;

@@ -8,11 +8,13 @@
 @use 'base/reset';
 
 // components
-@use 'components/button';
 @use 'components/app';
 @use 'components/header';
 @use 'components/social';
 @use 'components/searchbar';
+@use 'components/logo';
+@use 'components/navigation';
 
 // pages
 @use 'pages/home';
+@use 'pages/main';

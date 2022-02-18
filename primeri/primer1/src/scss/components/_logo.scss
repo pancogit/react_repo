@@ -1,0 +1,57 @@
+// logo
+
+@use '../abstracts/variables';
+@use '../abstracts/colors';
+
+.logo {
+    display: flex;
+    text-decoration: none;
+
+    &--margin {
+        margin-right: variables.$logo_modif_margin-right;
+    }
+
+    @media screen and (max-width: variables.$navigation_hamburger_menu_screen_medium) {
+        margin-right: 0;
+        flex: variables.$logo_flex_screen_medium;
+    }
+
+    &:hover {
+        .logo__text {
+            color: colors.$Logo_text_color_hover;
+        }
+    }
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-right: variables.$logo_wrapper_margin_right;
+    }
+
+    &__heading {
+        font-size: variables.$logo_heading_font_size;
+
+        @media screen and (max-width: variables.$logo_heading_small_screen) {
+            font-size: variables.$logo_heading_font_size_small;
+        }
+    }
+
+    &__image {
+        @media screen and (max-width: variables.$logo_heading_small_screen) {
+            width: variables.$logo_image_width_small;
+        }
+    }
+
+    &__subheading {
+        margin-left: variables.$logo_subheading_margin_left;
+        margin-top: variables.$logo_subheading_margin_top;
+        font-size: variables.$logo_subheading_font_size;
+        font-weight: normal;
+    }
+
+    &__text {
+        margin: 0;
+        color: colors.$logo_text_color;
+    }
+}

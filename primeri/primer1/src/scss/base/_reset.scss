@@ -1,9 +1,11 @@
 // reset
 
+@use '../abstracts/colors';
 @use '../abstracts/variables';
 
 body {
     margin: 0;
+    background-color: colors.$body_background_color;
 }
 
 // page centered content

@@ -32,9 +32,11 @@ export default function Header() {
             <div className='header__content'>
                 <div className='content'>
                     <div className='header__content-wrapper'>
-                        <Logo imageWidth={50} />
+                        <Logo imageWidth={60} />
                         <Navigation />
-                        <div className='header__donate'>Donate Now</div>
+                        <div className='header__donate-wrapper'>
+                            <div className='header__donate'>Donate Now</div>
+                        </div>
                     </div>
                 </div>
             </div>

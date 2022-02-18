@@ -7,10 +7,36 @@
     background-color: colors.$header_background_color;
     color: colors.$header_color;
 
-    &__content {
+    &__donate {
+        margin-left: variables.$header_donate_margin_left;
+        padding: variables.$header_donate_padding;
+        border-style: solid;
+        border-width: variables.$header_donate_border_width;
+        border-color: colors.$header_donate_border_color;
+        border-radius: variables.$header_donate_border_radius;
+        color: colors.$header_donate_color;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: variables.$header_donate_font_size;
+
+        &:hover {
+            border-color: colors.$header_donate_border_color_hover;
+            background-color: colors.$header_donate_background_color_hover;
+        }
+
+        @media screen and (max-width: variables.$navigation_hamburger_menu_screen_medium) {
+            margin-left: 0;
+        }
     }
 
-    &__donate {
+    &__donate-wrapper {
+        @media screen and (max-width: variables.$navigation_hamburger_menu_screen_medium) {
+            display: flex;
+            justify-content: center;
+            order: variables.$header_donate_wrapper_order_medium;
+            flex: variables.$header_donate_wrapper_flex_medium;
+            margin-top: variables.$header_donate_wrapper_margin_top_medium;
+        }
     }
 
     &__email {
@@ -127,5 +153,16 @@
 
     &__letter {
         margin-right: variables.$header_letter_margin_right;
+    }
+
+    &__content-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: variables.$header_content_wrapper_padding;
+
+        @media screen and (max-width: variables.$header_content_wrapper_screen_large) {
+            flex-wrap: wrap;
+        }
     }
 }

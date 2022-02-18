@@ -79,6 +79,7 @@ export default function Footer() {
                             <a
                                 href='http://t.co/abcde'
                                 target='_blank'
+                                rel='noreferrer'
                                 className='footer__redirect'
                             >
                                 http://t.co/abcde
@@ -93,6 +94,7 @@ export default function Footer() {
                                 <a
                                     href='https://www.twitter.com'
                                     target='_blank'
+                                    rel='noreferrer'
                                     className='footer__redirect footer__redirect--small'
                                 >
                                     @YourTwitter
@@ -122,6 +124,7 @@ export default function Footer() {
                                 <a
                                     href='https://www.webinvader.com'
                                     target='_blank'
+                                    rel='noreferrer'
                                     className='footer__redirect footer__redirect--small'
                                 >
                                     wwwebinvader

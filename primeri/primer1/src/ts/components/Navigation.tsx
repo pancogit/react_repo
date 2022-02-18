@@ -14,13 +14,12 @@ export default function Navigation() {
                         Causes
                     </Link>
                 </li>
-                <li className='navigation__item'>
+                <li className='navigation__menu'>
+                    <Link to='#' className='navigation__link'>
+                        Pages{' '}
+                        <i className='fa-solid fa-angle-down navigation__arrow'></i>
+                    </Link>
                     <ul className='navigation__submenu'>
-                        <li className='navigation__submenu-title'>
-                            Pages{' '}
-                            <i className='fa-solid fa-angle-down navigation__arrow'></i>
-                            {/* <i className='fa-solid fa-angle-up navigation__arrow'></i> */}
-                        </li>
                         <li className='navigation__submenu-item'>
                             <Link to='/projects' className='navigation__link'>
                                 Projects
@@ -38,13 +37,12 @@ export default function Navigation() {
                         </li>
                     </ul>
                 </li>
-                <li className='navigation__item'>
+                <li className='navigation__menu'>
+                    <Link to='#' className='navigation__link'>
+                        Gallery{' '}
+                        <i className='fa-solid fa-angle-down navigation__arrow'></i>
+                    </Link>
                     <ul className='navigation__submenu'>
-                        <li className='navigation__submenu-title'>
-                            Gallery{' '}
-                            <i className='fa-solid fa-angle-down navigation__arrow'></i>
-                            {/* <i className='fa-solid fa-angle-up navigation__arrow'></i> */}
-                        </li>
                         <li className='navigation__submenu-item'>
                             <Link
                                 to='/gallery-pictures'
@@ -63,13 +61,12 @@ export default function Navigation() {
                         </li>
                     </ul>
                 </li>
-                <li className='navigation__item'>
+                <li className='navigation__menu'>
+                    <Link to='#' className='navigation__link'>
+                        Shop{' '}
+                        <i className='fa-solid fa-angle-down navigation__arrow'></i>
+                    </Link>
                     <ul className='navigation__submenu'>
-                        <li className='navigation__submenu-title'>
-                            Shop{' '}
-                            <i className='fa-solid fa-angle-down navigation__arrow'></i>
-                            {/* <i className='fa-solid fa-angle-up navigation__arrow'></i> */}
-                        </li>
                         <li className='navigation__submenu-item'>
                             <Link to='/shop-page' className='navigation__link'>
                                 Shop Page
@@ -82,13 +79,12 @@ export default function Navigation() {
                         </li>
                     </ul>
                 </li>
-                <li className='navigation__item'>
+                <li className='navigation__menu'>
+                    <Link to='#' className='navigation__link'>
+                        Blog{' '}
+                        <i className='fa-solid fa-angle-down navigation__arrow'></i>
+                    </Link>
                     <ul className='navigation__submenu'>
-                        <li className='navigation__submenu-title'>
-                            Blog{' '}
-                            <i className='fa-solid fa-angle-down navigation__arrow'></i>
-                            {/* <i className='fa-solid fa-angle-up navigation__arrow'></i> */}
-                        </li>
                         <li className='navigation__submenu-item'>
                             <Link to='/blog-1' className='navigation__link'>
                                 Blog 1
@@ -117,6 +113,8 @@ export default function Navigation() {
                     </Link>
                 </li>
             </ul>
+            <i className='fa-solid fa-bars navigation__hamburger-menu'></i>
+            <i className='fa-solid fa-xmark navigation__hamburger-close'></i>
         </nav>
     );
 }

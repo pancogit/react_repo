@@ -1,0 +1,184 @@
+// navigation
+
+@use '../abstracts/variables';
+@use '../abstracts/colors';
+
+.navigation {
+    // move navigation to the last flex element and spread it to the full flex line
+    @media screen and (max-width: variables.$header_content_wrapper_screen_large) {
+        order: variables.$navigation_order_large;
+        flex: variables.$navigation_flex_large;
+        margin-top: variables.$navigation_margin_top_large;
+    }
+
+    @media screen and (max-width: variables.$navigation_hamburger_menu_screen_medium) {
+        display: inline-block;
+        flex: 0;
+        margin-top: 0;
+    }
+
+    // beat cascade with fontawesome styles using nested css classes
+    .navigation__hamburger-close {
+        display: none;
+        font-size: variables.$navigation_hamburger_close_font_size;
+        cursor: pointer;
+        transition: transform variables.$navigation_hamburger_close_transition;
+
+        &:hover {
+            color: colors.$navigation_hamburger_close_color_hover;
+
+            transition: color
+                    variables.$navigation_hamburger_close_transition_color_hover,
+                transform
+                    variables.$navigation_hamburger_close_transition_transform_hover;
+
+            transform: rotate(
+                variables.$navigation_hamburger_close_transform_hover
+            );
+        }
+    }
+
+    // when mobile menu is used, then change layout of navigation list
+    &--hamburger-menu {
+        .navigation {
+            &__list {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: variables.$navigation_list_hamburger_z_index;
+                overflow-y: auto;
+                background-color: colors.$navigation_list_hamburger_background_color;
+            }
+
+            &__hamburger-close {
+                display: block;
+                position: fixed;
+                top: variables.$navigation_hamburger_close_top;
+                right: variables.$navigation_hamburger_close_right;
+                z-index: variables.$navigation_hamburger_close_z_index;
+            }
+
+            &__submenu {
+                transition: none;
+            }
+        }
+    }
+
+    &__arrow {
+        margin-left: variables.$navigation_arrow_margin_left;
+        margin-right: variables.$navigation_arrow_margin_right;
+        font-size: variables.$navigation_arrow_font_size;
+        color: colors.$navigation_arrow_color;
+
+        transition: transform variables.$navigation_arrow_transition,
+            margin-left variables.$navigation_arrow_transition,
+            margin-right variables.$navigation_arrow_transition;
+    }
+
+    &__item {
+        display: flex;
+    }
+
+    &__list {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+
+        @media screen and (max-width: variables.$navigation_hamburger_menu_screen_medium) {
+            display: none;
+        }
+    }
+
+    &__link {
+        display: flex;
+        align-items: center;
+        padding: variables.$navigation_list_padding;
+        font-weight: bold;
+        font-size: variables.$navigation_list_font_size;
+        text-decoration: none;
+        color: colors.$navigation_list_color;
+
+        &:hover {
+            color: colors.$navigation_list_color_hover;
+
+            // do a small rotation with translation via margins
+            .navigation__arrow {
+                color: colors.$navigation_arrow_color_hover;
+                transform: rotate(variables.$navigation_arrow_transform_hover);
+                margin-left: variables.$navigation_arrow_margin_left_hover;
+                margin-right: 0;
+            }
+
+            // show submenu when navigation submenu title is hovered
+            + .navigation__submenu {
+                max-height: variables.$navigation_submenu_max_height_hover;
+            }
+        }
+    }
+
+    &__submenu {
+        padding: 0;
+        position: absolute;
+        z-index: variables.$navigation_submenu_z_index;
+        list-style-type: none;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height variables.$navigation_submenu_transition;
+        box-sizing: border-box;
+
+        &:hover {
+            max-height: variables.$navigation_submenu_max_height_hover;
+        }
+    }
+
+    &__menu {
+        display: block;
+    }
+
+    &__submenu-item {
+        background-color: colors.$navigation_submenu_item_background_color;
+
+        &:first-child {
+            border-top-left-radius: variables.$navigation_submenu_item_border_radius_child;
+            border-top-right-radius: variables.$navigation_submenu_item_border_radius_child;
+        }
+
+        &:last-child {
+            border-bottom-left-radius: variables.$navigation_submenu_item_border_radius_child;
+            border-bottom-right-radius: variables.$navigation_submenu_item_border_radius_child;
+        }
+
+        // set top border for all list items except first
+        + .navigation__submenu-item {
+            border-top-style: solid;
+            border-top-width: variables.$navigation_submenu_item_border_width;
+            border-top-color: colors.$navigation_submenu_item_border_color;
+        }
+    }
+
+    &__hamburger-menu {
+        margin: variables.$navigation_hamburger_menu_margin;
+        font-size: variables.$navigation_hamburger_menu_font_size;
+        cursor: pointer;
+
+        &:hover {
+            color: colors.$navigation_hamburger_menu_color_hover;
+        }
+    }
+
+    // beat cascade with fontawesome styles using nested css classes
+    .navigation__hamburger-menu {
+        display: none;
+
+        @media screen and (max-width: variables.$navigation_hamburger_menu_screen_medium) {
+            display: inline-block;
+        }
+    }
+}

@@ -1,0 +1,7 @@
+// main
+
+@use '../abstracts/colors';
+
+.main {
+    background-color: colors.$main_background_color;
+}
