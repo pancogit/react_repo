@@ -14,4 +14,9 @@ body {
     padding-right: variables.$content_padding;
     margin: 0 auto;
     max-width: variables.$content_max_width;
+
+    @media screen and (max-width: variables.$content_screen_medium) {
+        padding-left: variables.$content_padding_small;
+        padding-right: variables.$content_padding_small;
+    }
 }

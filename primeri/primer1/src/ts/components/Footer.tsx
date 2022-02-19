@@ -13,7 +13,10 @@ export default function Footer() {
                             <ul className='footer__list'>
                                 <li className='footer__list-item'>
                                     <Link to='/about' className='footer__link'>
-                                        About Event
+                                        <i className='fa-solid fa-caret-right footer__arrow'></i>
+                                        <span className='footer__list-text'>
+                                            About Event
+                                        </span>
                                     </Link>
                                 </li>
                                 <li className='footer__list-item'>
@@ -21,7 +24,10 @@ export default function Footer() {
                                         to='/projects'
                                         className='footer__link'
                                     >
-                                        Current Projects
+                                        <i className='fa-solid fa-caret-right footer__arrow'></i>
+                                        <span className='footer__list-text'>
+                                            Current Projects
+                                        </span>
                                     </Link>
                                 </li>
                                 <li className='footer__list-item'>
@@ -29,7 +35,10 @@ export default function Footer() {
                                         to='/volunteers'
                                         className='footer__link'
                                     >
-                                        Our Volunteers
+                                        <i className='fa-solid fa-caret-right footer__arrow'></i>
+                                        <span className='footer__list-text'>
+                                            Our Volunteers
+                                        </span>
                                     </Link>
                                 </li>
                                 <li className='footer__list-item'>
@@ -37,7 +46,10 @@ export default function Footer() {
                                         to='/partners'
                                         className='footer__link'
                                     >
-                                        Our Partners
+                                        <i className='fa-solid fa-caret-right footer__arrow'></i>
+                                        <span className='footer__list-text'>
+                                            Our Partners
+                                        </span>
                                     </Link>
                                 </li>
                             </ul>
@@ -47,7 +59,10 @@ export default function Footer() {
                                         to='/gallery-pictures'
                                         className='footer__link'
                                     >
-                                        Our Gallery
+                                        <i className='fa-solid fa-caret-right footer__arrow'></i>
+                                        <span className='footer__list-text'>
+                                            Our Gallery
+                                        </span>
                                     </Link>
                                 </li>
                                 <li className='footer__list-item'>
@@ -55,7 +70,10 @@ export default function Footer() {
                                         to='/shop-page'
                                         className='footer__link'
                                     >
-                                        Our Shop
+                                        <i className='fa-solid fa-caret-right footer__arrow'></i>
+                                        <span className='footer__list-text'>
+                                            Our Shop
+                                        </span>
                                     </Link>
                                 </li>
                                 <li className='footer__list-item'>
@@ -63,7 +81,10 @@ export default function Footer() {
                                         to='/contact'
                                         className='footer__link'
                                     >
-                                        Contact Us
+                                        <i className='fa-solid fa-caret-right footer__arrow'></i>
+                                        <span className='footer__list-text'>
+                                            Contact Us
+                                        </span>
                                     </Link>
                                 </li>
                             </ul>
@@ -119,7 +140,7 @@ export default function Footer() {
                 <div className='content'>
                     <div className='footer__bottom-wrapper'>
                         <div className='footer__copy-wrapper'>
-                            <p className='footer__copyright'>
+                            <span className='footer__copyright'>
                                 &copy; Created by{' '}
                                 <a
                                     href='https://www.webinvader.com'
@@ -129,8 +150,10 @@ export default function Footer() {
                                 >
                                     wwwebinvader
                                 </a>
-                            </p>
-                            <p className='footer__news'>Get news by E-mail</p>
+                            </span>
+                            <span className='footer__news'>
+                                Get news by E-mail
+                            </span>
                         </div>
                         <div className='footer__social'>
                             <Link to='/contact' className='footer__join'>

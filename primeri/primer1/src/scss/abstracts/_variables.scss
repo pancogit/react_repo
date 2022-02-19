@@ -1,8 +1,10 @@
 // variables
 
 // base
-$content_padding: 0.5rem;
+$content_padding: 1rem;
+$content_padding_small: 0.5rem;
 $content_max_width: 80rem;
+$content_screen_medium: 40rem;
 
 // app
 $app_min_width: 20rem;
@@ -90,3 +92,55 @@ $logo_image_width_small: 3.2rem;
 $logo_subheading_margin_left: 0.2rem;
 $logo_subheading_margin_top: -0.2rem;
 $logo_subheading_font_size: 1rem;
+
+// footer
+$footer_padding_top: 2rem;
+$footer_copyright_margin: 0 0.8rem;
+$footer_copyright_screen_small: 25rem;
+$footer_news_margin_top_small: 0.2rem;
+$footer_heading_margin_bottom: 2rem;
+$footer_heading_padding_bottom: 1rem;
+$footer_heading_border_width: 0.12rem;
+$footer_heading_font_size: 1.4rem;
+$footer_join_padding: 1rem;
+$footer_join_font_size: 0.9rem;
+$footer_join_border_width: 0.1rem;
+$footer_link_font_size: 0.8rem;
+$footer_arrow_translate: 0.8rem;
+$footer_arrow_margin_right: 0.7rem;
+$footer_arrow_transition: 0.5s;
+$footer_list_margin_left: 3rem;
+$footer_list_item_margin_bottom: 1rem;
+$footer_list_text_transition: 0.3s;
+$footer_redirect_font_size: 1.05rem;
+$footer_redirect_font_size_small: 0.9rem;
+$footer_sections_grid_col_min: 15rem;
+$footer_sections_grid_col_max: 1fr;
+$footer_sections_gap: 1.8rem;
+$footer_sections_margin_bottom: 2rem;
+$footer_social_border_width: 0.1rem;
+$footer_social_margin_bottom: 0.5rem;
+$footer_social_screen_medium: 43rem;
+$footer_text_margin_bottom: 1rem;
+$footer_text_line_height: 1.4rem;
+$footer_tweet_icon_margin_right: 0.8rem;
+$footer_tweet_icon_font_size: 2.2rem;
+$footer_latest_tweet_line_height: 1.4rem;
+$footer_latest_tweet_font_size: 0.9rem;
+$footer_bottom_border_width: 0.12rem;
+$footer_copy_wrapper_margin_right: 3rem;
+$footer_copy_wrapper_font_size: 0.9rem;
+$footer_copy_wrapper_flex_medium: 100%;
+$footer_copy_wrapper_margin_bottom_medium: 1rem;
+$footer_copy_wrapper_margin_top_medium: 1rem;
+
+// email
+$email_margin_top: 2rem;
+$email_box_padding: 0.7rem 1rem;
+$email_box_border_width: 0.15rem;
+$email_box_border_radius: 0.3rem;
+$email_icon_font_size: 0.7rem;
+$email_input_flex: 1;
+$email_input_margin_right: 0.5rem;
+$email_input_font_size: 0.9rem;
+$email_message_margin_top: 0.5rem;

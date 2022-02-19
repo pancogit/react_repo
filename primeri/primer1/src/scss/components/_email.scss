@@ -1,0 +1,50 @@
+// email
+
+@use '../abstracts/variables';
+@use '../abstracts/colors';
+
+.email {
+    &--margin {
+        margin-top: variables.$email_margin_top;
+    }
+
+    &__box {
+        display: flex;
+        justify-content: space-between;
+        padding: variables.$email_box_padding;
+        border-style: solid;
+        border-width: variables.$email_box_border_width;
+        border-color: colors.$email_box_border_color;
+        border-radius: variables.$email_box_border_radius;
+        background-color: colors.$email_box_background_color;
+    }
+
+    &__icon {
+        color: colors.$email_icon_color;
+        font-size: variables.$email_icon_font_size;
+    }
+
+    &__input {
+        flex: variables.$email_input_flex;
+        margin-right: variables.$email_input_margin_right;
+        background-color: colors.$email_input_background_color;
+        border: none;
+        outline: none;
+        font-size: variables.$email_input_font_size;
+        color: colors.$email_input_color;
+
+        &::placeholder {
+            color: colors.$email_input_color;
+            font-weight: bold;
+            font-size: variables.$email_input_font_size;
+        }
+    }
+
+    &__message {
+        margin-top: variables.$email_message_margin_top;
+        margin-bottom: 0;
+        text-align: center;
+        color: colors.$email_message_color;
+        font-weight: bold;
+    }
+}
