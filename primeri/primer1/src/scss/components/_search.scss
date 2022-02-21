@@ -1,0 +1,45 @@
+// search
+
+@use '../abstracts/variables';
+@use '../abstracts/colors';
+
+.search {
+    display: flex;
+    border-style: solid;
+    border-width: variables.$search_border_width;
+    border-color: colors.$search_border_color;
+    border-radius: variables.$search_border_radius;
+
+    &__icon {
+        color: colors.$search_icon_color;
+        font-size: variables.$search_icon_font_size;
+    }
+
+    &__input {
+        flex: 1;
+        padding-top: variables.$search_input_padding_top;
+        padding-bottom: variables.$search_input_padding_top;
+        padding-left: variables.$search_input_padding_left;
+
+        padding-right: variables.$search_input_padding_left -
+            variables.$search_label_padding_left;
+
+        border: none;
+        outline: none;
+        font-style: italic;
+        min-width: 0;
+
+        &::placeholder {
+            font-weight: bold;
+            color: colors.$search_input_placeholder_color;
+        }
+    }
+
+    &__label {
+        display: flex;
+        align-items: center;
+        padding-left: variables.$search_label_padding_left;
+        padding-right: variables.$search_label_padding_left;
+        cursor: pointer;
+    }
+}

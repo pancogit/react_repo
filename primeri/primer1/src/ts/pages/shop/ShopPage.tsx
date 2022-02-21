@@ -20,7 +20,9 @@ export default function ShopPage() {
 
             <div className='shop-page__content'>
                 <div className='shop-page__header'>
-                    <h2 className='shop-page__heading'>Shop Page</h2>
+                    <h2 className='shop-page__heading main__heading'>
+                        Shop Page
+                    </h2>
                     <div className='shop-page__filters'>
                         <p className='shop-page__showing'>
                             Showing 1-7 of 84 results

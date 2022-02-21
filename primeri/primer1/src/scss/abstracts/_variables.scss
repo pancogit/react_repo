@@ -9,6 +9,10 @@ $content_screen_medium: 40rem;
 // app
 $app_min_width: 20rem;
 
+// main
+$main_content_padding_top: 3rem;
+$main_heading_font_size: 2rem;
+
 // social
 $social_item_border_width: 0.1rem;
 $social_item_font_size: 0.8rem;
@@ -144,3 +148,70 @@ $email_input_flex: 1;
 $email_input_margin_right: 0.5rem;
 $email_input_font_size: 0.9rem;
 $email_message_margin_top: 0.5rem;
+
+// breadcrumbs
+$breadcrumbs_box_border_width: 0.15rem;
+$breadcrumbs_box_padding_top: 1.7rem;
+$breadcrumbs_box_padding_left: 2.5rem;
+$breadcrumbs_box_transition: 0.2s;
+$breadcrumbs_box_screen_small: 30rem;
+$breadcrumbs_hide_font_size: 0.9rem;
+$breadcrumbs_icon_margin_right: 0.55rem;
+$breadcrumbs_icon_font_size: 1.2rem;
+$breadcrumbs_item_font_size: 0.75rem;
+$breadcrumbs_item_margin: 0 0.6rem;
+$breadcrumbs_link_font_size: 0.9rem;
+$breadcrumbs_list_margin_top: 1rem;
+$breadcrumbs_list_margin_right: 2rem;
+
+// top-back
+$top_back_padding: 0.7rem 0.6rem;
+$top_back_bottom: 1rem;
+$top_back_left: 0.5rem;
+$top_back_border_radius: 0.15rem;
+$top_back_transition: 0.35s;
+$top_back_active_opacity: 1;
+$top_back_text_font_size: 0.8rem;
+$top_back_icon_margin_bottom: 0.5rem;
+$top_back_icon_font_size: 0.9rem;
+
+// search
+$search_border_width: 0.13rem;
+$search_border_radius: 0.2rem;
+$search_input_padding_left: 1rem;
+$search_input_padding_top: 0.8rem;
+$search_label_padding_left: 0.8rem;
+$search_icon_font_size: 0.8rem;
+
+// shop-page
+$shop_page_aside_flex: 0 0 15rem;
+$shop_page_aside_margin_right: 1.5rem;
+$shop_page_content_flex: 1;
+
+// cart
+$cart_margin_top: 1rem;
+$cart_button_view_transition: 0.2s;
+$cart_button_view_padding: 0.7rem 1rem;
+$cart_button_view_border_width: 0.15rem;
+$cart_button_view_border_radius: 0.2rem;
+$cart_button_view_font_size: 0.9rem;
+$cart_checkout_text_margin_right: 0.8rem;
+$cart_heading_font_size: 1.25rem;
+$cart_icon_transition: 0.3s;
+$cart_icon_animation_duration: 1s;
+$cart_icon_animation_iteration_count: 1;
+$cart_icon_animation_32p_rotate: -20deg;
+$cart_icon_animation_32p_translate: 0.4rem;
+$cart_image_wrapper_margin_right: 0.6rem;
+$cart_item_padding: 1.5rem 0;
+$cart_item_border_width: 0.1rem;
+$cart_item_link_font_size: 1.1rem;
+$cart_items_border_width: 0.2rem;
+$cart_link_padding: 1.2rem 1rem;
+$cart_name_margin_top: 0.4rem;
+$cart_order_margin_top: 0.7rem;
+$cart_price_font_size: 1.2rem;
+$cart_quantity_margin_right: 0.7rem;
+$cart_quantity_font_size: 1.2rem;
+$cart_subtotal_font_size: 1.05rem;
+$cart_total_padding: 1.1rem 0;

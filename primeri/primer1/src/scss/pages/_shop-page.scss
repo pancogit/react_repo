@@ -1,0 +1,35 @@
+// shop-page
+
+@use '../abstracts/variables';
+
+.shop-page {
+    display: flex;
+
+    &__aside {
+        flex: variables.$shop_page_aside_flex;
+        margin-right: variables.$shop_page_aside_margin_right;
+    }
+
+    &__content {
+        flex: variables.$shop_page_content_flex;
+    }
+
+    &__filters {
+    }
+
+    &__header {
+    }
+
+    &__heading {
+        text-align: left;
+    }
+
+    &__pagination {
+    }
+
+    &__products {
+    }
+
+    &__showing {
+    }
+}

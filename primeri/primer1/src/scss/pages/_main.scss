@@ -1,7 +1,20 @@
 // main
 
 @use '../abstracts/colors';
+@use '../abstracts/variables';
 
 .main {
     background-color: colors.$main_background_color;
+
+    &__content {
+        padding-top: variables.$main_content_padding_top;
+        padding-bottom: variables.$main_content_padding_top;
+    }
+
+    &__heading {
+        margin: 0;
+        text-align: center;
+        color: colors.$main_heading_color;
+        font-size: variables.$main_heading_font_size;
+    }
 }

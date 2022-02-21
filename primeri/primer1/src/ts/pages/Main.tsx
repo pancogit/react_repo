@@ -24,27 +24,32 @@ export default function Main() {
             <Breadcrumbs />
 
             <div className='content'>
-                <Routes>
-                    <Route path='/' element={<Home />} />
-                    <Route path='about' element={<About />} />
-                    <Route path='causes' element={<Causes />} />
-                    <Route path='projects' element={<Projects />} />
-                    <Route path='volunteers' element={<Volunteers />} />
-                    <Route path='partners' element={<Partners />} />
-                    <Route
-                        path='gallery-pictures'
-                        element={<GalleryPictures />}
-                    />
-                    <Route path='gallery-links' element={<GalleryLinks />} />
-                    <Route path='shop-page' element={<ShopPage />} />
-                    <Route path='shop-cart' element={<ShopCart />} />
-                    <Route path='blog-1' element={<Blog1 />} />
-                    <Route path='blog-2' element={<Blog2 />} />
-                    <Route path='blog-3' element={<Blog3 />} />
-                    <Route path='blog-4' element={<Blog4 />} />
-                    <Route path='contact' element={<Contact />} />
-                    <Route path='*' element={<PageNotFound />} />
-                </Routes>
+                <div className='main__content'>
+                    <Routes>
+                        <Route path='/' element={<Home />} />
+                        <Route path='about' element={<About />} />
+                        <Route path='causes' element={<Causes />} />
+                        <Route path='projects' element={<Projects />} />
+                        <Route path='volunteers' element={<Volunteers />} />
+                        <Route path='partners' element={<Partners />} />
+                        <Route
+                            path='gallery-pictures'
+                            element={<GalleryPictures />}
+                        />
+                        <Route
+                            path='gallery-links'
+                            element={<GalleryLinks />}
+                        />
+                        <Route path='shop-page' element={<ShopPage />} />
+                        <Route path='shop-cart' element={<ShopCart />} />
+                        <Route path='blog-1' element={<Blog1 />} />
+                        <Route path='blog-2' element={<Blog2 />} />
+                        <Route path='blog-3' element={<Blog3 />} />
+                        <Route path='blog-4' element={<Blog4 />} />
+                        <Route path='contact' element={<Contact />} />
+                        <Route path='*' element={<PageNotFound />} />
+                    </Routes>
+                </div>
             </div>
 
             <TopBack />

@@ -1,0 +1,108 @@
+// breadcrumbs
+
+@use '../abstracts/colors';
+@use '../abstracts/variables';
+
+.breadcrumbs {
+    background-color: colors.$breadcrumbs_background_color;
+
+    &__box {
+        display: flex;
+        align-items: center;
+        padding-top: variables.$breadcrumbs_box_padding_top;
+        padding-left: variables.$breadcrumbs_box_padding_left;
+        padding-right: variables.$breadcrumbs_box_padding_left;
+
+        // subtract bottom border width from padding to use the same width as top padding
+        padding-bottom: variables.$breadcrumbs_box_padding_top -
+            variables.$breadcrumbs_box_border_width;
+
+        cursor: pointer;
+        background-color: colors.$breadcrumbs_box_background_color;
+        border-bottom-style: solid;
+        border-bottom-width: variables.$breadcrumbs_box_border_width;
+        border-bottom-color: transparent;
+        transition: border-bottom-color variables.$breadcrumbs_box_transition;
+
+        // show bottom border when hovered
+        &:hover {
+            border-bottom-color: colors.$breadcrumbs_box_border_color_hover;
+        }
+
+        // hide box for smaller screens
+        @media screen and (max-width: variables.$breadcrumbs_box_screen_small) {
+            display: none;
+        }
+    }
+
+    &__hide {
+        font-weight: bold;
+        font-size: variables.$breadcrumbs_hide_font_size;
+    }
+
+    &__icon {
+        margin-right: variables.$breadcrumbs_icon_margin_right;
+        color: colors.$breadcrumbs_icon_color;
+        font-size: variables.$breadcrumbs_icon_font_size;
+    }
+
+    &__item {
+        // set fontawesome icon for angle-right manually for all list elements except first
+        + .breadcrumbs__item {
+            &::before {
+                content: '\f105';
+
+                font-family: 'Font Awesome 6 Free';
+                font-weight: 900;
+
+                -webkit-font-smoothing: antialiased;
+                display: var(--fa-display, inline-block);
+                font-style: normal;
+                font-feature-settings: normal;
+                font-variant: normal;
+                line-height: 1;
+                text-rendering: auto;
+
+                // change font size and color of icon and add block margins
+                font-size: variables.$breadcrumbs_item_font_size;
+                color: colors.$breadcrumbs_item_color;
+                margin: variables.$breadcrumbs_item_margin;
+            }
+        }
+
+        // remove underline from last link in the breadcrumb list and set default cursor
+        &:last-child {
+            .breadcrumbs__link {
+                text-decoration: none;
+                cursor: auto;
+            }
+        }
+    }
+
+    &__link {
+        font-size: variables.$breadcrumbs_link_font_size;
+        font-weight: bold;
+        color: colors.$breadcrumbs_link_color;
+        text-decoration: underline;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: variables.$breadcrumbs_list_margin_top;
+        margin-bottom: variables.$breadcrumbs_list_margin_top;
+        margin-right: variables.$breadcrumbs_list_margin_right;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

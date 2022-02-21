@@ -1,0 +1,187 @@
+// cart
+
+@use '../abstracts/colors';
+@use '../abstracts/variables';
+
+.cart {
+    &--margin {
+        margin-top: variables.$cart_margin_top;
+    }
+
+    &__button-view {
+        background-color: colors.$cart_button_view_background_color;
+        color: colors.$cart_button_view_color;
+        transition: background-color variables.$cart_button_view_transition,
+            color variables.$cart_button_view_transition;
+
+        &:hover {
+            background-color: colors.$cart_button_view_background_color_hover;
+            color: colors.$cart_button_view_color_hover;
+        }
+    }
+
+    &__button-view,
+    &__button-checkout {
+        padding: variables.$cart_button_view_padding;
+        border-style: solid;
+        border-width: variables.$cart_button_view_border_width;
+        border-color: colors.$cart_button_view_border_color;
+        border-radius: variables.$cart_button_view_border_radius;
+        font-weight: bold;
+        font-size: variables.$cart_button_view_font_size;
+        cursor: pointer;
+    }
+
+    &__button-checkout {
+        display: flex;
+        align-items: center;
+        background-color: colors.$cart_button_view_border_color;
+        color: colors.$cart_button_checkout_color;
+        transition: background-color variables.$cart_button_view_transition,
+            border-color variables.$cart_button_view_transition;
+
+        &:hover {
+            background-color: colors.$cart_button_checkout_background_color_hover;
+            border-color: colors.$cart_button_checkout_background_color_hover;
+        }
+    }
+
+    &__checkout-text {
+        margin-right: variables.$cart_checkout_text_margin_right;
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__buttons-link {
+        text-decoration: none;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__heading {
+        margin: 0;
+        color: colors.$cart_heading_color;
+        font-size: variables.$cart_heading_font_size;
+    }
+
+    &__icon {
+        color: colors.$cart_icon_color;
+        transition: color variables.$cart_icon_transition;
+    }
+
+    &__image-wrapper {
+        margin-right: variables.$cart_image_wrapper_margin_right;
+    }
+
+    &__item {
+        display: flex;
+        padding: variables.$cart_item_padding;
+        border-top-style: solid;
+        border-top-width: variables.$cart_item_border_width;
+        border-top-color: colors.$cart_item_border_color;
+    }
+
+    &__item-link {
+        display: block;
+        text-decoration: none;
+        color: colors.$cart_item_link_color;
+        font-weight: bold;
+        font-size: variables.$cart_item_link_font_size;
+    }
+
+    &__items {
+        border-bottom-style: double;
+        border-bottom-width: variables.$cart_items_border_width;
+        border-bottom-color: colors.$cart_item_border_color;
+    }
+
+    &__link {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: variables.$cart_link_padding;
+        text-decoration: none;
+
+        &:hover {
+            .cart__icon {
+                color: colors.$cart_icon_color_hover;
+                animation-name: cart-icon-animation;
+                animation-duration: variables.$cart_icon_animation_duration;
+                animation-iteration-count: variables.$cart_icon_animation_iteration_count;
+            }
+        }
+    }
+
+    &__name {
+        margin-top: variables.$cart_name_margin_top;
+        margin-bottom: 0;
+        word-break: break-all;
+    }
+
+    &__order {
+        margin-top: variables.$cart_order_margin_top;
+        margin-bottom: 0;
+    }
+
+    &__pounds,
+    &__price {
+        color: colors.$cart_price_color;
+        font-weight: bold;
+        font-size: variables.$cart_price_font_size;
+    }
+
+    &__price {
+        margin: 0;
+    }
+
+    &__quantity {
+        display: inline-block;
+        margin-right: variables.$cart_quantity_margin_right;
+        color: colors.$cart_quantity_color;
+        font-size: variables.$cart_quantity_font_size;
+    }
+
+    &__subtotal {
+        margin: 0;
+        color: colors.$cart_subtotal_color;
+        font-size: variables.$cart_subtotal_font_size;
+    }
+
+    &__total {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: variables.$cart_total_padding;
+    }
+}
+
+// small animation for cart icon
+@keyframes cart-icon-animation {
+    0% {
+        transform: rotate(0);
+    }
+
+    // go to the right side and rotate a little to up
+    32% {
+        transform: rotate(variables.$cart_icon_animation_32p_rotate)
+            translateX(variables.$cart_icon_animation_32p_translate);
+    }
+
+    // stay on right side and rotate to the ground
+    64% {
+        transform: rotate(0)
+            translateX(variables.$cart_icon_animation_32p_translate);
+    }
+
+    // return back to start position
+    100% {
+        transform: rotate(0) translateX(0);
+    }
+}

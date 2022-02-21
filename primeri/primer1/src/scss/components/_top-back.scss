@@ -1,0 +1,48 @@
+// top-back
+
+@use '../abstracts/colors';
+@use '../abstracts/variables';
+
+.top-back {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    padding: variables.$top_back_padding;
+    position: fixed;
+    bottom: variables.$top_back_bottom;
+    left: variables.$top_back_left;
+    background-color: colors.$top_back_background_color;
+    color: colors.$top_back_color;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: variables.$top_back_border_radius;
+    opacity: 0;
+    visibility: hidden;
+    cursor: auto;
+
+    // set small transition for opacity to slowly show icon
+    transition: opacity variables.$top_back_transition;
+
+    &:hover {
+        background-color: colors.$top_back_background_color_hover;
+    }
+
+    // set both opacity and visibility, opacity for smooth transition and visibility
+    // to allow clicking on the link, if just opacity is set then link could be clickable
+    // event if it's hidden with opacity
+    &--active {
+        opacity: variables.$top_back_active_opacity;
+        visibility: visible;
+        cursor: pointer;
+    }
+
+    &__text {
+        font-size: variables.$top_back_text_font_size;
+    }
+
+    &__icon {
+        margin-bottom: variables.$top_back_icon_margin_bottom;
+        font-size: variables.$top_back_icon_font_size;
+    }
+}

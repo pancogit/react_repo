@@ -5,7 +5,7 @@ import shipYourIdea from '../../images/mens/shirts/02.jpg';
 
 export default function Cart() {
     return (
-        <div className='cart'>
+        <div className='cart cart--margin'>
             <div className='cart__header'>
                 <h3 className='cart__heading'>Your Cart</h3>
                 <Link to='/shop-cart' className='cart__link'>
@@ -18,6 +18,7 @@ export default function Cart() {
                         <Link to='cart-item-1' className='cart__item-link'>
                             <img
                                 src={ninjaSilhouette}
+                                alt='cart product'
                                 className='cart__image'
                                 width={100}
                                 height='auto'
@@ -39,6 +40,7 @@ export default function Cart() {
                         <Link to='cart-item-2' className='cart__item-link'>
                             <img
                                 src={shipYourIdea}
+                                alt='cart product'
                                 className='cart__image'
                                 width={100}
                                 height='auto'
