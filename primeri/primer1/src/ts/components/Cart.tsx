@@ -7,7 +7,9 @@ export default function Cart() {
     return (
         <div className='cart cart--margin'>
             <div className='cart__header'>
-                <h3 className='cart__heading'>Your Cart</h3>
+                <h3 className='cart__heading shop-page__aside-heading'>
+                    Your Cart
+                </h3>
                 <Link to='/shop-cart' className='cart__link'>
                     <i className='fa-solid fa-cart-shopping cart__icon'></i>
                 </Link>

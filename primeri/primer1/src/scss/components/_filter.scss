@@ -1,0 +1,192 @@
+// filter
+
+@use '../abstracts/variables';
+@use '../abstracts/colors';
+
+.filter {
+    &__button {
+        display: flex;
+        justify-content: space-between;
+        align-items: normal;
+        padding: 0;
+        margin-bottom: variables.$filter_button_margin_bottom;
+        width: variables.$filter_button_width;
+        cursor: pointer;
+        border-style: solid;
+        border-width: variables.$filter_button_border_width;
+        border-color: colors.$filter_button_border_color;
+        border-radius: variables.$filter_button_border_radius;
+        background-color: colors.$filter_button_background_color;
+        transition: variables.$filter_button_transition;
+
+        // change inner colors when is hovered
+        &:hover {
+            background-color: colors.$filter_button_background_color_hover;
+            border-color: colors.$filter_button_background_color_hover;
+
+            .filter__icon {
+                color: colors.$filter_icon_hover_button_color;
+                border-left-color: colors.$filter_icon_hover_button_border_color;
+            }
+
+            .filter__button-text {
+                color: colors.$filter_button_text_hover_button_color;
+            }
+        }
+    }
+
+    &__button-text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: variables.$filter_button_text_flex;
+        color: colors.$filter_button_text_color;
+        font-weight: bold;
+        font-size: variables.$filter_button_text_font_size;
+    }
+
+    &__icon {
+        // set negative margins on top and bottom side of icon to not show possible
+        // gaps between left border and container outer borders
+        // cover whole container height with left border and use negative size of container borders
+        margin-top: -(variables.$filter_button_border_width);
+        margin-bottom: -(variables.$filter_button_border_width);
+
+        padding: variables.$filter_icon_padding;
+
+        border-left-style: solid;
+        border-left-width: variables.$filter_button_border_width;
+        border-left-color: colors.$filter_button_border_color;
+        color: colors.$filter_icon_color;
+        font-size: variables.$filter_icon_font_size;
+    }
+
+    &__link {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: variables.$filter_link_padding;
+        text-decoration: none;
+        font-size: variables.$filter_link_font_size;
+
+        // set bottom borders
+        border-bottom-style: solid;
+        border-bottom-width: variables.$filter_link_border_width;
+        border-bottom-color: colors.$filter_link_border_color;
+
+        &:hover {
+            background-color: colors.$filter_link_background_color_hover;
+            border-bottom-color: colors.$filter_link_background_color_hover;
+
+            .filter__link-text,
+            .filter__link-number,
+            .filter__submenu-arrow {
+                color: colors.$filter_link_text_hover_link_color;
+            }
+
+            .filter__submenu-arrow {
+                margin-left: variables.$filter_submenu_arrow_hover_link_margin_left;
+                margin-right: variables.$filter_submenu_arrow_hover_link_margin_right;
+            }
+        }
+    }
+
+    &__link-text {
+        margin-right: variables.$filter_link_text_margin_right;
+        color: colors.$filter_link_text_color;
+        word-break: break-all;
+    }
+
+    &__link-number {
+        font-weight: bold;
+        color: colors.$filter_link_number_color;
+    }
+
+    &__list {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    &__pounds {
+        margin: 0;
+        color: colors.$filter_pounds_color;
+        font-weight: bold;
+        font-size: variables.$filter_pounds_font_size;
+    }
+
+    &__price {
+        margin: 0;
+        color: colors.$filter_price_color;
+        font-size: variables.$filter_price_font_size;
+        font-weight: bold;
+    }
+
+    &__price-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: variables.$filter_price_wrapper_margin_top;
+    }
+
+    &__divider {
+        margin-top: variables.$filter_divider_margin_top;
+        margin-bottom: variables.$filter_divider_margin_bottom;
+        border-bottom-style: solid;
+        border-bottom-width: variables.$filter_divider_border_width;
+        border-bottom-color: colors.$filter_divider_border_color;
+        border-radius: variables.$filter_divider_border_radius;
+    }
+
+    &__slider {
+        margin-top: variables.$filter_slider_margin_top;
+        margin-bottom: variables.$filter_slider_margin_bottom;
+        padding: variables.$filter_slider_padding;
+        border-top-style: solid;
+        border-top-width: variables.$filter_slider_border_width;
+        border-top-color: colors.$filter_slider_border_color;
+        border-bottom-style: solid;
+        border-bottom-width: variables.$filter_slider_border_width;
+        border-bottom-color: colors.$filter_slider_border_color;
+    }
+
+    &__submenu-list {
+        .filter__link {
+            text-align: center;
+        }
+
+        .filter__link-text {
+            flex: variables.$filter_submenu_link_text_hover_list_flex;
+        }
+    }
+
+    &__submenu,
+    &__submenu-list {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+
+        // hide submenu by default
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height variables.$filter_submenu_transition;
+
+        // show submenu when submenu link is clicked
+        &--active {
+            max-height: variables.$filter_submenu_active_max_height;
+        }
+    }
+
+    &__submenu-text {
+        display: flex;
+        align-items: center;
+    }
+
+    &__submenu-arrow {
+        margin-right: variables.$filter_submenu_arrow_margin_right;
+        color: colors.$filter_submenu_arrow_color;
+        font-size: variables.$filter_submenu_arrow_font_size;
+        transition: margin-left variables.$filter_submenu_arrow_transition,
+            margin-right variables.$filter_submenu_arrow_transition;
+    }
+}

@@ -1,7 +1,9 @@
 export default function TagsCloud() {
     return (
         <div className='tags-cloud'>
-            <h3 className='tags-cloud__heading'>Tags Cloud</h3>
+            <h3 className='tags-cloud__heading shop-page__aside-heading'>
+                Tags Cloud
+            </h3>
             <div className='tags-cloud__tag'>
                 <p className='tags-cloud__text'>Items</p>
                 <div className='tags-cloud__back'>

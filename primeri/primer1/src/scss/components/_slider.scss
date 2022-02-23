@@ -1,0 +1,156 @@
+// slider
+
+@use '../abstracts/variables';
+@use '../abstracts/colors';
+@use 'sass:math';
+
+.slider {
+    &__buttons {
+        height: variables.$slider_buttons_height;
+
+        // positioning container for inner elements
+        position: relative;
+    }
+
+    &__button {
+        display: inline-block;
+        height: variables.$slider_button_height;
+        width: variables.$slider_button_width;
+        border-style: solid;
+        border-width: variables.$slider_range_border_width;
+        border-color: colors.$slider_track_border_color;
+        border-radius: variables.$slider_button_border_radius;
+        background-color: colors.$slider_button_background_color;
+        cursor: pointer;
+
+        position: absolute;
+
+        // use negative top position with same value as top slider line oversize part
+        // also subtract half of the button border to not sit on the edge of the slider line
+        // note: division "/" is deprecated in sass, use sass math.div instead
+        /* 
+        top: -(variables.$slider_line_oversize_width_top -
+                    (variables.$slider_range_border_width / 2)); 
+        */
+        top: -(variables.$slider_line_oversize_width_top -
+                    math.div(variables.$slider_range_border_width, 2));
+
+        // set position for left button marker
+        &--left {
+            // note: division "/" is deprecated in sass, use sass math.div instead
+            /* 
+            left: variables.$slider_track_left +
+                variables.$slider_range_border_width -
+                (
+                    (
+                            variables.$slider_button_width + 2 *
+                                variables.$slider_range_border_width
+                        ) / 2
+                ) - (variables.$slider_range_border_width / 2); 
+            */
+            left: variables.$slider_track_left +
+                variables.$slider_range_border_width -
+                math.div(
+                    variables.$slider_button_width + 2 *
+                        variables.$slider_range_border_width,
+                    2
+                ) - math.div(variables.$slider_range_border_width, 2);
+        }
+
+        // set position for right button marker
+        &--right {
+            // note: division "/" is deprecated in sass, use sass math.div instead
+            /*
+            right: variables.$slider_track_right +
+                variables.$slider_range_border_width -
+                (
+                    (
+                            variables.$slider_button_width + 2 *
+                                variables.$slider_range_border_width
+                        ) / 2
+                ) - (variables.$slider_range_border_width / 2);
+            */
+            right: variables.$slider_track_right +
+                variables.$slider_range_border_width -
+                math.div(
+                    variables.$slider_button_width + 2 *
+                        variables.$slider_range_border_width,
+                    2
+                ) - math.div(variables.$slider_range_border_width, 2);
+        }
+
+        &--active {
+            background-color: colors.$slider_button_background_color_active;
+        }
+    }
+
+    // change upper part of button marker to be square like
+    &__button-top {
+        height: variables.$slider_button_top_height;
+        border-top-left-radius: variables.$slider_button_top_border_radius;
+        border-top-right-radius: variables.$slider_button_top_border_radius;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom: none;
+        z-index: variables.$slider_button_top_z_index;
+    }
+
+    &__range {
+        height: variables.$slider_range_height;
+
+        // positioning container for inner elements
+        position: relative;
+
+        border-style: solid;
+        border-width: variables.$slider_range_border_width;
+        border-color: colors.$slider_range_border_color;
+        border-radius: variables.$slider_range_border_radius;
+        background-color: colors.$slider_range_background_color;
+    }
+
+    &__track {
+        position: absolute;
+
+        // put negative positioning for top and bottom of the track to overlap borders of the container
+        top: -(variables.$slider_range_border_width);
+        bottom: -(variables.$slider_range_border_width);
+
+        // set positions for left and right button marker
+        left: variables.$slider_track_left;
+        right: variables.$slider_track_right;
+
+        background-color: colors.$slider_track_background_color;
+        border-style: solid;
+        border-width: variables.$slider_range_border_width;
+        border-color: colors.$slider_track_border_color;
+    }
+
+    &__line {
+        position: absolute;
+
+        // put negative positioning for top and bottom of the line to the full container height
+        // also add little size to the top and bottom to overflow line out of container
+        top: -(variables.$slider_range_border_width +
+                    variables.$slider_line_oversize_width_top);
+
+        bottom: -(variables.$slider_range_border_width +
+                    variables.$slider_line_oversize_width_bottom);
+
+        // line width must be the same as border of container to look the same as border
+        width: variables.$slider_range_border_width;
+
+        background-color: colors.$slider_track_border_color;
+        border-bottom-left-radius: variables.$slider_line_border_radius;
+        border-bottom-right-radius: variables.$slider_line_border_radius;
+
+        // set position for left button marker
+        &--left {
+            left: variables.$slider_track_left;
+        }
+
+        // set position for right button marker
+        &--right {
+            right: variables.$slider_track_right;
+        }
+    }
+}

@@ -6,6 +6,7 @@
 .cart {
     &--margin {
         margin-top: variables.$cart_margin_top;
+        margin-bottom: variables.$cart_margin_bottom;
     }
 
     &__button-view {
@@ -63,12 +64,6 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-    }
-
-    &__heading {
-        margin: 0;
-        color: colors.$cart_heading_color;
-        font-size: variables.$cart_heading_font_size;
     }
 
     &__icon {

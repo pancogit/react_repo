@@ -8,7 +8,9 @@ import Stars from './Stars';
 export default function TopProducts() {
     return (
         <div className='top-products'>
-            <h3 className='top-products__heading'>Top Rated Products</h3>
+            <h3 className='top-products__heading shop-page__aside-heading'>
+                Top Rated Products
+            </h3>
             <div className='top-products__product'>
                 <Link to='product-1' className='top-products__image'>
                     <img
