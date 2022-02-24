@@ -1,0 +1,17 @@
+// stars
+
+@use '../abstracts/colors';
+@use '../abstracts/variables';
+
+.stars {
+    &__icon {
+        display: inline-block;
+        margin-right: variables.$stars_icon_margin_right;
+        font-size: variables.$stars_icon_font_size;
+        color: colors.$stars_icon_color;
+
+        &--empty {
+            color: colors.$stars_icon_empty_color;
+        }
+    }
+}

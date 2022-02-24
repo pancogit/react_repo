@@ -22,21 +22,47 @@
     }
 
     &__filters {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: variables.$shop_page_header_padding_bottom;
+        margin-bottom: variables.$shop_page_header_margin_bottom;
+        border-bottom-style: solid;
+        border-bottom-width: variables.$shop_page_header_border_width;
+        border-bottom-color: colors.$shop_page_header_border_color;
     }
 
     &__heading {
         text-align: left;
+        margin-right: variables.$shop_page_heading_margin_right;
     }
 
     &__pagination {
     }
 
     &__products {
+        display: grid;
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(
+                variables.$shop_page_products_grid_min,
+                variables.$shop_page_products_grid_max
+            )
+        );
+        gap: variables.$shop_page_products_gap;
     }
 
     &__showing {
+        margin: 0;
+        margin-right: variables.$shop_page_showing_margin_right;
+        font-weight: bold;
+        font-size: variables.$shop_page_showing_font_size;
+        color: colors.$shop_page_showing_color;
     }
 }

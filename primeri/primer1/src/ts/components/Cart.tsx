@@ -22,7 +22,7 @@ export default function Cart() {
                                 src={ninjaSilhouette}
                                 alt='cart product'
                                 className='cart__image'
-                                width={100}
+                                width={80}
                                 height='auto'
                             />
                         </Link>
@@ -44,7 +44,7 @@ export default function Cart() {
                                 src={shipYourIdea}
                                 alt='cart product'
                                 className='cart__image'
-                                width={100}
+                                width={80}
                                 height='auto'
                             />
                         </Link>

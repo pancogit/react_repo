@@ -26,7 +26,7 @@ export default function Filter() {
                         <span className='filter__link-number'>24</span>
                     </Link>
                     <ul className='filter__submenu filter__submenu--active'>
-                        <li className='filter__list-item'>
+                        <li className='filter__list-item filter__list-item--active'>
                             <Link to='' className='filter__link'>
                                 <span className='filter__submenu-text'>
                                     <i className='fa-solid fa-angle-right filter__submenu-arrow'></i>
@@ -36,7 +36,7 @@ export default function Filter() {
                                 </span>
                                 <span className='filter__link-number'>18</span>
                             </Link>
-                            <ul className='filter__submenu-list filter__submenu-list--active'>
+                            <ul className='filter__submenu-list'>
                                 <li className='filter__list-item'>
                                     <Link to='' className='filter__link'>
                                         <span className='filter__link-text'>

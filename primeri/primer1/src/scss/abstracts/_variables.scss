@@ -188,6 +188,15 @@ $shop_page_aside_flex: 0 0 15rem;
 $shop_page_aside_margin_right: 1.5rem;
 $shop_page_content_flex: 1;
 $shop_page_aside_heading_font_size: 1.25rem;
+$shop_page_header_padding_bottom: 0.8rem;
+$shop_page_header_margin_bottom: 2rem;
+$shop_page_header_border_width: 0.1rem;
+$shop_page_heading_margin_right: 2rem;
+$shop_page_products_grid_min: 15rem;
+$shop_page_products_grid_max: 1fr;
+$shop_page_products_gap: 1rem;
+$shop_page_showing_margin_right: 1.5rem;
+$shop_page_showing_font_size: 0.85rem;
 
 // cart
 $cart_margin_top: 1rem;
@@ -203,13 +212,13 @@ $cart_icon_animation_duration: 1s;
 $cart_icon_animation_iteration_count: 1;
 $cart_icon_animation_32p_rotate: -20deg;
 $cart_icon_animation_32p_translate: 0.4rem;
-$cart_image_wrapper_margin_right: 0.6rem;
+$cart_image_wrapper_margin_right: 1rem;
 $cart_item_padding: 1.5rem 0;
 $cart_item_border_width: 0.1rem;
 $cart_item_link_font_size: 1.1rem;
 $cart_items_border_width: 0.2rem;
 $cart_link_padding: 1.2rem 1rem;
-$cart_name_margin_top: 0.4rem;
+$cart_name_margin_top: 0.1rem;
 $cart_order_margin_top: 0.7rem;
 $cart_price_font_size: 1.2rem;
 $cart_quantity_margin_right: 0.7rem;
@@ -267,3 +276,58 @@ $filter_submenu_active_max_height: 100rem;
 $filter_submenu_arrow_margin_right: 0.8rem;
 $filter_submenu_arrow_font_size: 0.7rem;
 $filter_submenu_arrow_transition: 0.3s;
+$filter_list_item_arrow_transform: 90deg;
+
+// tags-cloud
+$tags_cloud_tag_border_width: 0.15rem;
+$tags_cloud_tag_border_radius: 0.2rem;
+$tags_cloud_circle_border_radius: 50%;
+$tags_cloud_circle_top: 1rem;
+$tags_cloud_circle_width: 0.5rem;
+$tags_cloud_circle_margin_right: 0.05rem;
+$tags_cloud_track_width: 0.3rem;
+$tags_cloud_track_margin_left: 0.2rem;
+$tags_cloud_value_margin_left: -0.1rem;
+$tags_cloud_value_margin_right: -0.2rem;
+$tags_cloud_value_padding: 0 0.8rem;
+$tags_cloud_value_font_size: 0.9rem;
+$tags_cloud_value_z_index: 1000;
+$tags_cloud_tag_margin_right: 0.7rem;
+$tags_cloud_tag_margin_bottom: 0.9rem;
+$tags_cloud_tags_margin_top: 1.2rem;
+$tags_cloud_tags_padding_top: 1.8rem;
+$tags_cloud_tags_border_width: 0.1rem;
+$tags_cloud_text_margin: 0.65rem 1.1rem;
+
+// select-list
+$select_list_options_width: 12.2rem;
+$select_list_options_margin_top: -0.15rem;
+$select_list_options_border_width: 0.1rem;
+$select_list_options_border_radius: 0.15rem;
+$select_list_text_font_size: 0.85rem;
+$select_list_arrow_margin_right: -0.4rem;
+$select_list_arrow_font_size: 0.9rem;
+$select_list_sel_padding: 0.7rem 1.3rem;
+$select_list_sel_border_width: 0.1rem;
+$select_list_sel_border_radius: 0.15rem;
+$select_list_option_padding: 0.4rem 1.3rem;
+$select_list_option_font_size: 0.85rem;
+
+// top-products
+$top_products_before_margin_right: 0.7rem;
+$top_products_before_font_size: 1.2rem;
+$top_products_after_font_size: 1.2rem;
+$top_products_heading_margin_bottom: 0.6rem;
+$top_products_heading_margin_top: 0.1rem;
+$top_products_heading_link_font_size: 1.1rem;
+$top_products_image_margin_right: 1rem;
+$top_products_price_margin_top: 0.55rem;
+$top_products_product_padding: 1.5rem 0;
+$top_products_product_border_width: 0.1rem;
+$top_products_prod_margin_bottom: 2rem;
+$top_sale_top: -0.45rem;
+$top_sale_right: -0.5rem;
+
+// stars
+$stars_icon_margin_right: 0.25rem;
+$stars_icon_font_size: 0.85rem;

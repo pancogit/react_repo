@@ -1,0 +1,77 @@
+// tags-cloud
+
+@use '../abstracts/colors';
+@use '../abstracts/variables';
+
+.tags-cloud {
+    &__back {
+        display: flex;
+        position: relative;
+    }
+
+    &__circle {
+        background-color: colors.$tags_cloud_circle_background_color;
+        border-radius: variables.$tags_cloud_circle_border_radius;
+        position: absolute;
+        top: variables.$tags_cloud_circle_top;
+        left: 0;
+        width: variables.$tags_cloud_circle_width;
+        height: variables.$tags_cloud_circle_width;
+        margin-right: variables.$tags_cloud_circle_margin_right;
+        margin-left: -(variables.$tags_cloud_circle_margin_right);
+    }
+
+    &__track {
+        width: variables.$tags_cloud_track_width;
+        margin-top: -(variables.$tags_cloud_tag_border_width);
+        margin-bottom: -(variables.$tags_cloud_tag_border_width);
+        margin-right: -(variables.$tags_cloud_track_margin_left);
+        margin-left: variables.$tags_cloud_track_margin_left;
+        background-color: colors.$tags_cloud_circle_background_color;
+        border-top-right-radius: variables.$tags_cloud_tag_border_radius;
+        border-bottom-right-radius: variables.$tags_cloud_tag_border_radius;
+    }
+
+    &__value {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: -(variables.$tags_cloud_tag_border_width);
+        margin-bottom: -(variables.$tags_cloud_tag_border_width);
+        margin-left: variables.$tags_cloud_value_margin_left;
+        margin-right: variables.$tags_cloud_value_margin_right;
+        padding: variables.$tags_cloud_value_padding;
+        border-top-right-radius: variables.$tags_cloud_tag_border_radius;
+        border-bottom-right-radius: variables.$tags_cloud_tag_border_radius;
+        background-color: colors.$tags_cloud_circle_background_color;
+        color: colors.$tags_cloud_value_color;
+        font-weight: bold;
+        font-size: variables.$tags_cloud_value_font_size;
+        z-index: variables.$tags_cloud_value_z_index;
+    }
+
+    &__tag {
+        display: inline-flex;
+        justify-content: space-between;
+        margin-right: variables.$tags_cloud_tag_margin_right;
+        margin-bottom: variables.$tags_cloud_tag_margin_bottom;
+        border-style: solid;
+        border-width: variables.$tags_cloud_tag_border_width;
+        border-color: colors.$tags_cloud_tag_border_color;
+        border-radius: variables.$tags_cloud_tag_border_radius;
+    }
+
+    &__tags {
+        margin-top: variables.$tags_cloud_tags_margin_top;
+        padding-top: variables.$tags_cloud_tags_padding_top;
+        border-top-style: solid;
+        border-top-width: variables.$tags_cloud_tags_border_width;
+        border-top-color: colors.$tags_cloud_tags_border_color;
+    }
+
+    &__text {
+        margin: variables.$tags_cloud_text_margin;
+        font-weight: bold;
+        color: colors.$tags_cloud_text_color;
+    }
+}

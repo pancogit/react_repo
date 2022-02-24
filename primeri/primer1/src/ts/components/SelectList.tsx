@@ -1,8 +1,10 @@
 export default function SelectList() {
     return (
-        <div className='select-list__select'>
-            <p className='select-list__text'>Default sorting</p>
-            <i className='fa-solid fa-caret-down select-list__arrow'></i>
+        <div className='select-list'>
+            <div className='select-list__select'>
+                <p className='select-list__text'>Default sorting</p>
+                <i className='fa-solid fa-caret-down select-list__arrow'></i>
+            </div>
             <div className='select-list__options'>
                 <p className='select-list__option'>Sort by name ascending</p>
                 <p className='select-list__option'>Sort by name descending</p>

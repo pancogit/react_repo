@@ -1,0 +1,70 @@
+// top-products
+
+@use '../abstracts/colors';
+@use '../abstracts/variables';
+
+.top-products {
+    &__before {
+        display: inline-block;
+        margin-right: variables.$top_products_before_margin_right;
+        color: colors.$top_products_before_color;
+        font-size: variables.$top_products_before_font_size;
+        text-decoration-line: line-through;
+        text-decoration-color: colors.$top_products_before_text_decoration_color;
+    }
+
+    &__after {
+        color: colors.$top_products_after_color;
+        font-weight: bold;
+        font-size: variables.$top_products_after_font_size;
+    }
+
+    // override css cascade of shop page heading with nested selector
+    .top-products__heading {
+        margin-bottom: variables.$top_products_heading_margin_bottom;
+        margin-top: variables.$top_products_heading_margin_top;
+        word-break: break-all;
+    }
+
+    &__heading-link {
+        display: block;
+        text-decoration: none;
+        color: colors.$top_products_heading_link_color;
+        font-weight: bold;
+        font-size: variables.$top_products_heading_link_font_size;
+    }
+
+    &__image {
+        display: block;
+        margin-right: variables.$top_products_image_margin_right;
+
+        // positioning container for sale image
+        position: relative;
+    }
+
+    &__price {
+        margin-top: variables.$top_products_price_margin_top;
+        margin-bottom: 0;
+    }
+
+    &__product {
+        display: flex;
+        padding: variables.$top_products_product_padding;
+        border-top-style: solid;
+        border-top-width: variables.$top_products_product_border_width;
+        border-top-color: colors.$top_products_product_border_color;
+    }
+
+    &__products {
+        margin-bottom: variables.$top_products_prod_margin_bottom;
+        border-bottom-style: solid;
+        border-bottom-width: variables.$top_products_product_border_width;
+        border-bottom-color: colors.$top_products_product_border_color;
+    }
+
+    &__sale {
+        position: absolute;
+        top: variables.$top_sale_top;
+        right: variables.$top_sale_right;
+    }
+}

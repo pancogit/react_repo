@@ -1,0 +1,74 @@
+// select-list
+
+@use '../abstracts/colors';
+@use '../abstracts/variables';
+
+.select-list {
+    &__text {
+        margin: 0;
+        font-weight: bold;
+        font-size: variables.$select_list_text_font_size;
+        color: colors.$select_list_text_color;
+
+        // don't allow selection of text
+        user-select: none;
+    }
+
+    &__arrow {
+        margin-right: variables.$select_list_arrow_margin_right;
+        color: colors.$select_list_arrow_color;
+        font-size: variables.$select_list_arrow_font_size;
+    }
+
+    &__select {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: variables.$select_list_sel_padding;
+        cursor: pointer;
+        border-style: solid;
+        border-width: variables.$select_list_sel_border_width;
+        border-color: colors.$select_list_sel_border_color;
+        border-radius: variables.$select_list_sel_border_radius;
+        position: relative;
+        width: variables.$select_list_options_width;
+        box-sizing: border-box;
+        background-color: colors.$select_list_sel_background_color;
+    }
+
+    &__options {
+        margin-top: variables.$select_list_options_margin_top;
+        border: none;
+        position: absolute;
+        border-style: solid;
+        border-width: variables.$select_list_options_border_width;
+        border-color: colors.$select_list_options_border_color;
+        border-bottom-left-radius: variables.$select_list_options_border_radius;
+        border-bottom-right-radius: variables.$select_list_options_border_radius;
+        border-top: none;
+        width: variables.$select_list_options_width;
+        box-sizing: border-box;
+        background-color: colors.$select_list_options_background_color;
+
+        // hide options by default
+        display: none;
+
+        // show options when header is clicked
+        &--open {
+            display: block;
+        }
+    }
+
+    &__option {
+        margin: 0;
+        padding: variables.$select_list_option_padding;
+        cursor: pointer;
+        font-size: variables.$select_list_option_font_size;
+        color: colors.$select_list_option_color;
+        font-weight: bold;
+
+        &:hover {
+            background-color: colors.$select_list_option_background_color;
+        }
+    }
+}

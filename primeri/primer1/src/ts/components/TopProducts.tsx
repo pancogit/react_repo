@@ -11,94 +11,105 @@ export default function TopProducts() {
             <h3 className='top-products__heading shop-page__aside-heading'>
                 Top Rated Products
             </h3>
-            <div className='top-products__product'>
-                <Link to='product-1' className='top-products__image'>
-                    <img
-                        src={ninjaSilhouette}
-                        alt='product'
-                        width={100}
-                        height='auto'
-                        className='top-products__picture'
-                    />
-                    <img
-                        src={sale}
-                        alt='sale'
-                        width={30}
-                        height='auto'
-                        className='top-products__sale'
-                    />
-                </Link>
-                <div className='top-products__info'>
-                    <Link to='product-1' className='top-products__heading-link'>
-                        <h4 className='top-products__heading'>
-                            Ninja Silhouette
-                        </h4>
+            <div className='top-products__products'>
+                <div className='top-products__product'>
+                    <Link to='product-1' className='top-products__image'>
+                        <img
+                            src={ninjaSilhouette}
+                            alt='product'
+                            width={80}
+                            height='auto'
+                            className='top-products__picture'
+                        />
+                        <img
+                            src={sale}
+                            alt='sale'
+                            width={40}
+                            height='auto'
+                            className='top-products__sale'
+                        />
                     </Link>
-                    <Stars />
-                    <p className='top-products__price'>
-                        <span className='top-products__before'>
-                            &pound;15.00
-                        </span>
-                        <span className='top-products__after'>
-                            &pound;12.00
-                        </span>
-                    </p>
+                    <div className='top-products__info'>
+                        <Link
+                            to='product-1'
+                            className='top-products__heading-link'
+                        >
+                            <h4 className='top-products__heading'>
+                                Ninja Silhouette
+                            </h4>
+                        </Link>
+                        <Stars />
+                        <p className='top-products__price'>
+                            <span className='top-products__before'>
+                                &pound;15.00
+                            </span>
+                            <span className='top-products__after'>
+                                &pound;12.00
+                            </span>
+                        </p>
+                    </div>
                 </div>
-            </div>
 
-            <div className='top-products__product'>
-                <Link to='product-2' className='top-products__image'>
-                    <img
-                        src={shipYourIdea}
-                        alt='product'
-                        width={100}
-                        height='auto'
-                        className='top-products__picture'
-                    />
-                </Link>
-                <div className='top-products__info'>
-                    <Link to='product-2' className='top-products__heading-link'>
-                        <h4 className='top-products__heading'>
-                            Ship Your Idea
-                        </h4>
+                <div className='top-products__product'>
+                    <Link to='product-2' className='top-products__image'>
+                        <img
+                            src={shipYourIdea}
+                            alt='product'
+                            width={80}
+                            height='auto'
+                            className='top-products__picture'
+                        />
                     </Link>
-                    <Stars />
-                    <p className='top-products__price'>
-                        <span className='top-products__before'>
-                            &pound;15.00
-                        </span>
-                        <span className='top-products__after'>
-                            &pound;12.00
-                        </span>
-                    </p>
+                    <div className='top-products__info'>
+                        <Link
+                            to='product-2'
+                            className='top-products__heading-link'
+                        >
+                            <h4 className='top-products__heading'>
+                                Ship Your Idea
+                            </h4>
+                        </Link>
+                        <Stars />
+                        <p className='top-products__price'>
+                            <span className='top-products__before'>
+                                &pound;15.00
+                            </span>
+                            <span className='top-products__after'>
+                                &pound;12.00
+                            </span>
+                        </p>
+                    </div>
                 </div>
-            </div>
 
-            <div className='top-products__product'>
-                <Link to='product-3' className='top-products__heading-link'>
-                    <img
-                        src={premiumQuality}
-                        alt='product'
-                        width={100}
-                        height='auto'
-                        className='top-products__picture'
-                    />
-                </Link>
-                <div className='top-products__info'>
-                    <Link to='product-3' className='top-products__heading-link'>
-                        <h4 className='top-products__heading'>
-                            Premium Quality
-                        </h4>
+                <div className='top-products__product'>
+                    <Link to='product-3' className='top-products__image'>
+                        <img
+                            src={premiumQuality}
+                            alt='product'
+                            width={80}
+                            height='auto'
+                            className='top-products__picture'
+                        />
                     </Link>
-                    <Stars />
-                    <p className='top-products__price'>
-                        <span className='top-products__before'>
-                            &pound;15.00
-                        </span>
-                        <span className='top-products__after'>
-                            &pound;12.00
-                        </span>
-                    </p>
+                    <div className='top-products__info'>
+                        <Link
+                            to='product-3'
+                            className='top-products__heading-link'
+                        >
+                            <h4 className='top-products__heading'>
+                                Premium Quality
+                            </h4>
+                        </Link>
+                        <Stars />
+                        <p className='top-products__price'>
+                            <span className='top-products__before'>
+                                &pound;15.00
+                            </span>
+                            <span className='top-products__after'>
+                                &pound;12.00
+                            </span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

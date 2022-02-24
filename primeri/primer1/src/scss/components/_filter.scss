@@ -108,6 +108,20 @@
         list-style-type: none;
     }
 
+    &__list-item {
+        &--active {
+            // show submenu when submenu link is clicked
+            .filter__submenu-list {
+                max-height: variables.$filter_submenu_active_max_height;
+            }
+
+            // rotate arrow when submenu is opened
+            .filter__submenu-arrow {
+                transform: rotate(variables.$filter_list_item_arrow_transform);
+            }
+        }
+    }
+
     &__pounds {
         margin: 0;
         color: colors.$filter_pounds_color;
@@ -170,8 +184,10 @@
         max-height: 0;
         overflow: hidden;
         transition: max-height variables.$filter_submenu_transition;
+    }
 
-        // show submenu when submenu link is clicked
+    // show submenu when submenu link is clicked
+    &__submenu {
         &--active {
             max-height: variables.$filter_submenu_active_max_height;
         }
@@ -186,7 +202,9 @@
         margin-right: variables.$filter_submenu_arrow_margin_right;
         color: colors.$filter_submenu_arrow_color;
         font-size: variables.$filter_submenu_arrow_font_size;
+
         transition: margin-left variables.$filter_submenu_arrow_transition,
-            margin-right variables.$filter_submenu_arrow_transition;
+            margin-right variables.$filter_submenu_arrow_transition,
+            transform variables.$filter_submenu_arrow_transition;
     }
 }

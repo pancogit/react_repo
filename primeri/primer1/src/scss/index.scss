@@ -22,6 +22,10 @@
 @use 'components/cart';
 @use 'components/filter';
 @use 'components/slider';
+@use 'components/top-products';
+@use 'components/stars';
+@use 'components/tags-cloud';
+@use 'components/select-list';
 
 // pages
 @use 'pages/home';
