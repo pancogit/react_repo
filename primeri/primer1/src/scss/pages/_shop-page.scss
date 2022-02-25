@@ -5,10 +5,37 @@
 
 .shop-page {
     display: flex;
+    position: relative;
 
     &__aside {
         flex: variables.$shop_page_aside_flex;
         margin-right: variables.$shop_page_aside_margin_right;
+        transition: transform variables.$shop_page_aside_transition;
+
+        // hide aside filters on medium screens
+        @media screen and (max-width: variables.$shop_page_aside_medium_screen) {
+            position: absolute;
+            padding: variables.$shop_page_aside_padding_medium;
+            width: variables.$shop_page_aside_width_medium;
+            background-color: colors.$shop_page_aside_background_color_medium;
+            z-index: variables.$shop_page_aside_z_index_medium;
+            border-style: solid;
+            border-width: variables.$shop_page_aside_border_width_medium;
+            border-color: colors.$shop_page_aside_border_color_medium;
+            border-left: none;
+            border-top-right-radius: variables.$shop_page_aside_border_radius;
+            border-bottom-right-radius: variables.$shop_page_aside_border_radius;
+            box-shadow: variables.$shop_page_aside_box_shadow_medium
+                colors.$shop_page_aside_box_shadow_medium_color;
+            transform: translateX(variables.$shop_page_aside_transform_medium);
+        }
+
+        // show aside part as hamburger menu with small translation
+        &--hamburger-menu {
+            transform: translateX(
+                variables.$shop_page_aside_transform_hamburger
+            );
+        }
     }
 
     &__aside-heading {
@@ -44,6 +71,7 @@
     }
 
     &__pagination {
+        margin-top: variables.$shop_page_pagination_margin_top;
     }
 
     &__products {
@@ -64,5 +92,23 @@
         font-weight: bold;
         font-size: variables.$shop_page_showing_font_size;
         color: colors.$shop_page_showing_color;
+    }
+
+    .shop-page__hamburger-menu {
+        display: none;
+        position: absolute;
+        top: variables.$shop_page_hamburger_top;
+        color: colors.$shop_page_hamburger_color;
+        cursor: pointer;
+        transition: color variables.$shop_page_hamburger_transition;
+
+        &:hover {
+            color: colors.$shop_page_hamburger_color_hover;
+        }
+
+        // show hamburger menu on medium screens
+        @media screen and (max-width: variables.$shop_page_aside_medium_screen) {
+            display: block;
+        }
     }
 }

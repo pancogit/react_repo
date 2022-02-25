@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import logoImage from '../../images/logo.png';
 
 interface Props {
     imageWidth: number;
@@ -10,7 +9,7 @@ export default function Logo({ imageWidth }: Props) {
         <Link to='/' className='logo logo--margin'>
             <div className='logo__wrapper'>
                 <img
-                    src={logoImage}
+                    src='images/logo.png'
                     alt='logo'
                     width={imageWidth}
                     height='auto'

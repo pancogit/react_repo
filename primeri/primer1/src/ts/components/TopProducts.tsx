@@ -1,8 +1,4 @@
 import { Link } from 'react-router-dom';
-import ninjaSilhouette from '../../images/mens/jackets/01.jpg';
-import shipYourIdea from '../../images/mens/jackets/02.jpg';
-import premiumQuality from '../../images/mens/jackets/03.jpg';
-import sale from '../../images/sale.png';
 import Stars from './Stars';
 
 export default function TopProducts() {
@@ -15,15 +11,15 @@ export default function TopProducts() {
                 <div className='top-products__product'>
                     <Link to='product-1' className='top-products__image'>
                         <img
-                            src={ninjaSilhouette}
+                            src='images/mens/jackets/01.jpg'
                             alt='product'
                             width={80}
                             height='auto'
                             className='top-products__picture'
                         />
                         <img
-                            src={sale}
-                            alt='sale'
+                            src='images/sale.png'
+                            alt='sale logo'
                             width={40}
                             height='auto'
                             className='top-products__sale'
@@ -53,7 +49,7 @@ export default function TopProducts() {
                 <div className='top-products__product'>
                     <Link to='product-2' className='top-products__image'>
                         <img
-                            src={shipYourIdea}
+                            src='images/mens/jackets/02.jpg'
                             alt='product'
                             width={80}
                             height='auto'
@@ -84,7 +80,7 @@ export default function TopProducts() {
                 <div className='top-products__product'>
                     <Link to='product-3' className='top-products__image'>
                         <img
-                            src={premiumQuality}
+                            src='images/mens/jackets/03.jpg'
                             alt='product'
                             width={80}
                             height='auto'

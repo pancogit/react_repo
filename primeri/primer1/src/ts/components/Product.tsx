@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
-import flyingNinja from '../../images/mens/shirts/01.jpg';
-import saleImage from '../../images/sale.png';
 import Stars from './Stars';
 
 interface Props {
     heading: string;
     price: Price;
     sale?: boolean;
+    image: string;
 }
 
 interface Price {
@@ -14,48 +13,50 @@ interface Price {
     new: number | [number, number];
 }
 
-export default function Product({ heading, price, sale = false }: Props) {
+export default function Product(props: Props) {
+    const { heading, price, sale = false, image } = props;
+
     return (
         <article className='product'>
             <Link to='' className='product__image-wrapper'>
-                <img
-                    src={flyingNinja}
-                    alt='product'
-                    width={150}
-                    height='auto'
+                <div
                     className='product__image'
-                />
+                    style={{ backgroundImage: `url(${image})`, color: 'white' }}
+                ></div>
                 {sale && (
                     <img
-                        src={saleImage}
+                        src='images/sale.png'
                         alt='sale'
-                        width={40}
-                        height='auto'
                         className='product__sale'
                     />
                 )}
             </Link>
-            <div className='product__info'>
-                <h4 className='product__heading'>{heading}</h4>
-                <Stars />
+            <div className='product__bottom'>
+                <div className='product__info'>
+                    <Link to='' className='product__heading-wrapper'>
+                        <h4 className='product__heading'>{heading}</h4>
+                    </Link>
+                    <Stars />
+                </div>
+                <button className='product__button'>
+                    <p className='product__price'>
+                        <span className='product__old-price'>
+                            &pound;{price.old}
+                        </span>
+                        {typeof price.new === 'number' ? (
+                            <span className='product__new-price'>
+                                &pound;{price.new}
+                            </span>
+                        ) : (
+                            <span className='product__new-price'>
+                                &pound;{price.new[0]} - &pound;{price.new[1]}
+                            </span>
+                        )}
+                    </p>
+                    <i className='fa-solid fa-cart-plus product__cart'></i>
+                </button>
             </div>
-            <button className='product__button'>
-                <p className='product__price'>
-                    <span className='product__old-price'>
-                        &pound;{price.old}
-                    </span>
-                    {typeof price.new === 'number' ? (
-                        <span className='product__new-price'>
-                            &pound;{price.new}
-                        </span>
-                    ) : (
-                        <span className='product__new-price'>
-                            &pound;{price.new[0]} - &pound;{price.new[1]}
-                        </span>
-                    )}
-                </p>
-                <i className='fa-solid fa-cart-plus product__cart'></i>
-            </button>
+            <div className='product__line'></div>
         </article>
     );
 }

@@ -186,17 +186,30 @@ $search_icon_font_size: 0.8rem;
 // shop-page
 $shop_page_aside_flex: 0 0 15rem;
 $shop_page_aside_margin_right: 1.5rem;
-$shop_page_content_flex: 1;
+$shop_page_aside_transition: 1s;
+$shop_page_aside_medium_screen: 56rem;
+$shop_page_aside_padding_medium: 1rem;
+$shop_page_aside_width_medium: 15rem;
+$shop_page_aside_z_index_medium: 1500;
+$shop_page_aside_border_width_medium: 0.2rem;
+$shop_page_aside_border_radius: 0.4rem;
+$shop_page_aside_box_shadow_medium: 2px 2px 4px 0px;
+$shop_page_aside_transform_medium: -20rem;
+$shop_page_aside_transform_hamburger: -1rem;
 $shop_page_aside_heading_font_size: 1.25rem;
+$shop_page_content_flex: 1;
 $shop_page_header_padding_bottom: 0.8rem;
 $shop_page_header_margin_bottom: 2rem;
 $shop_page_header_border_width: 0.1rem;
 $shop_page_heading_margin_right: 2rem;
-$shop_page_products_grid_min: 15rem;
+$shop_page_products_grid_min: 17rem;
 $shop_page_products_grid_max: 1fr;
-$shop_page_products_gap: 1rem;
+$shop_page_products_gap: 1.6rem;
 $shop_page_showing_margin_right: 1.5rem;
 $shop_page_showing_font_size: 0.85rem;
+$shop_page_pagination_margin_top: 2.4rem;
+$shop_page_hamburger_top: -1.8rem;
+$shop_page_hamburger_transition: 0.5s;
 
 // cart
 $cart_margin_top: 1rem;
@@ -331,3 +344,45 @@ $top_sale_right: -0.5rem;
 // stars
 $stars_icon_margin_right: 0.25rem;
 $stars_icon_font_size: 0.85rem;
+
+// product
+$product_transition: 0.2s;
+$product_margin_bottom: 1rem;
+$product_padding_bottom: 1.8rem;
+$product_border_width: 0.1rem;
+$product_height: 32rem;
+$product_hover_heading_wrapper_margin_bottom: 1rem;
+$product_hover_line_opacity: 1;
+$product_button_padding: 0.7rem 1rem;
+$product_button_width: 100%;
+$product_button_border_width: 0.15rem;
+$product_button_border_radius: 0.2rem;
+$product_button_font_size: 1.2rem;
+$product_button_transition: 0.2s;
+$product_cart_font_size: 1.1rem;
+$product_heading_font_size: 1.1rem;
+$product_heading_wrapper_margin_right: 1rem;
+$product_image_height: 22rem;
+$product_image_wrapper_max_height: 100rem;
+$product_image_wrapper_opacity: 1;
+$product_info_margin: 1.4rem 0;
+$product_line_bottom: -0.2rem;
+$product_line_height: 0.2rem;
+$product_line_width: 100%;
+$product_old_price_margin_right: 0.7rem;
+$product_sale_top: 0.5rem;
+$product_sale_right: 0.5rem;
+$product_sale_z_index: 1000;
+$product_sale_width: 4rem;
+
+// pagination
+$pagination_page_border_width: 0.1rem;
+$pagination_page_padding_left: 1rem;
+$pagination_page_font_size: 0.9rem;
+$pagination_page_active_z_index: 2000;
+$pagination_border_flex: 1;
+$pagination_border_height: 0.1rem;
+$pagination_page_padding_top: 0.7rem;
+$pagination_arrow_left_font_size: 0.75rem;
+$pagination_arrow_left_border_radius: 0.2rem;
+$pagination_icon_margin_top: 0.1rem;

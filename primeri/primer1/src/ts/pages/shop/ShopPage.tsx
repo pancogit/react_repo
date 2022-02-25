@@ -10,6 +10,7 @@ import TopProducts from '../../components/TopProducts';
 export default function ShopPage() {
     return (
         <div className='shop-page'>
+            <i className='fa-solid fa-bars shop-page__hamburger-menu'></i>
             <aside className='shop-page__aside'>
                 <Search />
                 <Cart />
@@ -35,50 +36,62 @@ export default function ShopPage() {
                         sale={true}
                         heading='Flying Ninja'
                         price={{ old: 15, new: [12, 28] }}
+                        image='images/mens/jackets/05.jpeg'
                     />
                     <Product
                         heading='Premium Quality'
                         price={{ old: 15, new: 12 }}
+                        image='images/mens/jackets/04.jpg'
                     />
                     <Product
                         heading='Ship Your Idea'
                         price={{ old: 15, new: 12 }}
+                        image='../../images/mens/jackets/03.jpg'
                     />
                     <Product
                         heading='Ninja Silhouette'
                         price={{ old: 15, new: 12 }}
+                        image='images/mens/jackets/09.jpeg'
                     />
                     <Product
                         heading='Ninja Silhouette'
                         price={{ old: 15, new: 12 }}
+                        image='../../images/mens/shirts/01.jpg'
                     />
                     <Product
                         heading='Ninja Silhouette'
                         price={{ old: 15, new: 12 }}
+                        image='images/mens/shirts/02.jpg'
                     />
                     <Product
                         heading='Ninja Silhouette'
                         price={{ old: 15, new: 12 }}
+                        image='images/mens/shirts/05.jpg'
                     />
                     <Product
                         heading='Ninja Silhouette'
                         price={{ old: 15, new: 12 }}
+                        image='images/mens/shirts/06.jpg'
                     />
                     <Product
                         heading='Ninja Silhouette'
                         price={{ old: 15, new: 12 }}
+                        image='images/mens/shirts/08.jpg'
                     />
                     <Product
                         heading='Ninja Silhouette'
                         price={{ old: 15, new: 12 }}
+                        image='images/mens/shirts/14.jpg'
                     />
                     <Product
                         heading='Ninja Silhouette'
                         price={{ old: 15, new: 12 }}
+                        image='images/mens/shirts/15.jpg'
                     />
                     <Product
                         heading='Ninja Silhouette'
                         price={{ old: 15, new: 12 }}
+                        image='images/mens/jackets/04.jpg'
                     />
                 </div>
                 <div className='shop-page__pagination'>

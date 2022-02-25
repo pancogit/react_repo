@@ -103,8 +103,13 @@ $cart_subtotal_color: #29292b;
 
 // shop-page
 $shop_page_aside_heading_color: #2d2c3a;
+$shop_page_aside_background_color_medium: white;
+$shop_page_aside_border_color_medium: #85af19;
+$shop_page_aside_box_shadow_medium_color: #042c0a;
 $shop_page_header_border_color: #e9e9e9;
 $shop_page_showing_color: #747478;
+$shop_page_hamburger_color: #26262e;
+$shop_page_hamburger_color_hover: #617e19;
 
 // slider
 $slider_track_border_color: #9dc243;
@@ -161,3 +166,34 @@ $select_list_options_border_color: #e9e9e9;
 $select_list_options_background_color: white;
 $select_list_option_color: #555564;
 $select_list_option_background_color: #e3e3e3;
+
+// product
+$product_border_color: #e9e9e9;
+$product_background_color_hover: #2e303c;
+$product_hover_heading_color: white;
+$product_button_border_color: #aad047;
+$product_button_background_color: #aad047;
+$product_button_color: white;
+$product_button_background_color_hover: #8daf35;
+$product_button_hover_old_price_color: #34582d;
+$product_button_hover_old_price_text_decoration_color: #4d8343;
+$product_heading_color: #27272f;
+$product_line_background_color: #aad047;
+$product_old_price_color: #4f7e47;
+$product_old_price_text_decoration_color: #65ad59;
+
+// pagination
+$pagination_border_background_color: #e9e9e9;
+$pagination_page_border_color: #e9e9e9;
+$pagination_page_background_color: white;
+$pagination_page_background_color_hover: #f5f5f5;
+$pagination_page_color: #27272f;
+$pagination_page_active_background_color: #2e303c;
+$pagination_page_active_color: white;
+$pagination_arrow_color: #aad047;
+$pagination_arrow_background_color: white;
+$pagination_arrow_active_color: white;
+$pagination_arrow_active_background_color: #aad047;
+$pagination_arrow_active_border_color: #9ec142;
+$pagination_arrow_active_background_color_hover: #a3c942;
+$pagination_arrow_active_border_color_hover: #92b53a;

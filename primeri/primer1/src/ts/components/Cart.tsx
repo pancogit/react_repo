@@ -1,8 +1,5 @@
 import { Link } from 'react-router-dom';
 
-import ninjaSilhouette from '../../images/mens/shirts/01.jpg';
-import shipYourIdea from '../../images/mens/shirts/02.jpg';
-
 export default function Cart() {
     return (
         <div className='cart cart--margin'>
@@ -19,7 +16,7 @@ export default function Cart() {
                     <div className='cart__image-wrapper'>
                         <Link to='cart-item-1' className='cart__item-link'>
                             <img
-                                src={ninjaSilhouette}
+                                src='images/mens/shirts/01.jpg'
                                 alt='cart product'
                                 className='cart__image'
                                 width={80}
@@ -41,7 +38,7 @@ export default function Cart() {
                     <div className='cart__image-wrapper'>
                         <Link to='cart-item-2' className='cart__item-link'>
                             <img
-                                src={shipYourIdea}
+                                src='images/mens/shirts/02.jpg'
                                 alt='cart product'
                                 className='cart__image'
                                 width={80}

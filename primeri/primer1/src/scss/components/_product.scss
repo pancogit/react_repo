@@ -1,0 +1,165 @@
+// product
+
+@use '../abstracts/colors';
+@use '../abstracts/variables';
+
+.product {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: variables.$product_margin_bottom;
+    padding-bottom: variables.$product_padding_bottom;
+    border-bottom-style: solid;
+    border-bottom-width: variables.$product_border_width;
+    border-bottom-color: colors.$product_border_color;
+    height: variables.$product_height;
+    position: relative;
+
+    // when product is hovered, increase bottom border and change it's color
+    // hide image, center remaining content in the product with small transition
+    &:hover {
+        justify-content: center;
+        background-color: colors.$product_background_color_hover;
+
+        .product__image-wrapper {
+            max-height: 0;
+            opacity: 0;
+        }
+
+        .product__info {
+            flex-direction: column;
+            align-items: center;
+            margin-top: 0;
+        }
+
+        .product__heading-wrapper {
+            margin-bottom: variables.$product_hover_heading_wrapper_margin_bottom;
+        }
+
+        .product__button {
+            border-radius: 0;
+        }
+
+        .product__heading {
+            color: colors.$product_hover_heading_color;
+        }
+
+        .product__line {
+            visibility: visible;
+            opacity: variables.$product_hover_line_opacity;
+        }
+    }
+
+    &__button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: variables.$product_button_padding;
+        width: variables.$product_button_width;
+        border-style: solid;
+        border-width: variables.$product_button_border_width;
+        border-color: colors.$product_button_border_color;
+        border-radius: variables.$product_button_border_radius;
+        box-sizing: border-box;
+        cursor: pointer;
+        background-color: colors.$product_button_background_color;
+        color: colors.$product_button_color;
+        font-size: variables.$product_button_font_size;
+        transition: background-color variables.$product_button_transition,
+            border-color variables.$product_button_transition;
+
+        &:hover {
+            background-color: colors.$product_button_background_color_hover;
+            border-color: colors.$product_button_background_color_hover;
+
+            .product__old-price {
+                color: colors.$product_button_hover_old_price_color;
+                text-decoration-color: colors.$product_button_hover_old_price_text_decoration_color;
+            }
+        }
+    }
+
+    &__cart {
+        font-size: variables.$product_cart_font_size;
+    }
+
+    &__heading {
+        margin: 0;
+        color: colors.$product_heading_color;
+        font-weight: bold;
+        font-size: variables.$product_heading_font_size;
+        transition: color variables.$product_transition;
+    }
+
+    &__heading-wrapper {
+        display: inline-block;
+        margin-right: variables.$product_heading_wrapper_margin_right;
+        text-decoration: none;
+    }
+
+    &__image {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: variables.$product_image_height;
+    }
+
+    &__image-wrapper {
+        display: block;
+        position: relative;
+        max-height: variables.$product_image_wrapper_max_height;
+        overflow: hidden;
+        opacity: variables.$product_image_wrapper_opacity;
+        transition: max-height variables.$product_transition,
+            opacity variables.$product_transition;
+    }
+
+    &__info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: variables.$product_info_margin;
+    }
+
+    // stick line to the bottom or article with absolute positioning
+    &__line {
+        position: absolute;
+        bottom: variables.$product_line_bottom;
+        height: variables.$product_line_height;
+        width: variables.$product_line_width;
+        background-color: colors.$product_line_background_color;
+
+        // hide line by default
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity variables.$product_transition;
+    }
+
+    &__price {
+        margin: 0;
+    }
+
+    &__new-price {
+        display: inline-block;
+        font-weight: bold;
+    }
+
+    &__old-price {
+        display: inline-block;
+        margin-right: variables.$product_old_price_margin_right;
+        font-weight: normal;
+        color: colors.$product_old_price_color;
+        text-decoration-line: line-through;
+        text-decoration-color: colors.$product_old_price_text_decoration_color;
+        transition: color variables.$product_transition,
+            text-decoration-color variables.$product_transition;
+    }
+
+    &__sale {
+        position: absolute;
+        top: variables.$product_sale_top;
+        right: variables.$product_sale_right;
+        z-index: variables.$product_sale_z_index;
+        width: variables.$product_sale_width;
+    }
+}
