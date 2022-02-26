@@ -77,6 +77,11 @@
                 cursor: auto;
             }
         }
+
+        @media screen and (max-width: variables.$breadcrumbs_box_screen_small) {
+            margin-bottom: variables.$breadcrumbs_item_margin_top_small;
+            margin-top: variables.$breadcrumbs_item_margin_top_small;
+        }
     }
 
     &__link {

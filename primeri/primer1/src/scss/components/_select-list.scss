@@ -40,6 +40,7 @@
         margin-top: variables.$select_list_options_margin_top;
         border: none;
         position: absolute;
+        z-index: variables.$select_list_options_z_index;
         border-style: solid;
         border-width: variables.$select_list_options_border_width;
         border-color: colors.$select_list_options_border_color;

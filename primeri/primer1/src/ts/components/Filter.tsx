@@ -38,7 +38,10 @@ export default function Filter() {
                             </Link>
                             <ul className='filter__submenu-list'>
                                 <li className='filter__list-item'>
-                                    <Link to='' className='filter__link'>
+                                    <Link
+                                        to=''
+                                        className='filter__link filter__link--active'
+                                    >
                                         <span className='filter__link-text'>
                                             Menu
                                         </span>

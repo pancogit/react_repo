@@ -6,19 +6,61 @@ interface Props {
     price: Price;
     sale?: boolean;
     image: string;
+    addedToCart?: boolean;
+    link: string;
 }
 
-interface Price {
-    old: number;
+export interface Price {
+    old?: number;
     new: number | [number, number];
 }
 
 export default function Product(props: Props) {
-    const { heading, price, sale = false, image } = props;
+    const {
+        heading,
+        price,
+        sale = false,
+        image,
+        addedToCart = false,
+        link,
+    } = props;
+
+    // choose between added to cart button and normal buy button
+    const addButton = addedToCart ? (
+        <Link to='/shop-cart' className='product__button-cart'>
+            <button className='product__button product__button--added'>
+                <p className='product__price'>
+                    <span className='product__new-price'>Added to cart</span>
+                </p>
+                <i className='fa-solid fa-circle-check product__cart'></i>
+            </button>
+        </Link>
+    ) : (
+        <button className='product__button'>
+            <p className='product__price'>
+                {price.old && (
+                    <span className='product__old-price'>
+                        &pound;{price.old}
+                    </span>
+                )}
+                {typeof price.new === 'number' ? (
+                    <span className='product__new-price'>
+                        &pound;{price.new}
+                    </span>
+                ) : (
+                    <span className='product__new-price'>
+                        &pound;{price.new[0]} - &pound;
+                        {price.new[1]}
+                    </span>
+                )}
+            </p>
+            <i className='fa-solid fa-cart-plus product__cart'></i>
+        </button>
+    );
 
     return (
         <article className='product'>
-            <Link to='' className='product__image-wrapper'>
+            <Link to={link} className='product__image-wrapper'>
                 <div
                     className='product__image'
                     style={{ backgroundImage: `url(${image})`, color: 'white' }}
@@ -33,28 +75,12 @@ export default function Product(props: Props) {
             </Link>
             <div className='product__bottom'>
                 <div className='product__info'>
-                    <Link to='' className='product__heading-wrapper'>
+                    <Link to={link} className='product__heading-wrapper'>
                         <h4 className='product__heading'>{heading}</h4>
                     </Link>
                     <Stars />
                 </div>
-                <button className='product__button'>
-                    <p className='product__price'>
-                        <span className='product__old-price'>
-                            &pound;{price.old}
-                        </span>
-                        {typeof price.new === 'number' ? (
-                            <span className='product__new-price'>
-                                &pound;{price.new}
-                            </span>
-                        ) : (
-                            <span className='product__new-price'>
-                                &pound;{price.new[0]} - &pound;{price.new[1]}
-                            </span>
-                        )}
-                    </p>
-                    <i className='fa-solid fa-cart-plus product__cart'></i>
-                </button>
+                {addButton}
             </div>
             <div className='product__line'></div>
         </article>

@@ -1,4 +1,8 @@
-export default function Stars() {
+interface Props {
+    isEditable?: boolean;
+}
+
+export default function Stars({ isEditable = false }: Props) {
     return (
         <div className='stars'>
             <i className='fa-solid fa-star stars__icon'></i>

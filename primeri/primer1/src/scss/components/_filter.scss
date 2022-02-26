@@ -74,7 +74,8 @@
         border-bottom-width: variables.$filter_link_border_width;
         border-bottom-color: colors.$filter_link_border_color;
 
-        &:hover {
+        &:hover,
+        &--active {
             background-color: colors.$filter_link_background_color_hover;
             border-bottom-color: colors.$filter_link_background_color_hover;
 
@@ -88,6 +89,10 @@
                 margin-left: variables.$filter_submenu_arrow_hover_link_margin_left;
                 margin-right: variables.$filter_submenu_arrow_hover_link_margin_right;
             }
+        }
+
+        &--active {
+            cursor: auto;
         }
     }
 

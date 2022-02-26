@@ -52,6 +52,17 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        @media screen and (max-width: variables.$shop_page_header_medium_screen) {
+            flex: variables.$shop_page_filters_flex_medium;
+        }
+
+        @media screen and (max-width: variables.$shop_page_header_small_screen) {
+            flex-wrap: wrap;
+            display: flex;
+            justify-content: center;
+            margin-bottom: variables.$shop_page_filters_margin_bottom_small;
+        }
     }
 
     &__header {
@@ -63,11 +74,25 @@
         border-bottom-style: solid;
         border-bottom-width: variables.$shop_page_header_border_width;
         border-bottom-color: colors.$shop_page_header_border_color;
+
+        @media screen and (max-width: variables.$shop_page_header_medium_screen) {
+            flex-wrap: wrap;
+        }
     }
 
     &__heading {
         text-align: left;
         margin-right: variables.$shop_page_heading_margin_right;
+
+        @media screen and (max-width: variables.$shop_page_header_medium_screen) {
+            flex: variables.$shop_page_heading_flex_medium;
+            margin-right: 0;
+            margin-bottom: variables.$shop_page_heading_margin_bottom_medium;
+        }
+
+        @media screen and (max-width: variables.$shop_page_header_small_screen) {
+            text-align: center;
+        }
     }
 
     &__pagination {
@@ -84,6 +109,26 @@
             )
         );
         gap: variables.$shop_page_products_gap;
+
+        @media screen and (max-width: variables.$shop_page_header_medium_screen) {
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(
+                    variables.$shop_page_products_grid_min_medium,
+                    variables.$shop_page_products_grid_max
+                )
+            );
+        }
+
+        @media screen and (max-width: variables.$shop_page_products_small_screen) {
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(
+                    variables.$shop_page_products_grid_min,
+                    variables.$shop_page_products_grid_max
+                )
+            );
+        }
     }
 
     &__showing {
@@ -92,6 +137,13 @@
         font-weight: bold;
         font-size: variables.$shop_page_showing_font_size;
         color: colors.$shop_page_showing_color;
+
+        @media screen and (max-width: variables.$shop_page_header_small_screen) {
+            flex: variables.$shop_page_showing_flex_medium;
+            margin-right: 0;
+            margin-bottom: variables.$shop_page_showing_margin_bottom_medium;
+            text-align: center;
+        }
     }
 
     .shop-page__hamburger-menu {

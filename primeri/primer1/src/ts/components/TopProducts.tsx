@@ -9,16 +9,19 @@ export default function TopProducts() {
             </h3>
             <div className='top-products__products'>
                 <div className='top-products__product'>
-                    <Link to='product-1' className='top-products__image'>
+                    <Link
+                        to='/products/mens/jackets/01'
+                        className='top-products__image'
+                    >
                         <img
-                            src='images/mens/jackets/01.jpg'
+                            src='/images/mens/jackets/01.jpg'
                             alt='product'
                             width={80}
                             height='auto'
                             className='top-products__picture'
                         />
                         <img
-                            src='images/sale.png'
+                            src='/images/sale.png'
                             alt='sale logo'
                             width={40}
                             height='auto'
@@ -27,7 +30,7 @@ export default function TopProducts() {
                     </Link>
                     <div className='top-products__info'>
                         <Link
-                            to='product-1'
+                            to='/products/mens/jackets/01'
                             className='top-products__heading-link'
                         >
                             <h4 className='top-products__heading'>
@@ -47,9 +50,12 @@ export default function TopProducts() {
                 </div>
 
                 <div className='top-products__product'>
-                    <Link to='product-2' className='top-products__image'>
+                    <Link
+                        to='/products/mens/jackets/02'
+                        className='top-products__image'
+                    >
                         <img
-                            src='images/mens/jackets/02.jpg'
+                            src='/images/mens/jackets/02.jpg'
                             alt='product'
                             width={80}
                             height='auto'
@@ -58,7 +64,7 @@ export default function TopProducts() {
                     </Link>
                     <div className='top-products__info'>
                         <Link
-                            to='product-2'
+                            to='/products/mens/jackets/02'
                             className='top-products__heading-link'
                         >
                             <h4 className='top-products__heading'>
@@ -78,9 +84,12 @@ export default function TopProducts() {
                 </div>
 
                 <div className='top-products__product'>
-                    <Link to='product-3' className='top-products__image'>
+                    <Link
+                        to='/products/mens/jackets/03'
+                        className='top-products__image'
+                    >
                         <img
-                            src='images/mens/jackets/03.jpg'
+                            src='/images/mens/jackets/03.jpg'
                             alt='product'
                             width={80}
                             height='auto'
@@ -89,7 +98,7 @@ export default function TopProducts() {
                     </Link>
                     <div className='top-products__info'>
                         <Link
-                            to='product-3'
+                            to='/products/mens/jackets/03'
                             className='top-products__heading-link'
                         >
                             <h4 className='top-products__heading'>

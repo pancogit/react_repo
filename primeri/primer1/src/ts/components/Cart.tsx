@@ -14,9 +14,12 @@ export default function Cart() {
             <div className='cart__items'>
                 <div className='cart__item'>
                     <div className='cart__image-wrapper'>
-                        <Link to='cart-item-1' className='cart__item-link'>
+                        <Link
+                            to='/products/mens/shirts/01'
+                            className='cart__item-link'
+                        >
                             <img
-                                src='images/mens/shirts/01.jpg'
+                                src='/images/mens/shirts/01.jpg'
                                 alt='cart product'
                                 className='cart__image'
                                 width={80}
@@ -25,7 +28,10 @@ export default function Cart() {
                         </Link>
                     </div>
                     <div className='cart__info'>
-                        <Link to='cart-item-1' className='cart__item-link'>
+                        <Link
+                            to='/products/mens/shirts/01'
+                            className='cart__item-link'
+                        >
                             <p className='cart__name'>Ninja Silhouette</p>
                         </Link>
                         <p className='cart__order'>
@@ -36,9 +42,12 @@ export default function Cart() {
                 </div>
                 <div className='cart__item'>
                     <div className='cart__image-wrapper'>
-                        <Link to='cart-item-2' className='cart__item-link'>
+                        <Link
+                            to='/products/mens/shirts/02'
+                            className='cart__item-link'
+                        >
                             <img
-                                src='images/mens/shirts/02.jpg'
+                                src='/images/mens/shirts/02.jpg'
                                 alt='cart product'
                                 className='cart__image'
                                 width={80}
@@ -47,7 +56,10 @@ export default function Cart() {
                         </Link>
                     </div>
                     <div className='cart__info'>
-                        <Link to='cart-item-2' className='cart__item-link'>
+                        <Link
+                            to='/products/mens/shirts/02'
+                            className='cart__item-link'
+                        >
                             <p className='cart__name'>Ship Your Idea</p>
                         </Link>
                         <p className='cart__order'>

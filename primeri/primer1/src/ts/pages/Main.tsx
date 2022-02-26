@@ -17,6 +17,7 @@ import Partners from './pages/Partners';
 import ShopCart from './shop/ShopCart';
 import ShopPage from './shop/ShopPage';
 import TopBack from '../components/TopBack';
+import Products from './Products';
 
 export default function Main() {
     return (
@@ -47,6 +48,7 @@ export default function Main() {
                         <Route path='blog-3' element={<Blog3 />} />
                         <Route path='blog-4' element={<Blog4 />} />
                         <Route path='contact' element={<Contact />} />
+                        <Route path='products/*' element={<Products />} />
                         <Route path='*' element={<PageNotFound />} />
                     </Routes>
                 </div>
