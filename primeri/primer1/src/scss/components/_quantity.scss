@@ -1,0 +1,44 @@
+// quantity
+
+@use '../abstracts/colors';
+@use '../abstracts/variables';
+
+.quantity {
+    display: flex;
+
+    &__button {
+        padding: variables.$quantity_button_padding;
+        border: none;
+        border-radius: unset;
+        background-color: colors.$quantity_button_background_color;
+        color: colors.$quantity_button_color;
+        cursor: pointer;
+        font-size: variables.$quantity_button_font_size;
+
+        &:hover {
+            .quantity__sign {
+                transform: scale(
+                    variables.$quantity_sign_hover_transform_scale
+                );
+            }
+        }
+    }
+
+    &__sign {
+        display: block;
+        overflow: hidden;
+        transition: transform variables.$quantity_sign_transition;
+    }
+
+    &__total {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: variables.$quantity_total_width;
+        border-style: inset;
+        border-width: variables.$quantity_total_border_width;
+        border-color: colors.$quantity_total_border_color;
+        background-color: colors.$quantity_total_background_color;
+        font-size: variables.$quantity_total_font_size;
+    }
+}

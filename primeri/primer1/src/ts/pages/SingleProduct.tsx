@@ -9,10 +9,11 @@ import Stars from '../components/Stars';
 interface Props {
     image: string;
     price: Price;
+    isSale: boolean;
 }
 
 export default function SingleProduct(props: Props) {
-    const { image, price } = props;
+    const { image, price, isSale } = props;
 
     return (
         <div className='single-product'>
@@ -23,6 +24,13 @@ export default function SingleProduct(props: Props) {
                         alt='single product'
                         className='single-product__image'
                     />
+                    {isSale && (
+                        <img
+                            src='/images/sale.png'
+                            alt='sale'
+                            className='single-product__sale'
+                        />
+                    )}
                 </div>
                 <div className='single-product__details'>
                     <h2 className='single-product__heading main__heading'>
@@ -31,7 +39,7 @@ export default function SingleProduct(props: Props) {
                     <div className='single-product__rating'>
                         <Stars isEditable={true} />
                         <Link to='' className='single-product__reviews-link'>
-                            (5 customer reviews)
+                            (8 customer reviews)
                         </Link>
                     </div>
                     <div className='single-product__price'>
@@ -59,15 +67,17 @@ export default function SingleProduct(props: Props) {
                         egestas semper. Aenean ultricies mi vitae est. Mauris
                         placerat eleifend leo.
                     </p>
-                    <div className='single-product__color'>
-                        <span className='single-product__color-text'>
-                            Color
-                        </span>
-                        <ColorSelect />
+                    <div className='single-product__list'>
+                        <span className='single-product__list-text'>Color</span>
+                        <div className='single-product__list-select'>
+                            <ColorSelect />
+                        </div>
                     </div>
-                    <div className='single-product__size'>
-                        <span className='single-product__size-text'>Size</span>
-                        <SizeSelect />
+                    <div className='single-product__list'>
+                        <span className='single-product__list-text'>Size</span>
+                        <div className='single-product__list-select'>
+                            <SizeSelect />
+                        </div>
                     </div>
                     <div className='single-product__quantity'>
                         <Quantity />

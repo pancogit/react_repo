@@ -67,7 +67,7 @@ export default function Product(props: Props) {
                 ></div>
                 {sale && (
                     <img
-                        src='images/sale.png'
+                        src='/images/sale.png'
                         alt='sale'
                         className='product__sale'
                     />

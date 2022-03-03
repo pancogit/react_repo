@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import SingleProduct from './SingleProduct';
 
 export default function Products() {
-    const imagePath = '/images/mens/jackets/04.jpg';
+    const imagePath = '/images/mens/jackets/01.jpg';
 
     return (
         <Routes>
@@ -14,6 +14,7 @@ export default function Products() {
                         price={{ old: 15, new: 12 }}
                         /* price={{ old: 15, new: [12, 28] }}
                         price={{ new: 12 }} */
+                        isSale={true}
                     />
                 }
             />

@@ -400,3 +400,66 @@ $pagination_page_padding_top: 0.7rem;
 $pagination_arrow_left_font_size: 0.75rem;
 $pagination_arrow_left_border_radius: 0.2rem;
 $pagination_icon_margin_top: 0.1rem;
+
+// description
+$description_tab_border_width: 0.1rem;
+$description_tab_border_radius: 0.3rem;
+$description_tab_padding_top: 0.3rem;
+$description_tab_padding_left: 0.8rem;
+$description_tab_font_size: 1rem;
+$description_tab_left_z_index: 1000;
+$description_tab_left_flex: 0 0 0.5rem;
+$description_tab_right_flex: 1;
+$description_header_margin_top: 1.7rem;
+$description_header_margin_bottom: 1.5rem;
+$description_header_font_size: 1.3rem;
+$description_text_line_height: 1.6rem;
+$description_text_font_size: 1.05rem;
+$description_comment_padding: 0.7rem;
+$description_comment_border_radius: 1rem;
+$description_username_margin_right: 0.3rem;
+$description_comment_text_line_height: 1.35rem;
+
+// single-product
+$single_product_info_medium_screen: 40rem;
+$single_product_picture_flex: 1;
+$single_product_picture_flex_medium: 100%;
+$single_product_picture_margin_right: 2rem;
+$single_product_picture_margin_bottom: 2rem;
+$single_product_details_flex: 1.5;
+$single_product_image_width: 100%;
+$single_product_heading_margin_bottom: 1rem;
+$single_product_rating_margin_bottom: 1.5rem;
+$single_product_rating_padding_bottom: 1.3rem;
+$single_product_rating_border_width: 0.1rem;
+$single_product_old_price_margin_right: 0.7rem;
+$single_product_old_price_font_size: 1.3rem;
+$single_product_new_price_font_size: 1.3rem;
+$single_product_text_margin_top: 1.4rem;
+$single_product_text_margin_bottom: 1.7rem;
+$single_product_text_line_height: 1.6rem;
+$single_product_text_font_size: 1.05rem;
+$single_product_list_margin_bottom: 1rem;
+$single_product_list_text_flex: 0 0 4rem;
+$single_product_list_select_flex: 1;
+$single_product_quantity_margin_top: 3rem;
+$single_product_add_cart_margin_right: 2rem;
+$single_product_add_cart_padding: 0.7rem 1rem;
+$single_product_add_cart_border_width: 0.15rem;
+$single_product_add_cart_border_radius: 0.2rem;
+$single_product_add_cart_font_size: 0.9rem;
+$single_product_add_cart_transition: 0.2s;
+$single_product_sale_top: -0.6rem;
+$single_product_sale_width: 3rem;
+$single_product_sale_top_medium: -0.8rem;
+$single_product_sale_left_medium: -0.3rem;
+$single_product_sale_margin_top: 2rem;
+
+// quantity
+$quantity_button_padding: 0.7rem 1.3rem;
+$quantity_button_font_size: 1.05rem;
+$quantity_sign_hover_transform_scale: 1.5;
+$quantity_sign_transition: 0.2s;
+$quantity_total_width: 2.7rem;
+$quantity_total_border_width: 0.1rem;
+$quantity_total_font_size: 0.9rem;

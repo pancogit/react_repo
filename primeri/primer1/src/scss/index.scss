@@ -28,8 +28,11 @@
 @use 'components/select-list';
 @use 'components/product';
 @use 'components/pagination';
+@use 'components/quantity';
+@use 'components/description';
 
 // pages
 @use 'pages/home';
 @use 'pages/main';
 @use 'pages/shop-page';
+@use 'pages/single-product';

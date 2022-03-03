@@ -1,0 +1,103 @@
+// description
+
+@use '../abstracts/colors';
+@use '../abstracts/variables';
+
+.description {
+    &__tabs {
+        display: flex;
+    }
+
+    &__tab {
+        padding-top: variables.$description_tab_padding_top;
+        padding-bottom: variables.$description_tab_padding_top;
+        padding-left: variables.$description_tab_padding_left;
+        padding-right: variables.$description_tab_padding_left;
+        border-style: solid;
+        border-width: variables.$description_tab_border_width;
+        border-color: colors.$description_tab_border_color;
+        color: colors.$description_tab_color;
+        font-weight: bold;
+        font-size: variables.$description_tab_font_size;
+        cursor: pointer;
+        background-color: colors.$description_tab_background_color;
+
+        &:hover {
+            background-color: colors.$description_tab_background_color_hover;
+        }
+
+        // remove left border for all elements except first
+        + .description__tab {
+            border-left: none;
+        }
+
+        &--active {
+            border-bottom: none;
+            cursor: auto;
+            background-color: colors.$description_tab_active_background_color;
+
+            &:hover {
+                background-color: colors.$description_tab_active_background_color;
+            }
+        }
+
+        &--left {
+            border-top-left-radius: variables.$description_tab_border_radius;
+            border-top-right-radius: variables.$description_tab_border_radius;
+            margin-right: -(variables.$description_tab_border_radius);
+
+            // layer active tab to the front of the stack
+            z-index: variables.$description_tab_left_z_index;
+        }
+
+        &--right {
+            border-top-right-radius: variables.$description_tab_border_radius;
+            padding-left: variables.$description_tab_padding_left +
+                variables.$description_tab_border_radius;
+        }
+    }
+
+    &__tab-left {
+        flex: variables.$description_tab_left_flex;
+    }
+
+    &__tab-right {
+        flex: variables.$description_tab_right_flex;
+    }
+
+    &__tab-left,
+    &__tab-right {
+        border-bottom-style: solid;
+        border-bottom-width: variables.$description_tab_border_width;
+        border-bottom-color: colors.$description_tab_border_color;
+    }
+
+    &__header {
+        margin-top: variables.$description_header_margin_top;
+        margin-bottom: variables.$description_header_margin_bottom;
+        color: colors.$description_header_color;
+        font-size: variables.$description_header_font_size;
+    }
+
+    &__text {
+        line-height: variables.$description_text_line_height;
+        font-size: variables.$description_text_font_size;
+    }
+
+    &__comment {
+        padding: variables.$description_comment_padding;
+        border-radius: variables.$description_comment_border_radius;
+        background-color: colors.$description_comment_background_color;
+    }
+
+    &__username {
+        display: inline-block;
+        margin-right: variables.$description_username_margin_right;
+        font-weight: bold;
+        color: colors.$description_username_color;
+    }
+
+    &__comment-text {
+        line-height: variables.$description_comment_text_line_height;
+    }
+}

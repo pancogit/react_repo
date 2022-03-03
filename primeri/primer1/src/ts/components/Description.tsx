@@ -2,8 +2,14 @@ export default function Description() {
     return (
         <div className='description'>
             <div className='description__tabs'>
-                <span className='description__tab'>Description</span>
-                <span className='description__tab'>Discussion (5)</span>
+                <span className='description__tab-left'></span>
+                <span className='description__tab description__tab--left description__tab--active'>
+                    Description
+                </span>
+                <span className='description__tab description__tab--right'>
+                    Discussion (8)
+                </span>
+                <span className='description__tab-right'></span>
             </div>
             <div className='description__content'>
                 <h2 className='description__header'>Product Description</h2>
@@ -15,7 +21,7 @@ export default function Description() {
                     vitae est. Mauris placerat eleifend leo.
                 </p>
             </div>
-            <div className='description__content'>
+            <div className='description__content' style={{ display: 'none' }}>
                 <h2 className='description__header'>Product Discussion</h2>
                 <p className='description__comment'>
                     <span className='description__username'>Laura Dalaloy</span>
