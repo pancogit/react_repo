@@ -1,0 +1,108 @@
+// checkout-dialog
+
+@use '../abstracts/colors';
+@use '../abstracts/variables';
+
+.checkout-dialog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: colors.$checkout_dialog_background_color;
+
+    &__box {
+        margin: variables.$checkout_dialog_box_margin;
+        border-radius: variables.$checkout_dialog_box_border_radius;
+        border-style: solid;
+        border-width: variables.$checkout_dialog_box_border_width;
+        border-color: colors.$checkout_dialog_box_border_color;
+        box-shadow: variables.$checkout_dialog_box_shadow_coords
+            colors.$checkout_dialog_box_shadow_color;
+        background-color: colors.$checkout_dialog_box_background_color;
+
+        // set a little translation when box is comming to the screen
+        transform: translateY(variables.$checkout_dialog_box_transform);
+        transition: transform variables.$checkout_dialog_box_transition;
+
+        &--visible {
+            transform: translateY(0);
+        }
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        margin: variables.$checkout_dialog_header_margin;
+    }
+
+    &__content {
+        margin: variables.$checkout_dialog_content_margin;
+        margin-top: 0;
+        padding: variables.$checkout_dialog_content_padding;
+        background-color: colors.$checkout_dialog_content_background_color;
+        border-style: solid;
+        border-width: variables.$checkout_dialog_content_border_width;
+        border-color: colors.$checkout_dialog_content_border_color;
+    }
+
+    &__heading {
+        margin: variables.$checkout_dialog_heading_margin;
+        color: colors.$checkout_dialog_heading_color;
+    }
+
+    &__close {
+        margin-top: variables.$checkout_dialog_close_margin_top;
+        margin-bottom: variables.$checkout_dialog_close_margin_bottom;
+        width: variables.$checkout_dialog_close_width;
+        background-color: colors.$checkout_dialog_close_background_color;
+        cursor: pointer;
+        border-style: solid;
+        border-width: variables.$checkout_dialog_close_border_width;
+        border-color: colors.$checkout_dialog_close_border_color;
+        border-bottom-left-radius: variables.$checkout_dialog_close_border_radius;
+        border-bottom-right-radius: variables.$checkout_dialog_close_border_radius;
+
+        &:hover {
+            background-color: colors.$checkout_dialog_close_background_color_hover;
+        }
+    }
+
+    &__close-icon {
+        font-size: variables.$checkout_dialog_close_icon_font_size;
+        color: colors.$checkout_dialog_close_icon_color;
+    }
+
+    &__text {
+        margin-top: variables.$checkout_dialog_text_margin_top;
+        margin-bottom: variables.$checkout_dialog_text_margin_bottom;
+        color: colors.$checkout_dialog_text_color;
+        font-size: variables.$checkout_dialog_text_font_size;
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    &__button {
+        margin-left: variables.$checkout_dialog_button_margin_left;
+        padding: variables.$checkout_dialog_button_padding;
+        width: variables.$checkout_dialog_button_width;
+        cursor: pointer;
+        border-style: solid;
+        border-width: variables.$checkout_dialog_button_border_width;
+        border-color: colors.$checkout_dialog_button_border_color;
+        border-radius: variables.$checkout_dialog_button_border_radius;
+        background-color: colors.$checkout_dialog_button_background_color;
+        color: colors.$checkout_dialog_button_color;
+
+        &:hover {
+            border-color: colors.$checkout_dialog_button_border_color_hover;
+            background-color: colors.$checkout_dialog_button_background_color_hover;
+        }
+    }
+}

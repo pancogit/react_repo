@@ -1,0 +1,122 @@
+// order
+
+@use '../abstracts/colors';
+@use '../abstracts/variables';
+
+.order {
+    padding: variables.$order_padding;
+    padding-top: variables.$order_padding_top;
+    background-color: colors.$order_background_color;
+    color: colors.$order_color;
+    border-radius: variables.$order_border_radius;
+
+    &__heading {
+        margin-top: 0;
+        margin-bottom: variables.$order_heading_margin_bottom;
+        padding-bottom: variables.$order_heading_padding_bottom;
+        text-transform: uppercase;
+        font-size: variables.$order_heading_font_size;
+        border-bottom-style: solid;
+        border-bottom-width: variables.$order_heading_border_width;
+        border-bottom-color: colors.$order_heading_border_color;
+    }
+
+    &__items {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: variables.$order_items_margin_bottom;
+    }
+
+    &__heading-text,
+    &__items-price {
+        font-weight: bold;
+        font-size: variables.$order_heading_text_font_size;
+        text-transform: uppercase;
+    }
+
+    &__delivery {
+        margin-top: variables.$order_delivery_margin_top;
+        margin-bottom: variables.$order_delivery_margin_bottom;
+        padding-bottom: variables.$order_delivery_padding_bottom;
+        border-bottom-style: solid;
+        border-bottom-width: variables.$order_delivery_border_width;
+        border-bottom-color: colors.$order_delivery_border_color;
+    }
+
+    &__checkout {
+        width: variables.$order_checkout_width;
+        margin-top: variables.$order_checkout_margin_top;
+        margin-bottom: variables.$order_checkout_margin_bottom;
+        padding: variables.$order_checkout_padding;
+        border-style: solid;
+        border-width: variables.$order_checkout_border_width;
+        border-color: colors.$order_checkout_border_color;
+        border-radius: variables.$order_checkout_border_radius;
+        background-color: colors.$order_checkout_border_color;
+        color: colors.$order_checkout_color;
+        transition: background-color variables.$order_checkout_transition,
+            border-color variables.$order_checkout_transition;
+        font-weight: bold;
+        font-size: variables.$order_checkout_font_size;
+        cursor: pointer;
+        text-transform: uppercase;
+
+        &:hover {
+            background-color: colors.$order_checkout_border_color_hover;
+            border-color: colors.$order_checkout_border_color_hover;
+        }
+    }
+
+    &__promotion {
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: variables.$order_promotion_font_size;
+        transition: color variables.$order_promotion_transition;
+
+        &:hover {
+            color: colors.$order_promotion_color_hover;
+        }
+    }
+
+    &__promotion-code {
+        display: block;
+        margin-top: variables.$order_promotion_code_margin_top;
+        padding: variables.$order_promotion_code_padding;
+        width: variables.$order_promotion_code_width;
+        box-sizing: border-box;
+        border-style: solid;
+        border-width: variables.$order_promotion_code_border_width;
+        border-color: colors.$order_promotion_code_border_color;
+        border-radius: variables.$order_promotion_code_border_radius;
+        outline: none;
+        color: colors.$order_promotion_code_color;
+        font-style: italic;
+        font-size: variables.$order_promotion_code_font_size;
+
+        &:focus {
+            border-color: colors.$order_promotion_code_border_color_hover;
+            box-shadow: variables.$order_promotion_code_box_shadow_focus_coords
+                colors.$order_promotion_code_box_shadow_focus_color;
+        }
+    }
+
+    // set small transition on promotion wrapper height and open it when modifier is active
+    &__promotion-code-wrapper {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height
+            variables.$order_promotion_code_wrapper_transition linear;
+
+        &--open {
+            max-height: variables.$order_promotion_code_wrapper_max_height;
+        }
+
+        // on closing then do faster transition
+        &--close {
+            transition-duration: variables.$order_promotion_code_wrapper_transition_duration;
+        }
+    }
+}

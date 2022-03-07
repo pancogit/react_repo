@@ -6,6 +6,34 @@
 .breadcrumbs {
     background-color: colors.$breadcrumbs_background_color;
 
+    // hide breadcrumbs content when button is clicked
+    // also put show button when breadcrumbs content is hidden
+    &--hide {
+        .breadcrumbs__list,
+        .breadcrumbs__hide {
+            max-height: 0;
+            visibility: hidden;
+        }
+
+        .breadcrumbs__list {
+            margin: 0;
+        }
+
+        .breadcrumbs__hide {
+            max-width: 0;
+        }
+
+        // rotate icon to down
+        .breadcrumbs__icon {
+            transform: rotate(variables.$breadcrumbs_icon_rotate);
+        }
+
+        .breadcrumbs__box {
+            padding: variables.$breadcrumbs_box_hide_padding;
+            background-color: transparent;
+        }
+    }
+
     &__box {
         display: flex;
         align-items: center;
@@ -22,7 +50,9 @@
         border-bottom-style: solid;
         border-bottom-width: variables.$breadcrumbs_box_border_width;
         border-bottom-color: transparent;
-        transition: border-bottom-color variables.$breadcrumbs_box_transition;
+        transition: border-bottom-color variables.$breadcrumbs_box_transition,
+            padding variables.$breadcrumbs_list_transition,
+            background-color variables.$breadcrumbs_list_transition;
 
         // show bottom border when hovered
         &:hover {
@@ -38,12 +68,16 @@
     &__hide {
         font-weight: bold;
         font-size: variables.$breadcrumbs_hide_font_size;
+        transition: max-height variables.$breadcrumbs_list_transition,
+            max-width variables.$breadcrumbs_list_transition;
+        max-width: variables.$breadcrumbs_hide_max_width;
     }
 
     &__icon {
         margin-right: variables.$breadcrumbs_icon_margin_right;
         color: colors.$breadcrumbs_icon_color;
         font-size: variables.$breadcrumbs_icon_font_size;
+        transition: transform variables.$breadcrumbs_list_transition;
     }
 
     &__item {
@@ -103,6 +137,15 @@
         margin-right: variables.$breadcrumbs_list_margin_right;
         padding: 0;
         list-style-type: none;
+        transition: margin variables.$breadcrumbs_list_transition,
+            max-height variables.$breadcrumbs_list_transition;
+    }
+
+    // hide breadcrumbs content when button is clicked
+    &__list,
+    &__hide {
+        overflow: hidden;
+        max-height: variables.$breadcrumbs_hide_max_height;
     }
 
     &__wrapper {

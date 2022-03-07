@@ -55,14 +55,14 @@
     }
 
     &__link {
+        display: flex;
+        flex-wrap: nowrap;
         color: colors.$footer_link_color;
         font-weight: bold;
         font-size: variables.$footer_link_font_size;
         text-decoration: none;
 
         &:hover {
-            text-decoration: underline;
-
             // move arrow and text a little to the right
             .footer__arrow,
             .footer__list-text {

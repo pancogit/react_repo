@@ -225,3 +225,48 @@ $quantity_button_background_color: white;
 $quantity_button_color: #524e4e;
 $quantity_total_border_color: silver;
 $quantity_total_background_color: #f5f5f5;
+
+// checkout-dialog
+$checkout_dialog_background_color: hsl(0deg 0% 75% / 34%);
+$checkout_dialog_box_border_color: black;
+$checkout_dialog_box_background_color: #2e303c;
+$checkout_dialog_box_shadow_color: #0e214c;
+$checkout_dialog_content_background_color: white;
+$checkout_dialog_content_border_color: #878787;
+$checkout_dialog_heading_color: white;
+$checkout_dialog_close_background_color: #8daf35;
+$checkout_dialog_close_background_color_hover: #95b937;
+$checkout_dialog_close_border_color: black;
+$checkout_dialog_close_icon_color: black;
+$checkout_dialog_text_color: #0c0c0e;
+$checkout_dialog_button_border_color: #979797;
+$checkout_dialog_button_border_color_hover: #013e0e;
+$checkout_dialog_button_background_color: #e7e7e7;
+$checkout_dialog_button_background_color_hover: #f7f7f7;
+$checkout_dialog_button_color: black;
+
+// shop-cart
+$shop_cart_content_wrapper_border_color: #e9e9e9;
+$shop_cart_products_border_color: #e9e9e9;
+$shop_cart_items_border_color: #e9e9e9;
+$shop_cart_shopping_link_color: #727272;
+
+// cart-product
+$cart_product_heading_color: #26262e;
+$cart_product_type_color: #727272;
+$cart_product_edit_color: #727272;
+$cart_product_money_color: #b57500;
+
+// order
+$order_background_color: #eeeeee;
+$order_color: #26262e;
+$order_heading_border_color: #dfdfdf;
+$order_delivery_border_color: #dfdfdf;
+$order_checkout_border_color: #8daf35;
+$order_checkout_border_color_hover: #95b937;
+$order_checkout_color: white;
+$order_promotion_color_hover: #0c7227;
+$order_promotion_code_border_color: #d1d1d1;
+$order_promotion_code_color: #26262e;
+$order_promotion_code_border_color_hover: #b5b5b5;
+$order_promotion_code_box_shadow_focus_color: #cfcfcf;

@@ -4,6 +4,42 @@
 @use '../abstracts/variables';
 
 .select-list {
+    &--small {
+        .select-list__select,
+        .select-list__options {
+            width: variables.$select_list_options_width_small;
+        }
+    }
+
+    &--paddings {
+        .select-list__select {
+            padding-left: variables.$select_list_paddings_padding_left;
+            padding-top: variables.$select_list_paddings_padding_top;
+            padding-bottom: variables.$select_list_paddings_padding_bottom;
+            padding-right: variables.$select_list_paddings_padding_right;
+        }
+
+        .select-list__option {
+            padding-left: variables.$select_list_paddings_padding_left;
+            text-align: left;
+        }
+    }
+
+    // for full width, stretch list to the whole line
+    &--full-width {
+        .select-list__select {
+            width: auto;
+        }
+
+        .select-list__options {
+            width: variables.$select_list_options_full_width;
+        }
+    }
+
+    &__options-wrapper {
+        position: relative;
+    }
+
     &__text {
         margin: 0;
         font-weight: bold;
