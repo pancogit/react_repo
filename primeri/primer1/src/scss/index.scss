@@ -33,6 +33,7 @@
 @use 'components/cart-product';
 @use 'components/order';
 @use 'components/checkout-dialog';
+@use 'components/query-result';
 
 // pages
 @use 'pages/home';
@@ -40,3 +41,4 @@
 @use 'pages/shop-page';
 @use 'pages/single-product';
 @use 'pages/shop-cart';
+@use 'pages/search-page';

@@ -1,0 +1,98 @@
+// query-result
+
+@use '../abstracts/colors';
+@use '../abstracts/variables';
+
+.query-result {
+    display: flex;
+    padding: variables.$query_result_padding;
+    border-style: solid;
+    border-width: variables.$query_result_border_width;
+    border-color: colors.$query_result_border_color;
+    border-radius: variables.$query_result_border_radius;
+    background-color: colors.$query_result_background_color;
+
+    transition: box-shadow variables.$query_result_transition,
+        transform variables.$query_result_transition,
+        background-color variables.$query_result_transition;
+
+    // when result is hovered, show small box shadow and scale result with css transformation
+    &:hover {
+        box-shadow: variables.$query_result_box_shadow_coords_hover
+            colors.$query_result_box_shadow_color_hover;
+        transform: scale(variables.$query_result_scale_hover);
+        background-color: colors.$query_result_background_color_hover;
+    }
+
+    // put some space between results
+    // set for all results except first
+    + .query-result {
+        margin-top: variables.$query_result_next_margin_top;
+    }
+
+    &__image-wrapper {
+        flex: variables.$query_result_image_wrapper_flex;
+    }
+
+    &__content-wrapper {
+        display: flex;
+        flex: variables.$query_result_content_wrapper_flex;
+
+        // put price to the new line for small screens
+        @media screen and (max-width: variables.$query_result_content_wrapper_small_screen) {
+            flex-wrap: wrap;
+
+            .query-result__content {
+                flex: variables.$query_result_content_wrapper_flex_small;
+            }
+        }
+    }
+
+    &__content {
+        flex: variables.$query_result_content_flex;
+        padding-top: variables.$query_result_content_padding_top;
+        padding-left: variables.$query_result_content_padding_left;
+        padding-right: variables.$query_result_content_padding_left;
+    }
+
+    &__image-link {
+        display: flex;
+    }
+
+    &__image {
+        width: variables.$query_result_image_width;
+        border-radius: variables.$query_result_image_border_radius;
+    }
+
+    &__link {
+        display: inline-block;
+        color: colors.$query_result_image_color;
+    }
+
+    &__heading {
+        display: inline-block;
+        margin: 0;
+        font-size: variables.$query_result_heading_font_size;
+        word-break: break-word;
+    }
+
+    &__description {
+        margin-top: variables.$query_result_description_margin_top;
+        margin-bottom: 0;
+        font-size: variables.$query_result_description_font_size;
+        color: colors.$query_result_description_color;
+    }
+
+    &__price {
+        margin-top: variables.$query_result_price_margin_top;
+        margin-left: variables.$query_result_price_margin_left;
+    }
+
+    &__cost {
+        margin-top: variables.$query_result_cost_margin_top;
+        margin-bottom: 0;
+        font-size: variables.$query_result_cost_font_size;
+        font-weight: bold;
+        color: colors.$query_result_cost_color;
+    }
+}

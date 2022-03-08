@@ -586,3 +586,33 @@ $order_promotion_code_box_shadow_focus_coords: 0 0 2px 1px;
 $order_promotion_code_wrapper_transition: 3.5s;
 $order_promotion_code_wrapper_max_height: 100rem;
 $order_promotion_code_wrapper_transition_duration: 0.2s;
+
+// search-page
+$search_page_heading_margin_bottom: 2.5rem;
+$search_page_message_font_size: 1.15rem;
+$search_page_pagination_margin_top: 3rem;
+
+// query-result
+$query_result_padding: 0.8rem;
+$query_result_border_width: 0.1rem;
+$query_result_border_radius: 0.6rem;
+$query_result_transition: 0.25s;
+$query_result_box_shadow_coords_hover: 0 0 6px 1px;
+$query_result_scale_hover: 0.95;
+$query_result_next_margin_top: 3rem;
+$query_result_image_wrapper_flex: 0 0 7rem;
+$query_result_content_wrapper_flex: 1;
+$query_result_content_wrapper_small_screen: 26rem;
+$query_result_content_wrapper_flex_small: 100%;
+$query_result_content_flex: 1;
+$query_result_content_padding_top: 0.2rem;
+$query_result_content_padding_left: 1.2rem;
+$query_result_image_width: 100%;
+$query_result_image_border_radius: 0.4rem;
+$query_result_heading_font_size: 1.3rem;
+$query_result_description_margin_top: 1rem;
+$query_result_description_font_size: 1.05rem;
+$query_result_price_margin_top: 0.2rem;
+$query_result_price_margin_left: 1.2rem;
+$query_result_cost_margin_top: 0.2rem;
+$query_result_cost_font_size: 1.15rem;

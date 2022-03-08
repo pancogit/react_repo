@@ -1,0 +1,24 @@
+// search-page
+
+@use '../abstracts/colors';
+@use '../abstracts/variables';
+
+.search-page {
+    &__heading {
+        margin-bottom: variables.$search_page_heading_margin_bottom;
+        text-align: left;
+        word-break: break-word;
+    }
+
+    &__message {
+        margin: 0;
+        font-size: variables.$search_page_message_font_size;
+        font-weight: normal;
+        font-style: italic;
+        color: colors.$search_page_message_color;
+    }
+
+    &__pagination {
+        margin-top: variables.$search_page_pagination_margin_top;
+    }
+}
