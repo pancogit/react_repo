@@ -1,0 +1,614 @@
+{
+    "products": [
+        {
+            "kind": "Mens",
+            "numberOfProducts": 38,
+            "path": "/images/mens/",
+            "subcategories": [
+                {
+                    "name": "Jackets",
+                    "numberOfProducts": 9,
+                    "path": "/images/mens/jackets/",
+                    "submenu": [
+                        {
+                            "name": "Golden",
+                            "numberOfProducts": 3,
+                            "products": [
+                                {
+                                    "id": "mens-jackets-golden-01",
+                                    "name": "Jacket 1",
+                                    "path": "/images/mens/jackets/01.jpg",
+                                    "link": "/products/mens/jackets/01",
+                                    "starsRated": 4.5,
+                                    "price": {
+                                        "old": 30,
+                                        "new": [12, 28]
+                                    },
+                                    "sale": true,
+                                    "text": "Phasellus dictum imperdiet tellus eu aliquam. Aenean scelerisque enim sed nunc egestas pretium. Praesent cursus tempor ultrices. Sed ut sem sem. Suspendisse laoreet dolor eget posuere fringilla. Mauris vitae mollis ex. In dolor justo, sollicitudin id posuere consectetur, accumsan vel est. Phasellus quam magna, ullamcorper ac nibh vitae, gravida convallis elit. Duis eu turpis in lacus mollis dignissim. Mauris sit amet condimentum augue. Nullam tellus velit, congue sit amet aliquet quis, congue quis felis. Nunc et turpis at elit ornare venenatis quis eu magna. Phasellus convallis massa elit. Aenean ornare quam eget libero gravida, pellentesque aliquet justo finibus. Suspendisse potenti.",
+                                    "colors": [
+                                        "Black",
+                                        "White",
+                                        "Red",
+                                        "Blue",
+                                        "Green",
+                                        "Yellow"
+                                    ],
+                                    "sizes": [
+                                        { "name": "XS", "price": 12 },
+                                        { "name": "S", "price": 12 },
+                                        { "name": "M", "price": 15 },
+                                        { "name": "L", "price": 18 },
+                                        { "name": "XL", "price": 22 },
+                                        { "name": "XXL", "price": 25 },
+                                        { "name": "XXXL", "price": 28 }
+                                    ],
+                                    "productCode": 185721,
+                                    "description": "Nunc sed tellus tempus, dignissim tellus at, interdum eros. Vivamus dignissim in magna vel condimentum. Cras sem orci, ultrices vel semper id, ultricies ut nibh. Vivamus malesuada gravida felis, non dapibus urna interdum sed. Vestibulum at diam sapien. Cras auctor iaculis turpis, at iaculis felis. Phasellus mi tellus, placerat eget sapien vitae, condimentum rhoncus nisi. Vestibulum ut diam magna. Suspendisse felis tellus, viverra id nisi et, mollis pretium urna. Suspendisse in elementum sapien, nec blandit libero. Morbi varius dui nisi, vel suscipit dui sollicitudin eget. Phasellus id sem faucibus, efficitur neque in, volutpat lacus. Sed rhoncus euismod justo eget consequat.",
+                                    "comments": {
+                                        "numberOfComments": 8,
+                                        "allComments": [
+                                            {
+                                                "author": "Proin Mattis",
+                                                "text": "Nulla non vehicula lacus. Nunc luctus felis eros, non dignissim sapien egestas et. Duis ut sapien volutpat, malesuada odio nec, pretium dui. Integer consequat eros bibendum iaculis vehicula. Etiam ultrices leo ac leo tincidunt, ac molestie ipsum aliquet. Nullam eu est tortor. Vestibulum nisi lorem, sollicitudin vel purus aliquet, commodo iaculis velit. Cras mattis facilisis purus, sit amet posuere dolor mattis vitae. Fusce vitae erat eget elit auctor condimentum ut non nisl. Quisque tincidunt mattis arcu. Nunc ac est ipsum."
+                                            },
+                                            {
+                                                "author": "Aliquam Varius",
+                                                "text": "Sed felis quam, venenatis nec dui eget, accumsan porta mauris. Nulla porttitor semper massa id fermentum. Sed quis lacus sit amet felis dignissim dictum eu ac sem. Aenean at arcu tortor. Donec nec malesuada enim, et semper arcu. Pellentesque varius nisl nibh, sit amet pharetra felis bibendum a. Pellentesque et tellus nisi. Suspendisse vitae gravida ex. Aliquam nisl mauris, malesuada in metus sed, tincidunt consectetur lacus. Praesent eget tempus purus. Nullam commodo, diam ac volutpat pharetra, lectus justo efficitur ex, sit amet consequat lorem dui venenatis ligula. Praesent et elit vitae nisi gravida facilisis sed sed urna. Praesent eget sodales lorem. Etiam rutrum dapibus quam, ac elementum risus elementum vitae. Integer vulputate ut ipsum non maximus. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                                            },
+                                            {
+                                                "author": "Aliquam Porttitor",
+                                                "text": "Nam ullamcorper scelerisque ex, in posuere elit condimentum sed. Nullam augue nibh, volutpat sed fringilla sit amet, rhoncus et ex. Aliquam tortor libero, fermentum non quam eget, eleifend dapibus ipsum. Phasellus id lectus lacus. Quisque sit amet purus ullamcorper, tristique velit sit amet, fermentum augue. Nam ut rhoncus nisl. Quisque varius ipsum et arcu iaculis, id suscipit purus suscipit."
+                                            },
+                                            {
+                                                "author": "Sed Rhoncus",
+                                                "text": "Quisque ultricies fringilla nisl, vitae commodo mauris semper a. Mauris lobortis, nulla vel hendrerit mollis, nunc sem finibus quam, in ultrices magna ex non nulla. Etiam massa magna, fringilla quis sapien ac, condimentum mollis leo. Integer nibh libero, eleifend a viverra nec, posuere nec ipsum."
+                                            },
+                                            {
+                                                "author": "Sed Non",
+                                                "text": "Donec tincidunt sapien eget eros imperdiet, in varius lectus gravida. Donec suscipit risus sit amet pulvinar dignissim. Vivamus ultricies vulputate ante, vel semper elit vestibulum quis. Quisque eget arcu lorem. Donec tempor pharetra vulputate."
+                                            },
+                                            {
+                                                "author": "Vivamus Placerat",
+                                                "text": "Suspendisse id dictum justo. Vestibulum non dolor commodo, consequat velit id, ornare enim. Etiam scelerisque dapibus elit, ac consequat lectus."
+                                            },
+                                            {
+                                                "author": "Sed Eleifend",
+                                                "text": "Duis ac interdum lacus. Donec lacus augue, lobortis a porta vel, euismod et ante. Morbi consequat ex odio, id sollicitudin enim molestie feugiat. Vestibulum enim velit, tincidunt eu turpis in, tincidunt accumsan eros. Aliquam facilisis ipsum nisl, non iaculis neque varius at. Aliquam porta vehicula massa, vel interdum urna elementum ut."
+                                            },
+                                            {
+                                                "author": "Suspendisse Consequat",
+                                                "text": "Phasellus varius ante ante. Fusce porttitor, dui quis faucibus scelerisque, libero ipsum lobortis elit, iaculis congue libero augue eget erat. Nunc quis blandit augue. Sed sagittis elementum eleifend. Aliquam erat volutpat. Fusce in vehicula metus, ac commodo neque. Ut tempus eget augue sit amet facilisis."
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "id": "mens-jackets-golden-02",
+                                    "name": "Jacket 2",
+                                    "path": "/images/mens/jackets/02.jpg",
+                                    "link": "/products/mens/jackets/02",
+                                    "starsRated": 5,
+                                    "price": {
+                                        "old": 25,
+                                        "new": 20
+                                    },
+                                    "sale": false,
+                                    "text": "Sed nunc turpis, auctor non quam ut, scelerisque tempor dui. Quisque pellentesque lorem at leo tincidunt, sed porttitor sapien euismod. Duis ut turpis ac sem luctus interdum eu non tortor. Curabitur ac viverra odio. Etiam efficitur efficitur mauris. Donec in enim et mi cursus aliquet. Morbi consequat, nibh a sagittis fermentum, erat eros tempor dolor, sed sagittis lorem mi ullamcorper augue. Aliquam erat volutpat. Maecenas at viverra leo. Ut rhoncus justo et sodales fringilla. Vestibulum at sollicitudin felis. Nunc eu lectus non lacus hendrerit ornare. Pellentesque ac malesuada nulla. In mattis ex ante, a aliquam dui tincidunt at. Sed vel nisl non diam semper sagittis. Nunc tincidunt pulvinar mauris, eu gravida urna tempor in.",
+                                    "colors": ["Black", "White", "Red"],
+                                    "sizes": [
+                                        { "name": "S", "price": 20 },
+                                        { "name": "M", "price": 20 },
+                                        { "name": "L", "price": 20 }
+                                    ],
+                                    "productCode": 458742,
+                                    "description": "Fusce tortor urna, elementum in varius non, ultrices sed dui. Nulla nec ex nunc. Suspendisse potenti. Aenean enim neque, malesuada scelerisque mauris in, rutrum finibus tortor. Suspendisse potenti. Pellentesque tempor, neque a faucibus tincidunt, eros mauris vestibulum dolor, in dignissim tellus magna in mauris. Nullam justo eros, fermentum id bibendum ut, convallis eget purus. Donec facilisis nunc ac nisi scelerisque ultrices. Suspendisse tincidunt ornare augue vel condimentum. Sed a tincidunt velit. In porta sem turpis, ac imperdiet urna porttitor in. Vestibulum et fringilla neque, ac fringilla neque.",
+                                    "comments": {
+                                        "numberOfComments": 3,
+                                        "allComments": [
+                                            {
+                                                "author": "Vivamus Sollicitudin",
+                                                "text": "Aenean sed iaculis nisl. Mauris at commodo lacus. Phasellus eget neque tristique, mattis nisl quis, blandit tellus. Integer elementum velit non mauris convallis aliquet. Quisque gravida lectus elit, sed auctor ante accumsan sit amet. Suspendisse malesuada augue ut est volutpat, vel dapibus quam porttitor."
+                                            },
+                                            {
+                                                "author": "Aenean Euismod",
+                                                "text": "Donec semper maximus dapibus. Aliquam fringilla sapien eu odio viverra porta. Aenean id neque a quam commodo fermentum ut a elit. Maecenas consequat, ligula vel laoreet ultricies, magna ligula hendrerit lorem, sed porttitor velit risus nec dui. Etiam urna lorem, porttitor at congue non, commodo ut lorem. In ex nunc, sodales vitae massa molestie, porttitor blandit quam."
+                                            },
+                                            {
+                                                "author": "Pellentesque Lorem",
+                                                "text": "Nunc quis velit laoreet, semper odio at, viverra velit. Vivamus dapibus tristique mauris, eu viverra velit sagittis vitae. Donec vehicula nulla viverra felis lobortis, vel laoreet risus iaculis. Aenean lacinia libero a placerat egestas. Nunc faucibus vestibulum risus, ac placerat felis viverra id. Nunc eleifend posuere erat, nec porttitor enim consectetur sit amet. Nullam nec aliquam lectus. Sed nec ex quis dolor posuere venenatis. Maecenas ultrices, leo tristique fringilla porttitor, nulla leo tempor felis, rhoncus bibendum enim ex sit amet libero. Integer sed nisl sed leo vulputate lobortis quis vitae dolor. Suspendisse fringilla dignissim mauris eget molestie. Nunc porttitor id diam sed tincidunt. Maecenas ullamcorper id metus vitae fermentum. Pellentesque fermentum elit elementum, egestas eros mollis, bibendum libero."
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "id": "mens-jackets-golden-03",
+                                    "name": "Jacket 3",
+                                    "path": "/images/mens/jackets/03.jpg",
+                                    "link": "/products/mens/jackets/03",
+                                    "starsRated": 3,
+                                    "price": {
+                                        "old": 18,
+                                        "new": 15
+                                    },
+                                    "sale": true,
+                                    "text": "Vivamus aliquet turpis sed diam faucibus, vitae tristique diam faucibus. Morbi id semper massa. Cras et lacus ligula. Etiam porttitor quam est, ut volutpat leo ultrices sit amet. Suspendisse at commodo dui. Praesent libero est, consectetur quis quam in, sollicitudin porttitor sapien. Etiam at gravida erat. Suspendisse dui diam, sagittis sed euismod nec, ornare ut orci.",
+                                    "colors": [
+                                        "Black",
+                                        "White",
+                                        "Blue",
+                                        "Green"
+                                    ],
+                                    "sizes": [
+                                        { "name": "XS", "price": 15 },
+                                        { "name": "S", "price": 15 },
+                                        { "name": "M", "price": 15 },
+                                        { "name": "L", "price": 15 },
+                                        { "name": "XXXL", "price": 15 }
+                                    ],
+                                    "productCode": 652548,
+                                    "description": "Donec varius ex non odio finibus convallis. In nec posuere diam, ac eleifend elit. Fusce lacinia, tellus ut imperdiet faucibus, erat nisi condimentum libero, ut congue eros justo laoreet enim. Quisque vehicula varius ipsum, sed elementum metus viverra in. Vivamus iaculis eros dolor, ut convallis nunc ullamcorper ut. Donec finibus diam sed neque placerat molestie. Suspendisse maximus tellus id lacus porta maximus. Maecenas imperdiet, nisi non commodo volutpat, neque magna sodales eros, vitae euismod velit felis quis augue.",
+                                    "comments": {
+                                        "numberOfComments": 4,
+                                        "allComments": [
+                                            {
+                                                "author": "Nam Purus",
+                                                "text": "Donec convallis congue libero, at aliquet lacus fringilla sit amet. Sed sit amet condimentum mauris, ut egestas diam. Donec convallis elit dictum ante faucibus, mollis porttitor libero dignissim. Fusce feugiat ligula consectetur, gravida arcu eget, facilisis velit. Proin viverra ligula leo, a cursus tellus molestie sit amet."
+                                            },
+                                            {
+                                                "author": "Nunc Nec",
+                                                "text": "Duis sit amet ornare mi, sit amet euismod nulla. Fusce id turpis mollis, vehicula lorem vel, elementum urna. Integer volutpat massa sapien, nec gravida quam tincidunt ut."
+                                            },
+                                            {
+                                                "author": "Donec Sed",
+                                                "text": "Fusce facilisis arcu at est sollicitudin, sit amet faucibus sem ornare. Mauris non sapien mattis, feugiat ex nec, euismod turpis."
+                                            },
+                                            {
+                                                "author": "Ut Nec",
+                                                "text": "Vestibulum feugiat placerat orci in blandit. Donec posuere accumsan metus, in commodo massa iaculis ut. Mauris aliquam nulla ut tellus faucibus pretium."
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Home",
+                            "numberOfProducts": 2,
+                            "products": [
+                                {
+                                    "id": "mens-jackets-home-04",
+                                    "name": "Jacket 4",
+                                    "path": "/images/mens/jackets/04.jpg",
+                                    "link": "/products/mens/jackets/04",
+                                    "starsRated": 5,
+                                    "price": {
+                                        "old": 20,
+                                        "new": [10, 15]
+                                    },
+                                    "sale": true,
+                                    "text": "Maecenas imperdiet, tellus ac ultricies vehicula, sapien felis convallis neque, non fermentum erat est eu sem. Donec est nulla, semper nec lacinia nec, ullamcorper in libero. Sed quis fermentum nibh, ut posuere nisl. Quisque ac bibendum lacus. Morbi pellentesque elementum suscipit.",
+                                    "colors": [
+                                        "Black",
+                                        "White",
+                                        "Red",
+                                        "Green",
+                                        "Yellow"
+                                    ],
+                                    "sizes": [
+                                        { "name": "XS", "price": 10 },
+                                        { "name": "S", "price": 10 },
+                                        { "name": "M", "price": 12 },
+                                        { "name": "XXL", "price": 15 },
+                                        { "name": "XXXL", "price": 15 }
+                                    ],
+                                    "productCode": 985478,
+                                    "description": "Donec viverra lorem eget orci vestibulum, vel commodo nibh rutrum. Vestibulum quam ligula, cursus scelerisque sollicitudin faucibus, condimentum nec metus. In ornare lacinia eros sed efficitur. Maecenas pretium metus et elit tincidunt lacinia. In hac habitasse platea dictumst. Nunc non faucibus diam. Nam vitae augue vitae nulla rutrum interdum non auctor tortor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce volutpat metus eu congue convallis. Nulla eget tellus orci.",
+                                    "comments": {
+                                        "numberOfComments": 5,
+                                        "allComments": [
+                                            {
+                                                "author": "Lorem Ipsum",
+                                                "text": "In hac habitasse platea dictumst. Aliquam vitae tempus lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor ex non tortor aliquam tempor."
+                                            },
+                                            {
+                                                "author": "Etiam Nec",
+                                                "text": "Duis id arcu ac orci molestie fermentum. Aenean sollicitudin, massa vitae mattis pretium, metus ipsum consequat nulla, vestibulum dapibus est nulla nec neque."
+                                            },
+                                            {
+                                                "author": "Nullam Sagittis",
+                                                "text": "Aliquam leo mauris, sagittis et quam ut, iaculis viverra metus. Integer vitae ullamcorper quam. Cras et dictum odio, at pharetra erat. Maecenas tincidunt suscipit dui, non ornare lacus facilisis ut. Nam sit amet neque commodo, efficitur nisl nec, sagittis sapien. Nulla congue odio quis tellus rutrum, quis rhoncus sapien lobortis. Donec in mattis nunc. Fusce sed eros et ante eleifend finibus non eu dui."
+                                            },
+                                            {
+                                                "author": "Pellentesque Non",
+                                                "text": "Donec pretium, lectus vel ultrices cursus, nunc lacus porta lacus, a maximus magna ipsum eget tellus. Suspendisse ut mi quis augue tincidunt iaculis. Maecenas sodales mollis lacus a gravida. Etiam vitae laoreet velit, nec suscipit enim. Suspendisse vestibulum finibus dignissim."
+                                            },
+                                            {
+                                                "author": "Curabitur Rutrum",
+                                                "text": "Nam vestibulum, lectus in aliquet euismod, nisl est consequat odio, viverra molestie enim mi eget lacus. Praesent quis ornare magna, eget porta dui. Sed id laoreet orci."
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "id": "mens-jackets-home-05",
+                                    "name": "Jacket 5",
+                                    "path": "/images/mens/jackets/05.jpeg",
+                                    "link": "/products/mens/jackets/05",
+                                    "starsRated": 3.5,
+                                    "price": {
+                                        "old": 30,
+                                        "new": 25
+                                    },
+                                    "sale": false,
+                                    "text": "Donec mollis tincidunt egestas. Suspendisse sollicitudin nibh a neque venenatis blandit. Sed felis quam, sollicitudin vel fringilla et, molestie vitae metus. Morbi est ante, molestie sed iaculis at, dapibus at urna. Nullam id laoreet lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at fringilla nibh, mollis malesuada diam. Integer vel pharetra dolor, ut placerat metus. In hac habitasse platea dictumst. Aenean efficitur imperdiet nisi.",
+                                    "colors": ["Black", "White", "Yellow"],
+                                    "sizes": [
+                                        { "name": "S", "price": 25 },
+                                        { "name": "M", "price": 25 },
+                                        { "name": "L", "price": 25 }
+                                    ],
+                                    "productCode": 154628,
+                                    "description": "Ut sit amet faucibus ante. Curabitur facilisis purus nisi, ac volutpat magna euismod ac. Maecenas at malesuada risus. Mauris sit amet faucibus enim, non egestas massa. Praesent pulvinar urna quis lacinia feugiat. Aliquam at convallis libero. In eu nunc interdum, lobortis metus vel, porta quam. Duis eleifend posuere augue, quis mollis est pretium eu. Nam ornare velit accumsan suscipit posuere.",
+                                    "comments": {
+                                        "numberOfComments": 2,
+                                        "allComments": [
+                                            {
+                                                "author": "Nullam Tincidunt",
+                                                "text": "Fusce interdum tincidunt nunc sed placerat. Sed at lacus sed arcu vestibulum maximus at vitae eros. Quisque nec libero in nibh consectetur convallis in eget erat. In maximus facilisis pretium. Vestibulum a tempus velit. Curabitur aliquam neque eget ex ullamcorper pulvinar. Suspendisse potenti. Phasellus volutpat non ante non pulvinar. Suspendisse luctus a magna eget rutrum. Ut vestibulum eleifend convallis. Morbi mattis porttitor sem quis imperdiet. Cras bibendum mauris eleifend, fringilla lacus a, suscipit risus."
+                                            },
+                                            {
+                                                "author": "Nunc Rhoncus",
+                                                "text": "Sed congue sem eu lectus volutpat, ut imperdiet lorem mollis."
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Walking",
+                            "numberOfProducts": 4,
+                            "products": [
+                                {
+                                    "id": "mens-jackets-walking-06",
+                                    "name": "Jacket 6",
+                                    "path": "/images/mens/jackets/06.jpg",
+                                    "link": "/products/mens/jackets/06",
+                                    "starsRated": 4,
+                                    "price": {
+                                        "old": 28,
+                                        "new": 14
+                                    },
+                                    "sale": true,
+                                    "text": "",
+                                    "colors": ["Black", "White"],
+                                    "sizes": [
+                                        { "name": "XS", "price": 14 },
+                                        { "name": "M", "price": 14 },
+                                        { "name": "XXL", "price": 14 },
+                                        { "name": "XXXL", "price": 14 }
+                                    ],
+                                    "productCode": 542154,
+                                    "description": "Donec vulputate neque diam, pharetra commodo turpis rutrum eu. Donec ultrices ut tellus euismod posuere. In vel tempus orci, ut suscipit est. Aliquam elementum tellus sit amet tincidunt pellentesque. Pellentesque lorem ante, pellentesque ac suscipit a, eleifend ut odio. Vestibulum quis laoreet neque. Duis molestie, ante sed fermentum viverra, leo orci venenatis libero, nec imperdiet enim felis quis ipsum. Vivamus hendrerit, tortor eu aliquam auctor, nisi massa scelerisque nisi, vitae auctor eros turpis a metus.",
+                                    "comments": {
+                                        "numberOfComments": 6,
+                                        "allComments": [
+                                            {
+                                                "author": "Quisque Laoreet",
+                                                "text": "Suspendisse ut nisl tincidunt, pharetra orci nec, varius nisl. Suspendisse elementum id arcu at sodales. Donec lobortis erat nunc, nec tincidunt nulla ultricies eu. Morbi dignissim velit a imperdiet tempus. Proin nunc quam, scelerisque in dictum eu, lacinia ut ligula. Phasellus tempor posuere pellentesque. Donec at ligula non nibh fermentum bibendum. Nulla eget felis eget dui ornare laoreet. Nam ultrices diam nisl, sit amet rhoncus ante imperdiet in. Duis dui diam, posuere quis ultrices nec, fringilla nec augue."
+                                            },
+                                            {
+                                                "author": "Vestibulum In",
+                                                "text": "Fusce semper nulla justo, sed consectetur sem pulvinar eget."
+                                            },
+                                            {
+                                                "author": "Etiam Et",
+                                                "text": "Cras augue tellus, interdum sed maximus vitae, pharetra eu est."
+                                            },
+                                            {
+                                                "author": "Vivamus Porta",
+                                                "text": "Fusce leo sem, maximus id arcu id, venenatis semper lorem. Duis et lobortis risus."
+                                            },
+                                            {
+                                                "author": "Suspendisse Est",
+                                                "text": "Nam tincidunt, erat et lobortis faucibus, ipsum nunc fringilla dui, et hendrerit dui odio sed mauris. Aenean commodo sodales ultricies. Mauris commodo efficitur mauris, eu pellentesque ex laoreet in."
+                                            },
+                                            {
+                                                "author": "Etiam Rhoncus",
+                                                "text": "Curabitur porttitor vehicula neque, id auctor odio iaculis nec. Morbi consequat ante in nibh dictum, nec auctor libero congue. Nunc vitae urna ac magna facilisis cursus in vitae lacus. Morbi interdum eros ante, non convallis neque iaculis nec. Vestibulum eget nulla in justo varius lacinia et ac justo. Phasellus vehicula dui quis lectus placerat, a bibendum nunc aliquet. Cras vitae sapien id ante efficitur hendrerit. Duis eget dignissim mi. Nullam lacinia lacus non arcu ultrices pulvinar."
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "id": "mens-jackets-walking-07",
+                                    "name": "Jacket 7",
+                                    "path": "/images/mens/jackets/07.jpg",
+                                    "link": "/products/mens/jackets/07",
+                                    "starsRated": 4.5,
+                                    "price": {
+                                        "old": 40,
+                                        "new": [20, 30]
+                                    },
+                                    "sale": false,
+                                    "text": "Duis sit amet nisi sit amet lorem laoreet pretium in eu lacus. Fusce facilisis quis augue a varius. Duis vel faucibus magna, sed convallis neque. Aenean ligula nulla, consequat et congue nec, facilisis sed turpis. Donec euismod varius fermentum. Suspendisse malesuada nisl id lacinia viverra. Nullam porttitor facilisis turpis a viverra.",
+                                    "colors": [
+                                        "Black",
+                                        "White",
+                                        "Red",
+                                        "Blue",
+                                        "Green",
+                                        "Yellow"
+                                    ],
+                                    "sizes": [
+                                        { "name": "XS", "price": 20 },
+                                        { "name": "S", "price": 22 },
+                                        { "name": "M", "price": 25 },
+                                        { "name": "L", "price": 25 },
+                                        { "name": "XL", "price": 28 },
+                                        { "name": "XXL", "price": 30 },
+                                        { "name": "XXXL", "price": 30 }
+                                    ],
+                                    "productCode": 845789,
+                                    "description": "Aenean lacinia convallis arcu, at fringilla ante. Aliquam et metus lobortis, volutpat enim sed, porta erat. Phasellus a ligula a lacus vulputate tempus. Duis in mauris condimentum, egestas leo vitae, finibus nisi. Mauris sollicitudin volutpat purus, in sodales nibh dignissim vel. Etiam imperdiet mauris sed tellus venenatis finibus. Curabitur porttitor dignissim nisl, ac aliquam ligula euismod eget. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sem diam, tincidunt non mi sed, egestas volutpat massa. Donec sed dui justo. Curabitur iaculis sollicitudin ante vel vehicula.",
+                                    "comments": {
+                                        "numberOfComments": 1,
+                                        "allComments": [
+                                            {
+                                                "author": "Quisque Bibendum",
+                                                "text": "Curabitur sagittis suscipit felis, at ornare diam dapibus id. In tincidunt, augue ut dictum interdum, nisl libero congue purus, sed condimentum felis diam a ante. Integer porttitor vitae nunc sed condimentum. Aenean rutrum orci ligula. Quisque dapibus hendrerit lorem ac elementum. Nullam arcu felis, aliquam viverra nulla vel, dapibus porta felis. Duis vel ullamcorper turpis, eget consectetur leo."
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "id": "mens-jackets-walking-08",
+                                    "name": "Jacket 8",
+                                    "path": "/images/mens/jackets/08.jpg",
+                                    "link": "/products/mens/jackets/08",
+                                    "starsRated": 5,
+                                    "price": {
+                                        "new": 26
+                                    },
+                                    "sale": false,
+                                    "text": "Donec ullamcorper ante a mollis mollis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris dui augue, porta in finibus convallis, imperdiet vel ligula. Nam laoreet, justo in scelerisque finibus, lectus erat condimentum nibh, ut egestas ipsum mi sit amet augue.",
+                                    "colors": [
+                                        "Black",
+                                        "White",
+                                        "Red",
+                                        "Blue",
+                                        "Green",
+                                        "Yellow"
+                                    ],
+                                    "sizes": [
+                                        { "name": "XS", "price": 26 },
+                                        { "name": "S", "price": 26 },
+                                        { "name": "M", "price": 26 },
+                                        { "name": "L", "price": 26 },
+                                        { "name": "XL", "price": 26 },
+                                        { "name": "XXL", "price": 26 },
+                                        { "name": "XXXL", "price": 26 }
+                                    ],
+                                    "productCode": 321548,
+                                    "description": "Vivamus aliquet malesuada lectus at viverra. Ut quis auctor felis. Aliquam erat volutpat. Pellentesque porta sit amet ex ut dictum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla fermentum ligula sit amet lorem varius faucibus at ac diam. Vestibulum tincidunt tincidunt leo, id varius nibh convallis sed. Vivamus lacinia ut urna quis rhoncus. Duis fermentum tempor elementum. Nulla vel nunc in enim tempus mollis nec quis nunc. Phasellus a faucibus neque, eget dignissim felis.",
+                                    "comments": {
+                                        "numberOfComments": 3,
+                                        "allComments": [
+                                            {
+                                                "author": "Phasellus Consectetur",
+                                                "text": "Etiam fermentum nisl pharetra augue ornare, eu dapibus nibh bibendum. Nulla tincidunt pulvinar ipsum a tristique. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur rutrum dapibus ligula a sagittis. In hac habitasse platea dictumst. Nulla ac posuere magna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Interdum et malesuada fames ac ante ipsum primis in faucibus."
+                                            },
+                                            {
+                                                "author": "Quisque Venenatis",
+                                                "text": "Nunc lobortis, eros eget volutpat iaculis, eros nulla fermentum turpis, nec varius ante neque vel quam. Sed tempor tortor nunc, egestas feugiat nunc placerat fermentum. Vivamus euismod leo ut nisl ullamcorper maximus. Fusce cursus nunc nec eros posuere, at eleifend ipsum molestie. Fusce non purus ac odio finibus pharetra. Nam eu mi sem. Phasellus justo nisl, fringilla vel faucibus vitae, porta non odio. Nam lobortis dolor vitae libero euismod facilisis."
+                                            },
+                                            {
+                                                "author": "Sed Quis",
+                                                "text": "Aliquam feugiat semper iaculis. Mauris ac orci vel metus consequat finibus. Sed efficitur lacinia mauris porta auctor. Mauris sem odio, rutrum a nunc ac, placerat porttitor nunc. In non cursus turpis. Duis dictum leo vel facilisis porta. Cras ut suscipit metus, sed tempor diam. Sed gravida, tortor non rhoncus vestibulum, elit eros fermentum tortor, ac lacinia risus purus sit amet odio."
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "id": "mens-jackets-walking-09",
+                                    "name": "Jacket 9",
+                                    "path": "/images/mens/jackets/09.jpeg",
+                                    "link": "/products/mens/jackets/09",
+                                    "starsRated": 3,
+                                    "price": {
+                                        "new": 18
+                                    },
+                                    "sale": false,
+                                    "text": "Vestibulum faucibus imperdiet sem in bibendum. Morbi consectetur sapien ut magna fringilla, et condimentum magna interdum. Pellentesque in aliquet quam. Nunc efficitur, metus id tristique ultricies, felis metus tempus orci, eget sodales enim libero nec ipsum. Mauris consequat varius lectus vulputate imperdiet. Suspendisse id aliquet augue. Nam placerat viverra dapibus. Nullam dictum ultricies libero.",
+                                    "colors": [
+                                        "Black",
+                                        "White",
+                                        "Red",
+                                        "Blue",
+                                        "Green",
+                                        "Yellow"
+                                    ],
+                                    "sizes": [
+                                        { "name": "XS", "price": 18 },
+                                        { "name": "S", "price": 18 },
+                                        { "name": "M", "price": 18 },
+                                        { "name": "L", "price": 18 },
+                                        { "name": "XL", "price": 18 },
+                                        { "name": "XXL", "price": 18 },
+                                        { "name": "XXXL", "price": 18 }
+                                    ],
+                                    "productCode": 652145,
+                                    "description": "Proin convallis aliquet venenatis. Quisque sed nulla commodo, convallis ligula a, laoreet metus. Nulla cursus purus at consectetur eleifend. Curabitur vitae lacinia massa, sit amet suscipit orci. Aenean iaculis, arcu sit amet dapibus vestibulum, mauris ipsum malesuada tortor, vel tempor magna leo quis magna.",
+                                    "comments": {
+                                        "numberOfComments": 5,
+                                        "allComments": [
+                                            {
+                                                "author": "Nam Dui",
+                                                "text": "Integer dapibus ex magna. Donec iaculis lobortis ipsum, vel finibus nulla bibendum non."
+                                            },
+                                            {
+                                                "author": "Aenean Congue",
+                                                "text": "Duis eget massa eu ex suscipit mattis. Nulla a orci bibendum, sagittis tellus nec, egestas neque. Duis dignissim convallis dui at placerat."
+                                            },
+                                            {
+                                                "author": "Aenean Pulvinar",
+                                                "text": "Integer ac lectus sagittis, eleifend magna et, aliquam metus. Mauris a dui tincidunt, finibus mauris nec, sodales est. Cras vitae semper augue, quis accumsan lacus. Donec tincidunt, mi vitae malesuada commodo, magna dui lobortis augue, ac eleifend augue purus congue arcu."
+                                            },
+                                            {
+                                                "author": "Vestibulum Ante",
+                                                "text": "Sed id pellentesque ex, eget feugiat massa. Aliquam at ipsum vestibulum, accumsan sapien eget, finibus tellus. Nulla eget orci non libero dignissim cursus dictum id quam. Etiam orci dolor, commodo at tincidunt quis, pharetra eu eros. Phasellus posuere odio ut lobortis viverra. Aliquam quam dolor, efficitur a accumsan mattis, porta non ante."
+                                            },
+                                            {
+                                                "author": "Morbi Consequat",
+                                                "text": "Nam purus mauris, rutrum at mi sed, sagittis ultrices nisl. Phasellus consectetur sapien in nisi sagittis, eget laoreet ex blandit. Proin pulvinar laoreet est. Mauris at sollicitudin sem, ac tincidunt sem. Vivamus ultricies dictum velit, sit amet sodales nulla sodales at. Aliquam tempor mollis fermentum. Proin eu nulla ultrices, auctor tortor nec, gravida dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut orci nunc. Fusce facilisis tempor cursus."
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Shirts",
+                    "numberOfProducts": 15,
+                    "path": "/images/mens/shirts/",
+                    "submenu": [
+                        { "name": "Golden", "numberOfProducts": 5 },
+                        { "name": "Home", "numberOfProducts": 4 },
+                        { "name": "Walking", "numberOfProducts": 6 }
+                    ]
+                },
+                {
+                    "name": "Shoes",
+                    "numberOfProducts": 14,
+                    "path": "/images/mens/shoes/",
+                    "submenu": [
+                        { "name": "Golden", "numberOfProducts": 4 },
+                        { "name": "Home", "numberOfProducts": 4 },
+                        { "name": "Walking", "numberOfProducts": 6 }
+                    ]
+                }
+            ]
+        },
+        {
+            "kind": "Girls",
+            "numberOfProducts": 46,
+            "path": "/images/girls/",
+            "subcategories": [
+                {
+                    "name": "Jackets",
+                    "numberOfProducts": 16,
+                    "path": "/images/girls/jackets/",
+                    "submenu": [
+                        { "name": "Golden", "numberOfProducts": 5 },
+                        { "name": "Home", "numberOfProducts": 2 },
+                        { "name": "Walking", "numberOfProducts": 9 }
+                    ]
+                },
+                {
+                    "name": "Shirts",
+                    "numberOfProducts": 16,
+                    "path": "/images/girls/shirts/",
+                    "submenu": [
+                        { "name": "Golden", "numberOfProducts": 7 },
+                        { "name": "Home", "numberOfProducts": 5 },
+                        { "name": "Walking", "numberOfProducts": 4 }
+                    ]
+                },
+                {
+                    "name": "Shoes",
+                    "numberOfProducts": 14,
+                    "path": "/images/girls/shoes/",
+                    "submenu": [
+                        { "name": "Golden", "numberOfProducts": 5 },
+                        { "name": "Home", "numberOfProducts": 5 },
+                        { "name": "Walking", "numberOfProducts": 4 }
+                    ]
+                }
+            ]
+        },
+        {
+            "kind": "Other",
+            "numberOfProducts": 16,
+            "path": "/images/other/",
+            "subcategories": [
+                {
+                    "name": "Gloves",
+                    "numberOfProducts": 4,
+                    "path": "/images/other/gloves/",
+                    "submenu": [
+                        { "name": "Must Have", "numberOfProducts": 2 },
+                        { "name": "Casual", "numberOfProducts": 1 },
+                        { "name": "Fancy", "numberOfProducts": 1 }
+                    ]
+                },
+                {
+                    "name": "Hats",
+                    "numberOfProducts": 6,
+                    "path": "/images/other/hats/",
+                    "submenu": [
+                        { "name": "School", "numberOfProducts": 2 },
+                        { "name": "Summer", "numberOfProducts": 2 },
+                        { "name": "Wild", "numberOfProducts": 2 }
+                    ]
+                },
+                {
+                    "name": "Ties",
+                    "numberOfProducts": 6,
+                    "path": "/images/other/ties/",
+                    "submenu": [
+                        { "name": "Golden", "numberOfProducts": 1 },
+                        { "name": "Home", "numberOfProducts": 3 },
+                        { "name": "Walking", "numberOfProducts": 2 }
+                    ]
+                }
+            ]
+        },
+        {
+            "kind": "Accessories",
+            "numberOfProducts": 15,
+            "path": "/images/accessories/",
+            "subcategories": [
+                {
+                    "name": "Bags",
+                    "numberOfProducts": 3,
+                    "path": "/images/accessories/bags/",
+                    "submenu": [
+                        { "name": "Home", "numberOfProducts": 2 },
+                        { "name": "Walking", "numberOfProducts": 1 }
+                    ]
+                },
+                {
+                    "name": "Jewelry",
+                    "numberOfProducts": 5,
+                    "path": "/images/accessories/jewelry/",
+                    "submenu": [
+                        { "name": "Home", "numberOfProducts": 2 },
+                        { "name": "Golden", "numberOfProducts": 2 },
+                        { "name": "Walking", "numberOfProducts": 1 }
+                    ]
+                },
+                {
+                    "name": "Scarves",
+                    "numberOfProducts": 3,
+                    "path": "/images/accessories/scarves/",
+                    "submenu": [
+                        { "name": "Evergreen", "numberOfProducts": 1 },
+                        { "name": "Natural", "numberOfProducts": 2 }
+                    ]
+                },
+                {
+                    "name": "Watches",
+                    "numberOfProducts": 4,
+                    "path": "/images/accessories/watches/",
+                    "submenu": [
+                        { "name": "Golden", "numberOfProducts": 2 },
+                        { "name": "Walking", "numberOfProducts": 2 }
+                    ]
+                }
+            ]
+        }
+    ]
+}

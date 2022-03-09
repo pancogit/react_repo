@@ -1,0 +1,6 @@
+{
+    "delivery": [
+        { "kind": "Standard Delivery", "cost": 4 },
+        { "kind": "Ship Delivery", "cost": 25 }
+    ]
+}

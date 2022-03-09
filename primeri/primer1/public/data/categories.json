@@ -1,0 +1,159 @@
+{
+    "categories": [
+        {
+            "kind": "Mens",
+            "numberOfProducts": 38,
+            "path": "/images/mens/",
+            "subcategories": [
+                {
+                    "name": "Jackets",
+                    "numberOfProducts": 9,
+                    "path": "/images/mens/jackets/",
+                    "submenu": [
+                        { "name": "Golden", "numberOfProducts": 3 },
+                        { "name": "Home", "numberOfProducts": 2 },
+                        { "name": "Walking", "numberOfProducts": 4 }
+                    ]
+                },
+                {
+                    "name": "Shirts",
+                    "numberOfProducts": 15,
+                    "path": "/images/mens/shirts/",
+                    "submenu": [
+                        { "name": "Golden", "numberOfProducts": 5 },
+                        { "name": "Home", "numberOfProducts": 4 },
+                        { "name": "Walking", "numberOfProducts": 6 }
+                    ]
+                },
+                {
+                    "name": "Shoes",
+                    "numberOfProducts": 14,
+                    "path": "/images/mens/shoes/",
+                    "submenu": [
+                        { "name": "Golden", "numberOfProducts": 4 },
+                        { "name": "Home", "numberOfProducts": 4 },
+                        { "name": "Walking", "numberOfProducts": 6 }
+                    ]
+                }
+            ]
+        },
+        {
+            "kind": "Girls",
+            "numberOfProducts": 46,
+            "path": "/images/girls/",
+            "subcategories": [
+                {
+                    "name": "Jackets",
+                    "numberOfProducts": 16,
+                    "path": "/images/girls/jackets/",
+                    "submenu": [
+                        { "name": "Golden", "numberOfProducts": 5 },
+                        { "name": "Home", "numberOfProducts": 2 },
+                        { "name": "Walking", "numberOfProducts": 9 }
+                    ]
+                },
+                {
+                    "name": "Shirts",
+                    "numberOfProducts": 16,
+                    "path": "/images/girls/shirts/",
+                    "submenu": [
+                        { "name": "Golden", "numberOfProducts": 7 },
+                        { "name": "Home", "numberOfProducts": 5 },
+                        { "name": "Walking", "numberOfProducts": 4 }
+                    ]
+                },
+                {
+                    "name": "Shoes",
+                    "numberOfProducts": 14,
+                    "path": "/images/girls/shoes/",
+                    "submenu": [
+                        { "name": "Golden", "numberOfProducts": 5 },
+                        { "name": "Home", "numberOfProducts": 5 },
+                        { "name": "Walking", "numberOfProducts": 4 }
+                    ]
+                }
+            ]
+        },
+        {
+            "kind": "Other",
+            "numberOfProducts": 16,
+            "path": "/images/other/",
+            "subcategories": [
+                {
+                    "name": "Gloves",
+                    "numberOfProducts": 4,
+                    "path": "/images/other/gloves/",
+                    "submenu": [
+                        { "name": "Must Have", "numberOfProducts": 2 },
+                        { "name": "Casual", "numberOfProducts": 1 },
+                        { "name": "Fancy", "numberOfProducts": 1 }
+                    ]
+                },
+                {
+                    "name": "Hats",
+                    "numberOfProducts": 6,
+                    "path": "/images/other/hats/",
+                    "submenu": [
+                        { "name": "School", "numberOfProducts": 2 },
+                        { "name": "Summer", "numberOfProducts": 2 },
+                        { "name": "Wild", "numberOfProducts": 2 }
+                    ]
+                },
+                {
+                    "name": "Ties",
+                    "numberOfProducts": 6,
+                    "path": "/images/other/ties/",
+                    "submenu": [
+                        { "name": "Golden", "numberOfProducts": 1 },
+                        { "name": "Home", "numberOfProducts": 3 },
+                        { "name": "Walking", "numberOfProducts": 2 }
+                    ]
+                }
+            ]
+        },
+        {
+            "kind": "Accessories",
+            "numberOfProducts": 15,
+            "path": "/images/accessories/",
+            "subcategories": [
+                {
+                    "name": "Bags",
+                    "numberOfProducts": 3,
+                    "path": "/images/accessories/bags/",
+                    "submenu": [
+                        { "name": "Home", "numberOfProducts": 2 },
+                        { "name": "Walking", "numberOfProducts": 1 }
+                    ]
+                },
+                {
+                    "name": "Jewelry",
+                    "numberOfProducts": 5,
+                    "path": "/images/accessories/jewelry/",
+                    "submenu": [
+                        { "name": "Home", "numberOfProducts": 2 },
+                        { "name": "Golden", "numberOfProducts": 2 },
+                        { "name": "Walking", "numberOfProducts": 1 }
+                    ]
+                },
+                {
+                    "name": "Scarves",
+                    "numberOfProducts": 3,
+                    "path": "/images/accessories/scarves/",
+                    "submenu": [
+                        { "name": "Evergreen", "numberOfProducts": 1 },
+                        { "name": "Natural", "numberOfProducts": 2 }
+                    ]
+                },
+                {
+                    "name": "Watches",
+                    "numberOfProducts": 4,
+                    "path": "/images/accessories/watches/",
+                    "submenu": [
+                        { "name": "Golden", "numberOfProducts": 2 },
+                        { "name": "Walking", "numberOfProducts": 2 }
+                    ]
+                }
+            ]
+        }
+    ]
+}
