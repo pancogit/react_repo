@@ -4,16 +4,21 @@
 @use '../abstracts/colors';
 
 .logo {
-    display: flex;
-    text-decoration: none;
-
     &--margin {
         margin-right: variables.$logo_modif_margin-right;
     }
 
     @media screen and (max-width: variables.$navigation_hamburger_menu_screen_medium) {
         margin-right: 0;
-        flex: variables.$logo_flex_screen_medium;
+    }
+
+    &__link-wrapper {
+        display: flex;
+        text-decoration: none;
+
+        @media screen and (max-width: variables.$navigation_hamburger_menu_screen_medium) {
+            flex: variables.$logo_flex_screen_medium;
+        }
     }
 
     &:hover {
