@@ -6,11 +6,17 @@
 .searchbar {
     display: flex;
 
+    // positioning container for search input
+    position: relative;
+
     // when searchbar is used, then show search input with width slide transition
     &--active {
         .searchbar__input {
             padding: variables.$searchbar_active_padding;
             width: variables.$searchbar_active_width;
+
+            // slide absolute positioning search input to the left
+            left: variables.$searchbar_active_left;
         }
     }
 
@@ -45,6 +51,14 @@
         font-style: italic;
         outline: none;
         min-width: 0;
+
+        // use absolute positioning to show over other elements
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        z-index: variables.$searchbar_input_z_index;
 
         // set transition on input when it's shown on page
         width: 0;

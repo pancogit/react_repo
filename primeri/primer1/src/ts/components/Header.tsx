@@ -1,9 +1,16 @@
+import { useSelector } from 'react-redux';
+import { User } from '../slices/userSlice';
+import { StoreState } from '../store/store';
 import Logo from './Logo';
 import Navigation from './Navigation';
 import Searchbar from './Searchbar';
 import Social from './Social';
 
 export default function Header() {
+    const { email, username } = useSelector<StoreState, User>(
+        state => state.user
+    );
+
     return (
         <header className='header'>
             <div className='header__top'>
@@ -18,10 +25,8 @@ export default function Header() {
                         <div className='header__info'>
                             <div className='header__user'>
                                 <i className='fa-solid fa-envelope header__letter'></i>
-                                <p className='header__email'>
-                                    generosity@gmail.com
-                                </p>
-                                <p className='header__username'>John Doe</p>
+                                <p className='header__email'>{email}</p>
+                                <p className='header__username'>{username}</p>
                             </div>
                             <Social />
                             <Searchbar />

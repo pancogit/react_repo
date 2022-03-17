@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getAsyncData } from './asyncData';
 
-interface Tweet {
+export interface Tweet {
     text: string;
     link: string;
     date: DateTweet;
@@ -14,7 +14,7 @@ interface DateTweet {
     time: TimeTweet;
 }
 
-interface TimeTweet {
+export interface TimeTweet {
     hour: number;
     minute: number;
     meridiem: Meridiem;
@@ -23,6 +23,8 @@ interface TimeTweet {
 type Meridiem = 'am' | 'pm';
 
 type State = Tweet[];
+
+export type { State as TweetsState };
 
 interface AsyncData {
     tweets: State;

@@ -8,8 +8,8 @@ export default function SearchPage() {
     let queryStrings = parseQueryStrings();
     let noSearchResults = false;
 
-    // parse all query strings from url
-    function parseQueryStrings() {
+    // parse all query strings from url or just result query string
+    function parseQueryStrings(parseAll = false) {
         let entry,
             queryStrings = '';
 
@@ -22,7 +22,17 @@ export default function SearchPage() {
                 break;
             }
 
-            queryStrings += entry.value[0] + ' = ' + entry.value[1] + ', ';
+            // parse all query strings
+            if (parseAll) {
+                queryStrings += entry.value[0] + ' = ' + entry.value[1] + ', ';
+            }
+            // or get just "result" query string
+            else {
+                if (entry.value[0] === 'result') {
+                    queryStrings = entry.value[1];
+                    break;
+                }
+            }
         }
 
         return queryStrings;

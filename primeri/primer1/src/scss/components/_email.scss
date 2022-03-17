@@ -47,4 +47,8 @@
         color: colors.$email_message_color;
         font-weight: bold;
     }
+
+    &__label {
+        cursor: pointer;
+    }
 }

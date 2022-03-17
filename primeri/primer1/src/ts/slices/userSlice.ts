@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getAsyncData } from './asyncData';
 
-interface User {
+export interface User {
     username: string;
     email: string;
 }

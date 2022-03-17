@@ -22,11 +22,13 @@ $social_link_height: 100%;
 // searchbar
 $searchbar_active_padding: 0.7rem 1rem;
 $searchbar_active_width: 14rem;
+$searchbar_active_left: -16rem;
 $searchbar_button_padding: 1rem;
 $searchbar_button_height: 100%;
 $searchbar_button_border_width: 0.1rem;
 $searchbar_icon_font_size: 0.8rem;
 $searchbar_input_transition: 0.7s;
+$searchbar_input_z_index: 10000;
 
 // header
 $header_email_margin: 0 0.9rem;
