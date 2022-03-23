@@ -8,6 +8,7 @@ interface Props {
     image: string;
     addedToCart?: boolean;
     link: string;
+    numberOfStars: number;
 }
 
 export interface Price {
@@ -23,6 +24,7 @@ export default function Product(props: Props) {
         image,
         addedToCart = false,
         link,
+        numberOfStars,
     } = props;
 
     // choose between added to cart button and normal buy button
@@ -78,7 +80,7 @@ export default function Product(props: Props) {
                     <Link to={link} className='product__heading-wrapper'>
                         <h4 className='product__heading'>{heading}</h4>
                     </Link>
-                    <Stars />
+                    <Stars numberOfStars={numberOfStars} />
                 </div>
                 {addButton}
             </div>

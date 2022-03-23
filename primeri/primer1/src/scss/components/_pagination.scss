@@ -63,12 +63,17 @@
     }
 
     &__page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         border-left: none;
         background-color: colors.$pagination_page_background_color;
         color: colors.$pagination_page_color;
+        font-family: Arial;
         font-weight: bold;
         font-size: variables.$pagination_page_font_size;
         cursor: pointer;
+        width: variables.$pagination_page_width;
 
         &:hover {
             background-color: colors.$pagination_page_background_color_hover;

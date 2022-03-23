@@ -22,9 +22,11 @@ interface Submenu {
     products: Products;
 }
 
-type Subcategories = Subcategory[];
-type Submenus = Submenu[];
+export type Subcategories = Subcategory[];
+export type Submenus = Submenu[];
 type State = Category[];
+
+export type { State as CategoryState };
 
 interface AsyncData {
     categories: State;

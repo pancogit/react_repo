@@ -37,7 +37,7 @@ export default function SingleProduct(props: Props) {
                         Single Product Page
                     </h2>
                     <div className='single-product__rating'>
-                        <Stars isEditable={true} />
+                        <Stars isEditable={true} numberOfStars={3.5} />
                         <Link to='' className='single-product__reviews-link'>
                             (8 customer reviews)
                         </Link>

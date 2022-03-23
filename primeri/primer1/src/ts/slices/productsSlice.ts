@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Colors } from '../components/ColorSelect';
 import { Sizes } from '../components/SizeSelect';
 import { getAsyncData } from './asyncData';
+import { CategoryState } from './categoriesSlice';
 
 interface Product {
     id: string;
@@ -45,7 +46,7 @@ type AllComments = SingleComment;
 export type Products = Product[];
 
 interface AsyncData {
-    products: Products;
+    products: CategoryState;
 }
 
 export const getProducts = createAsyncThunk('get-products', async () => {
@@ -54,7 +55,7 @@ export const getProducts = createAsyncThunk('get-products', async () => {
     return data.products;
 });
 
-const initialState: Products = [];
+const initialState: CategoryState = [];
 
 const productsSlice = createSlice({
     name: 'products',
@@ -64,7 +65,7 @@ const productsSlice = createSlice({
     extraReducers: builder => {
         builder.addCase(
             getProducts.fulfilled,
-            (state, action: PayloadAction<Products>) => {
+            (state, action: PayloadAction<CategoryState>) => {
                 return action.payload;
             }
         );

@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { categoriesReducer } from '../slices/categoriesSlice';
 import { deliveryReducer } from '../slices/deliverySlice';
 import { productsReducer } from '../slices/productsSlice';
+import { shopPageReducer } from '../slices/shopPageSlice';
 import { subscribeReducer } from '../slices/subscribeSlice';
 import { tagsCloudReducer } from '../slices/tagsCloudSlice';
 import { tweetsReducer } from '../slices/tweetsSlice';
@@ -16,6 +17,7 @@ const store = configureStore({
         user: userReducer,
         products: productsReducer,
         subscribe: subscribeReducer,
+        shopPage: shopPageReducer,
     },
 });
 

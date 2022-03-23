@@ -18,7 +18,13 @@ export default function Products() {
                     />
                 }
             />
-            <Route path='*' element={<Navigate to='/shop-page' />} />
+
+            {/* replace current url with new one to not constantly navigate to the new url
+                when back button is clicked */}
+            <Route
+                path='*'
+                element={<Navigate to='/shop-page' replace={true} />}
+            />
         </Routes>
     );
 }

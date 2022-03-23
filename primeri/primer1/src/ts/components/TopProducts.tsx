@@ -37,7 +37,7 @@ export default function TopProducts() {
                                 Ninja Silhouette
                             </h4>
                         </Link>
-                        <Stars />
+                        <Stars numberOfStars={3.5} />
                         <p className='top-products__price'>
                             <span className='top-products__before'>
                                 &pound;15.00
@@ -71,7 +71,7 @@ export default function TopProducts() {
                                 Ship Your Idea
                             </h4>
                         </Link>
-                        <Stars />
+                        <Stars numberOfStars={3.5} />
                         <p className='top-products__price'>
                             <span className='top-products__before'>
                                 &pound;15.00
@@ -105,7 +105,7 @@ export default function TopProducts() {
                                 Premium Quality
                             </h4>
                         </Link>
-                        <Stars />
+                        <Stars numberOfStars={3.5} />
                         <p className='top-products__price'>
                             <span className='top-products__before'>
                                 &pound;15.00
