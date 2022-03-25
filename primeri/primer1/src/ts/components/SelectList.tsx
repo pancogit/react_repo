@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 import { setSortingType } from '../slices/shopPageSlice';
 import { DispatchType, StoreState } from '../store/store';
 
@@ -33,12 +34,14 @@ export default function SelectList() {
         ? 'select-list__options select-list__options--open'
         : 'select-list__options';
 
-    const allOptions = createOptions();
-
     const dispatch = useDispatch<DispatchType>();
     const listOption = useSelector<StoreState, SortOptionType>(
         state => state.shopPage.sortingType
     );
+
+    const allOptions = createOptions();
+
+    const [searchParams, setSearchParams] = useSearchParams();
 
     function openCloseList() {
         setIsOpen(!isOpen);
@@ -90,9 +93,14 @@ export default function SelectList() {
     }, [dispatch]);
 
     // when some option is clicked, dispatch it to the store and close the list
+    // set query string for current sorting type
     function optionIsClicked(optionType: SortOptionType) {
         dispatch(setSortingType(optionType));
         setIsOpen(false);
+
+        // set query string for sorting
+        searchParams.set('sorting', optionType.toLowerCase());
+        setSearchParams(searchParams);
     }
 
     function createOptions() {
@@ -109,9 +117,11 @@ export default function SelectList() {
 
             // don't put default property, because once any property is clicked
             // then default property is not used anymore while component is mounted
-            if (property !== 'DEFAULT') {
+            // also don't show already selected option in the list
+            if (property !== 'DEFAULT' && listOption !== property) {
                 allOptions.push(
                     <p
+                        key={index}
                         className='select-list__option'
                         onClick={() => optionIsClicked(property)}
                     >
@@ -125,7 +135,7 @@ export default function SelectList() {
     }
 
     return (
-        <div className='select-list' ref={listRef}>
+        <div className='select-list select-list--large' ref={listRef}>
             <div className='select-list__select' onClick={openCloseList}>
                 <p className='select-list__text'>{options[listOption]}</p>
                 <i className='fa-solid fa-caret-down select-list__arrow'></i>

@@ -6,10 +6,16 @@ import Filter from '../../components/Filter';
 import Pagination from '../../components/Pagination';
 import ProductsList from '../../components/ProductsList';
 import Search from '../../components/Search';
-import SelectList from '../../components/SelectList';
+import SelectList, { SortOptionType } from '../../components/SelectList';
 import TagsCloud from '../../components/TagsCloud';
 import TopProducts from '../../components/TopProducts';
-import { setCurrentPage, ShopPageState } from '../../slices/shopPageSlice';
+
+import {
+    setCurrentPage,
+    setSortingType,
+    ShopPageState,
+} from '../../slices/shopPageSlice';
+
 import { DispatchType, StoreState } from '../../store/store';
 
 export default function ShopPage() {
@@ -56,6 +62,33 @@ export default function ShopPage() {
             }
         }
     }, [dispatch, searchParams, setSearchParams, numberOfPages, currentPage]);
+
+    // read sorting type from query string and dispatch it to the store
+    useEffect(() => {
+        let queryString = searchParams.get('sorting');
+        let sortingType: SortOptionType;
+
+        if (queryString !== null) {
+            sortingType = queryString.toUpperCase() as SortOptionType;
+
+            // dispatch just known types
+            if (
+                sortingType === 'NAME_ASCENDING' ||
+                sortingType === 'NAME_DESCENDING' ||
+                sortingType === 'PRICE_ASCENDING' ||
+                sortingType === 'PRICE_DESCENDING' ||
+                sortingType === 'QUALITY_ASCENDING' ||
+                sortingType === 'QUALITY_DESCENDING'
+            ) {
+                dispatch(setSortingType(sortingType));
+            }
+            // remove not existing sorting types from url
+            else {
+                searchParams.delete('sorting');
+                setSearchParams(searchParams);
+            }
+        }
+    }, [dispatch, searchParams, setSearchParams]);
 
     return (
         <div className='shop-page'>

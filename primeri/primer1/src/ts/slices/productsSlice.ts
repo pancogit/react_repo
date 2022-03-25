@@ -20,6 +20,8 @@ interface Product {
     comments: CommentsObject;
 }
 
+export type { Product as ProductType };
+
 interface Price {
     old?: number;
     new: number | [number, number];

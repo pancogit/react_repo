@@ -25,6 +25,15 @@
         }
     }
 
+    &--large {
+        width: variables.$select_list_large_width;
+
+        .select-list__select,
+        .select-list__options {
+            width: variables.$select_list_large_width;
+        }
+    }
+
     // for full width, stretch list to the whole line
     &--full-width {
         .select-list__select {
