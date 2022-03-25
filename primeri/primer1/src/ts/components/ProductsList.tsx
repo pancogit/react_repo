@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
@@ -8,7 +8,13 @@ import {
 } from '../slices/categoriesSlice';
 
 import { Products } from '../slices/productsSlice';
-import { setNumberOfPages, setNumberOfResults } from '../slices/shopPageSlice';
+
+import {
+    setNumberOfPages,
+    setNumberOfResults,
+    ShopPageState,
+} from '../slices/shopPageSlice';
+
 import { DispatchType, StoreState } from '../store/store';
 import Product from './Product';
 
@@ -17,27 +23,60 @@ export default function ProductsList() {
         state => state.products
     );
 
-    const numberOfProductsPerPage = useSelector<StoreState, number>(
-        state => state.shopPage.numberOfProductsPerPage
-    );
+    const { numberOfProductsPerPage, currentPage } = useSelector<
+        StoreState,
+        ShopPageState
+    >(state => state.shopPage);
 
+    const [productsLoaded, setProductsLoaded] = useState(false);
+    const [searchResults, setSearchResults] = useState<Products>([]);
     const dispatch = useDispatch<DispatchType>();
 
     let numberOfResults: number | null = null;
-    const productsList = createList();
+    const productsList = productsLoaded ? createProductsList() : [];
 
     if (allProducts.length) numberOfResults = getNumberOfSearchedResults();
 
     // create list of products
-    function createList() {
-        let subcategories: Subcategories,
-            submenus: Submenus,
-            products: Products;
+    function createProductsList() {
         let productsList: JSX.Element[] = [];
+
+        // iterate through all search results of products and create products
+        searchResults.forEach((product, index) => {
+            productsList.push(
+                <Product
+                    key={product.id}
+                    sale={product.sale}
+                    heading={product.name}
+                    price={{
+                        old: product.price.old,
+                        new: product.price.new,
+                    }}
+                    image={product.path}
+                    link={product.link}
+                    numberOfStars={product.starsRated}
+                />
+            );
+        });
+
+        return productsList;
+    }
+
+    // search for products and set local state with search results
+    // memoize function (save reference to the function) to not call it on every render in useEffect hook
+    const searchProducts = useCallback(() => {
+        let subcategories: Subcategories;
+        let submenus: Submenus;
+        let products: Products;
+        let foundProducts: Products = [];
         let numberOfProducts = 0;
         let skipProducts = false;
 
-        // get number of searched results for products
+        // skip some products if it's not the first page
+        let numberOfProductsToSkip =
+            currentPage && currentPage > 1
+                ? (currentPage - 1) * numberOfProductsPerPage
+                : 0;
 
         // iterate through all categories and subcategories to find products
         for (let i = 0; i < allProducts.length; i++) {
@@ -56,38 +95,29 @@ export default function ProductsList() {
                     products = submenus[k].products;
 
                     for (let l = 0; l < products.length; l++) {
-                        numberOfProducts++;
-
-                        // show first several products, not all products at once because
-                        // pagination is used for more products
-                        if (numberOfProducts <= numberOfProductsPerPage) {
-                            productsList.push(
-                                <Product
-                                    key={products[l].id}
-                                    sale={products[l].sale}
-                                    heading={products[l].name}
-                                    price={{
-                                        old: products[l].price.old,
-                                        new: products[l].price.new,
-                                    }}
-                                    image={products[l].path}
-                                    link={products[l].link}
-                                    numberOfStars={products[l].starsRated}
-                                />
-                            );
-                        }
-                        // if enough products are loaded, then skip searching for others
+                        if (numberOfProductsToSkip) numberOfProductsToSkip--;
                         else {
-                            skipProducts = true;
-                            break;
+                            numberOfProducts++;
+
+                            // save first several products, not all products at once because
+                            // pagination is used for more products
+                            if (numberOfProducts <= numberOfProductsPerPage) {
+                                foundProducts.push(products[l]);
+                            }
+                            // if enough products are loaded, then skip searching for others
+                            else {
+                                skipProducts = true;
+                                break;
+                            }
                         }
                     }
                 }
             }
         }
 
-        return productsList;
-    }
+        // save search results in local state
+        setSearchResults(foundProducts);
+    }, [allProducts, numberOfProductsPerPage, currentPage]);
 
     function getNumberOfSearchedResults() {
         let numberOfResults = 0;
@@ -113,6 +143,15 @@ export default function ProductsList() {
             dispatch(setNumberOfPages(numberOfPages));
         }
     }, [dispatch, numberOfProductsPerPage, numberOfResults]);
+
+    // when page is changed, search for new products for that page
+    useEffect(() => {
+        if (currentPage) {
+            setProductsLoaded(false);
+            searchProducts();
+            setProductsLoaded(true);
+        }
+    }, [currentPage, searchProducts]);
 
     return <div className='shop-page__products'>{productsList}</div>;
 }

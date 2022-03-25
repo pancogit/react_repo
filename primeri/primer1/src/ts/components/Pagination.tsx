@@ -13,6 +13,9 @@ export default function Pagination() {
         state => state.shopPage
     );
 
+    // keep local track of last clicked page
+    const [lastPage, setLastPage] = useState<number | null>(null);
+
     const navigate = useNavigate();
     const dispatch = useDispatch<DispatchType>();
 
@@ -87,6 +90,8 @@ export default function Pagination() {
         let firstPage = 1;
 
         if (shopPage.numberOfPages && shopPage.currentPage) {
+            if (lastPage && lastPage === shopPage.currentPage) return;
+
             // first look for last clicked visible page, then look for first and finally
             // look for some page in between
             if (pagesNumbers) {
@@ -128,8 +133,17 @@ export default function Pagination() {
             // update pagination numbers only when they are changed
             if (pagesNumbers === null || pagesNumbers[0] !== pages[0])
                 setPagesNumbers(pages);
+
+            // save last visited page
+            setLastPage(shopPage.currentPage);
         }
-    }, [shopPage.currentPage, shopPage.numberOfPages, findFirstFreePageSlot]);
+    }, [
+        shopPage.currentPage,
+        shopPage.numberOfPages,
+        findFirstFreePageSlot,
+        pagesNumbers,
+        lastPage,
+    ]);
 
     return (
         <div className='pagination'>

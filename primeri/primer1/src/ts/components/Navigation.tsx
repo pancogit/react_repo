@@ -28,6 +28,11 @@ export default function Navigation() {
         return () => window.removeEventListener('keydown', closeMenu);
     }, []);
 
+    // don't clean query strings if they exist if submenu heading link is clicked
+    function preventDefaultLink(event: React.MouseEvent<HTMLAnchorElement>) {
+        event.preventDefault();
+    }
+
     return (
         <nav className={navigationClass}>
             <ul className='navigation__list'>
@@ -50,7 +55,11 @@ export default function Navigation() {
                     </Link>
                 </li>
                 <li className='navigation__menu'>
-                    <Link to='#' className='navigation__link'>
+                    <Link
+                        to='#'
+                        className='navigation__link'
+                        onClick={preventDefaultLink}
+                    >
                         Pages{' '}
                         <i className='fa-solid fa-angle-down navigation__arrow'></i>
                     </Link>
@@ -85,7 +94,11 @@ export default function Navigation() {
                     </ul>
                 </li>
                 <li className='navigation__menu'>
-                    <Link to='#' className='navigation__link'>
+                    <Link
+                        to='#'
+                        className='navigation__link'
+                        onClick={preventDefaultLink}
+                    >
                         Gallery{' '}
                         <i className='fa-solid fa-angle-down navigation__arrow'></i>
                     </Link>
@@ -111,7 +124,11 @@ export default function Navigation() {
                     </ul>
                 </li>
                 <li className='navigation__menu'>
-                    <Link to='#' className='navigation__link'>
+                    <Link
+                        to='#'
+                        className='navigation__link'
+                        onClick={preventDefaultLink}
+                    >
                         Shop{' '}
                         <i className='fa-solid fa-angle-down navigation__arrow'></i>
                     </Link>
@@ -137,7 +154,11 @@ export default function Navigation() {
                     </ul>
                 </li>
                 <li className='navigation__menu'>
-                    <Link to='#' className='navigation__link'>
+                    <Link
+                        to='#'
+                        className='navigation__link'
+                        onClick={preventDefaultLink}
+                    >
                         Blog{' '}
                         <i className='fa-solid fa-angle-down navigation__arrow'></i>
                     </Link>
