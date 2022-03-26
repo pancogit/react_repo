@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import Cart from '../../components/Cart';
@@ -9,6 +9,7 @@ import Search from '../../components/Search';
 import SelectList, { SortOptionType } from '../../components/SelectList';
 import TagsCloud from '../../components/TagsCloud';
 import TopProducts from '../../components/TopProducts';
+import { closeCategories } from '../../slices/categoriesSlice';
 
 import {
     setCurrentPage,
@@ -27,6 +28,11 @@ export default function ShopPage() {
     const dispatch = useDispatch<DispatchType>();
     const [searchParams, setSearchParams] = useSearchParams();
 
+    // aside part of page and hamburger menu for them
+    const [hamburgerMenuActive, setHamburgerMenuActive] = useState(false);
+    const hamburgerAsideRef = useRef<HTMLElement | null>(null);
+    const hamburgerIconRef = useRef<HTMLElement | null>(null);
+
     let showingResults =
         numberOfPages &&
         numberOfResults &&
@@ -34,6 +40,10 @@ export default function ShopPage() {
         currentPage <= numberOfPages
             ? `Showing ${currentPage}-${numberOfPages} of ${numberOfResults} results`
             : '';
+
+    const hamburgerMenuClass = hamburgerMenuActive
+        ? 'shop-page__aside shop-page__aside--hamburger-menu'
+        : 'shop-page__aside';
 
     // set current page to the first if shop page is mounted and query
     // string for page is not specified
@@ -90,10 +100,75 @@ export default function ShopPage() {
         }
     }, [dispatch, searchParams, setSearchParams]);
 
+    function hamburgerMenuClicked() {
+        setHamburgerMenuActive(!hamburgerMenuActive);
+    }
+
+    function closeHamburgerMenu() {
+        setHamburgerMenuActive(false);
+    }
+
+    // when aside component is closed, clear all categories, subcategories and submenus
+    // flags because menu for filters should be cleared when aside component is closed
+    // clear categories flags ony if aside component is closed
+    useEffect(() => {
+        if (!hamburgerMenuActive) {
+            dispatch(closeCategories());
+        }
+    }, [hamburgerMenuActive, dispatch]);
+
+    // close aside hamburger menu when escape is pressed on keyboard
+    useEffect(() => {
+        function keyIsPressed(event: KeyboardEvent) {
+            if (event.key === 'Escape') closeHamburgerMenu();
+        }
+
+        window.addEventListener('keydown', keyIsPressed);
+
+        return () => window.removeEventListener('keydown', keyIsPressed);
+    }, []);
+
+    // close aside hamburger menu when it's clicked outside of aside component
+    useEffect(() => {
+        function windowIsClicked(event: MouseEvent) {
+            const eventPath = event.composedPath();
+            let node: Node;
+            let asideMenuFound = false;
+
+            for (let i = 0; i < eventPath.length; i++) {
+                node = eventPath[i] as Node;
+
+                // look when it's clicked on aside component or on hamburger menu icon
+                // in that case, don't close aside component
+                if (
+                    hamburgerAsideRef.current &&
+                    hamburgerIconRef.current &&
+                    (node === hamburgerAsideRef.current ||
+                        node === hamburgerIconRef.current)
+                ) {
+                    asideMenuFound = true;
+                    break;
+                }
+            }
+
+            // if there is no aside component along to the root dom element,
+            // then it's clicked outside of aside component and close the hamburger menu
+            if (!asideMenuFound) closeHamburgerMenu();
+        }
+
+        window.addEventListener('click', windowIsClicked);
+
+        return () => window.removeEventListener('click', windowIsClicked);
+    }, []);
+
     return (
         <div className='shop-page'>
-            <i className='fa-solid fa-bars shop-page__hamburger-menu'></i>
-            <aside className='shop-page__aside'>
+            <i
+                className='fa-solid fa-bars shop-page__hamburger-menu'
+                onClick={hamburgerMenuClicked}
+                ref={hamburgerIconRef}
+            ></i>
+            <aside className={hamburgerMenuClass} ref={hamburgerAsideRef}>
                 <Search />
                 <Cart />
                 <Filter />

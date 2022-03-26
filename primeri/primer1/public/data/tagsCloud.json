@@ -1,3 +1,10 @@
 {
-    "tagsCloud": ["Items", "Donate", "Lorem", "Ipsum", "Dolor", "Malesuada"]
+    "tagsCloud": [
+        { "text": "Items" },
+        { "text": "Donate", "value": 28 },
+        { "text": "Lorem" },
+        { "text": "Ipsum" },
+        { "text": "Dolor" },
+        { "text": "Malesuada" }
+    ]
 }

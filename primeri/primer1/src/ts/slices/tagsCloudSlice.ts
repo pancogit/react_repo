@@ -1,7 +1,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getAsyncData } from './asyncData';
 
-type State = string[];
+interface TagCloud {
+    text: string;
+    value?: number;
+}
+
+type State = TagCloud[];
 
 interface AsyncData {
     tagsCloud: State;
