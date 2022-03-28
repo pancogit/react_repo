@@ -7,7 +7,8 @@ interface Category {
     numberOfProducts: number;
     path: string;
     subcategories: Subcategories;
-    isActive: boolean;
+    isSelected: boolean;
+    isOpened: boolean;
 }
 
 export type { Category as CategoryType };
@@ -17,14 +18,15 @@ interface Subcategory {
     numberOfProducts: number;
     path: string;
     submenu: Submenus;
-    isActive: boolean;
+    isSelected: boolean;
+    isOpened: boolean;
 }
 
 interface Submenu {
     name: string;
     numberOfProducts: number;
     products: Products;
-    isActive: boolean;
+    isSelected: boolean;
 }
 
 export type Subcategories = Subcategory[];
@@ -56,13 +58,15 @@ const categoriesSlice = createSlice({
         // close all categories, subcategories and submenus by clearing all their flags
         closeCategories(state) {
             state.forEach(category => {
-                category.isActive = false;
+                category.isSelected = false;
+                category.isOpened = false;
 
                 category.subcategories.forEach(subcategory => {
-                    subcategory.isActive = false;
+                    subcategory.isSelected = false;
+                    subcategory.isOpened = false;
 
                     subcategory.submenu.forEach(submenu => {
-                        submenu.isActive = false;
+                        submenu.isSelected = false;
                     });
                 });
             });
@@ -73,17 +77,19 @@ const categoriesSlice = createSlice({
         builder.addCase(
             getCategories.fulfilled,
             (state, action: PayloadAction<State>) => {
-                // set active field to false for each category
+                // set selected and opened fields to false for each category
                 action.payload.forEach(category => {
-                    category.isActive = false;
+                    category.isSelected = false;
+                    category.isOpened = false;
 
-                    // set active field to false for each subcategory
+                    // set selected and opened fields to false for each subcategory
                     category.subcategories.forEach(subcategory => {
-                        subcategory.isActive = false;
+                        subcategory.isSelected = false;
+                        subcategory.isOpened = false;
 
-                        // set active field to false for each submenu
+                        // set selected field to false for each submenu
                         subcategory.submenu.forEach(submenu => {
-                            submenu.isActive = false;
+                            submenu.isSelected = false;
                         });
                     });
                 });

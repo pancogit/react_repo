@@ -33,6 +33,9 @@ export default function ShopPage() {
     const hamburgerAsideRef = useRef<HTMLElement | null>(null);
     const hamburgerIconRef = useRef<HTMLElement | null>(null);
 
+    // last type of sorting read from query string
+    const [sortType, setSortType] = useState<SortOptionType | null>(null);
+
     let showingResults =
         numberOfPages &&
         numberOfResults &&
@@ -90,7 +93,14 @@ export default function ShopPage() {
                 sortingType === 'QUALITY_ASCENDING' ||
                 sortingType === 'QUALITY_DESCENDING'
             ) {
-                dispatch(setSortingType(sortingType));
+                // dispatch sorting type only if it's not already updated with the same value
+                if (sortingType !== sortType) {
+                    dispatch(setSortingType(sortingType));
+
+                    // remember last sorting type for the next update to skip
+                    // update if it's already updated
+                    setSortType(sortingType);
+                }
             }
             // remove not existing sorting types from url
             else {
@@ -98,7 +108,7 @@ export default function ShopPage() {
                 setSearchParams(searchParams);
             }
         }
-    }, [dispatch, searchParams, setSearchParams]);
+    }, [dispatch, searchParams, setSearchParams, sortType]);
 
     function hamburgerMenuClicked() {
         setHamburgerMenuActive(!hamburgerMenuActive);
@@ -108,14 +118,14 @@ export default function ShopPage() {
         setHamburgerMenuActive(false);
     }
 
-    // when aside component is closed, clear all categories, subcategories and submenus
-    // flags because menu for filters should be cleared when aside component is closed
-    // clear categories flags ony if aside component is closed
+    // when shop page is leaved and component unmounted, then clear all categories,
+    // subcategories and submenus flags because menu for filters should be cleared
+    // when shop page is leaved
     useEffect(() => {
-        if (!hamburgerMenuActive) {
+        return () => {
             dispatch(closeCategories());
-        }
-    }, [hamburgerMenuActive, dispatch]);
+        };
+    }, [dispatch]);
 
     // close aside hamburger menu when escape is pressed on keyboard
     useEffect(() => {

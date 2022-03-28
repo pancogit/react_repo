@@ -7,11 +7,25 @@ interface State {
     currentPage?: number;
     readonly numberOfProductsPerPage: number;
     sortingType: SortOptionType;
+    filters: FiltersType;
 }
+
+interface FiltersType {
+    category: CategoryFilter;
+    priceRange: PriceRangeFilter;
+}
+
+interface CategoryFilter {
+    path: string | null;
+    name: string | null;
+}
+
+type PriceRangeFilter = [number, number];
 
 const initialState: State = {
     numberOfProductsPerPage: 12,
     sortingType: 'DEFAULT',
+    filters: { category: { name: null, path: null }, priceRange: [75, 300] },
 };
 
 export type { State as ShopPageState };
@@ -35,6 +49,23 @@ const shopPageSlice = createSlice({
         setSortingType(state, action: PayloadAction<SortOptionType>) {
             state.sortingType = action.payload;
         },
+
+        setCategoriesFilters: {
+            reducer(state, action: PayloadAction<CategoryFilter>) {
+                state.filters.category = action.payload;
+            },
+
+            // set 2 arguments to the dispatched reducer function instead of payload object
+            // get those 2 arguments and insert them into the payload object and then
+            // return it to the reducer function "action" argument
+            prepare(path: string | null, name: string | null) {
+                return { payload: { path, name } };
+            },
+        },
+
+        setPriceRangeFilters(state, action: PayloadAction<PriceRangeFilter>) {
+            state.filters.priceRange = action.payload;
+        },
     },
 });
 
@@ -45,4 +76,6 @@ export const {
     setNumberOfPages,
     setNumberOfResults,
     setSortingType,
+    setCategoriesFilters,
+    setPriceRangeFilters,
 } = shopPageSlice.actions;

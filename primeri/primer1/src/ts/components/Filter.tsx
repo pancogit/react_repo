@@ -1,3 +1,4 @@
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -7,6 +8,7 @@ import {
     Subcategories,
     Submenus,
 } from '../slices/categoriesSlice';
+import { setCategoriesFilters } from '../slices/shopPageSlice';
 
 import { DispatchType, StoreState } from '../store/store';
 import Slider from './Slider';
@@ -22,23 +24,31 @@ export default function Filter() {
         event: React.MouseEvent<HTMLAnchorElement>,
         categoryIndex: number
     ) {
+        let categorySelectedFlag: boolean;
+
         event.preventDefault();
 
         // create copy of object and then mutate it and set state
         const categoriesCopy = createCategoriesCopy();
 
-        // flip current flag
-        categoriesCopy[categoryIndex].isActive =
-            !categoriesCopy[categoryIndex].isActive;
+        // first save current category flag
+        categorySelectedFlag = categoriesCopy[categoryIndex].isSelected;
 
-        // if flag is cleared, then clear all subcategories and submenus flags
-        if (!categoriesCopy[categoryIndex].isActive) {
+        // clear all categories, subcategories and submenus selected flags because
+        // only one link can be selected at the same time
+        clearAllSelectedFlags(categoriesCopy);
+
+        // flip current flags
+        categoriesCopy[categoryIndex].isOpened =
+            !categoriesCopy[categoryIndex].isOpened;
+
+        categoriesCopy[categoryIndex].isSelected = !categorySelectedFlag;
+
+        // when category is closed then clear all opened flags for given category
+        // to close all subcategories
+        if (!categoriesCopy[categoryIndex].isOpened) {
             categoriesCopy[categoryIndex].subcategories.forEach(subcategory => {
-                subcategory.isActive = false;
-
-                subcategory.submenu.forEach(submenu => {
-                    submenu.isActive = false;
-                });
+                subcategory.isOpened = false;
             });
         }
 
@@ -51,27 +61,30 @@ export default function Filter() {
         subcategoryIndex: number,
         categoryIndex: number
     ) {
+        let subcategorySelectedFlag;
+
         event.preventDefault();
 
         // create copy of object and then mutate it and set state
         const categoriesCopy = createCategoriesCopy();
 
-        // flip current flag
-        categoriesCopy[categoryIndex].subcategories[subcategoryIndex].isActive =
-            !categoriesCopy[categoryIndex].subcategories[subcategoryIndex]
-                .isActive;
+        // first save current subcategory flag
+        subcategorySelectedFlag =
+            categoriesCopy[categoryIndex].subcategories[subcategoryIndex]
+                .isSelected;
 
-        // if flag is cleared, then clear submenus flags
-        if (
+        // clear all categories, subcategories and submenus selected flags because
+        // only one link can be selected at the same time
+        clearAllSelectedFlags(categoriesCopy);
+
+        // flip current flags
+        categoriesCopy[categoryIndex].subcategories[subcategoryIndex].isOpened =
             !categoriesCopy[categoryIndex].subcategories[subcategoryIndex]
-                .isActive
-        ) {
-            categoriesCopy[categoryIndex].subcategories[
-                subcategoryIndex
-            ].submenu.forEach(submenu => {
-                submenu.isActive = false;
-            });
-        }
+                .isOpened;
+
+        categoriesCopy[categoryIndex].subcategories[
+            subcategoryIndex
+        ].isSelected = !subcategorySelectedFlag;
 
         // dispatch categories to the store
         dispatch(setCategories(categoriesCopy));
@@ -83,31 +96,42 @@ export default function Filter() {
         subcategoryIndex: number,
         categoryIndex: number
     ) {
+        let submenuSelectedFlag;
+
         event.preventDefault();
 
         // create copy of object and then mutate it and set state
         const categoriesCopy = createCategoriesCopy();
 
-        // clear all existing submenu flags before setting current,
-        // because just 1 flag can be set at the same time
-        clearAllSubmenusFlags(categoriesCopy);
+        // first save current submenu flag
+        submenuSelectedFlag =
+            categoriesCopy[categoryIndex].subcategories[subcategoryIndex]
+                .submenu[submenuIndex].isSelected;
+
+        // clear all categories, subcategories and submenus selected flags because
+        // only one link can be selected at the same time
+        clearAllSelectedFlags(categoriesCopy);
 
         // flip current flag
         categoriesCopy[categoryIndex].subcategories[subcategoryIndex].submenu[
             submenuIndex
-        ].isActive =
-            !categoriesCopy[categoryIndex].subcategories[subcategoryIndex]
-                .submenu[submenuIndex].isActive;
+        ].isSelected = !submenuSelectedFlag;
 
         // dispatch categories to the store
         dispatch(setCategories(categoriesCopy));
     }
 
-    function clearAllSubmenusFlags(categories: CategoryState) {
+    // clear all categories, subcategories and submenus selected flags because
+    // only one link can be selected at the same time
+    function clearAllSelectedFlags(categories: CategoryState) {
         categories.forEach(category => {
+            category.isSelected = false;
+
             category.subcategories.forEach(subcategory => {
+                subcategory.isSelected = false;
+
                 subcategory.submenu.forEach(submenu => {
-                    submenu.isActive = false;
+                    submenu.isSelected = false;
                 });
             });
         });
@@ -136,12 +160,13 @@ export default function Filter() {
                     submenusArray.push(submenuObject);
                 }
 
-                const { name, numberOfProducts, path, isActive } =
+                const { name, numberOfProducts, path, isSelected, isOpened } =
                     subcategories[j];
 
                 // 2) after submenus are created, then create all subcategories
                 subcategoriesArray.push({
-                    isActive,
+                    isSelected,
+                    isOpened,
                     name,
                     numberOfProducts,
                     path,
@@ -149,11 +174,13 @@ export default function Filter() {
                 });
             }
 
-            const { isActive, kind, numberOfProducts, path } = categories[i];
+            const { isSelected, isOpened, kind, numberOfProducts, path } =
+                categories[i];
 
             // 3) when subcategories are created, then create all categories
             categoriesArray.push({
-                isActive,
+                isSelected,
+                isOpened,
                 kind,
                 numberOfProducts,
                 path,
@@ -162,6 +189,72 @@ export default function Filter() {
         }
 
         return categoriesArray;
+    }
+
+    // dispatch filters values to the store and apply them
+    function applyFilters() {
+        // find clicked menu item and dispatch it to the store
+        const { menuSelectedItemName, menuSelectedItemPath } =
+            findClickedMenuItem();
+
+        dispatch(
+            setCategoriesFilters(menuSelectedItemPath, menuSelectedItemName)
+        );
+    }
+
+    // return path and name of clicked menu item or null if it's not found
+    function findClickedMenuItem() {
+        let menuSelectedItemFound = false;
+        let menuSelectedItemName: string | null = null;
+        let menuSelectedItemPath: string | null = null;
+
+        // find clicked submenu item
+        for (let i = 0; i < categories.length; i++) {
+            if (menuSelectedItemFound) break;
+
+            // when selected menu item is found, save name and path and exit from loops
+            if (categories[i].isSelected) {
+                menuSelectedItemFound = true;
+                menuSelectedItemName = categories[i].kind;
+
+                // path is always at the root of the images folder
+                menuSelectedItemPath = '/images/';
+                break;
+            }
+
+            for (let j = 0; j < categories[i].subcategories.length; j++) {
+                if (menuSelectedItemFound) break;
+
+                // when selected menu item is found, save name and path and exit from loops
+                if (categories[i].subcategories[j].isSelected) {
+                    menuSelectedItemFound = true;
+                    menuSelectedItemName = categories[i].subcategories[j].name;
+                    menuSelectedItemPath = categories[i].path;
+                    break;
+                }
+
+                for (
+                    let k = 0;
+                    k < categories[i].subcategories[j].submenu.length;
+                    k++
+                ) {
+                    // when selected menu item is found, save name and path and exit from loops
+                    if (categories[i].subcategories[j].submenu[k].isSelected) {
+                        menuSelectedItemFound = true;
+                        menuSelectedItemName =
+                            categories[i].subcategories[j].submenu[k].name;
+                        menuSelectedItemPath =
+                            categories[i].subcategories[j].path;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return {
+            menuSelectedItemName,
+            menuSelectedItemPath,
+        };
     }
 
     return (
@@ -176,7 +269,7 @@ export default function Filter() {
                     <p className='filter__pounds'>&pound;75 - &pound;300</p>
                 </div>
             </div>
-            <button className='filter__button'>
+            <button className='filter__button' onClick={applyFilters}>
                 <span className='filter__button-text'>Filter</span>
                 <i className='fa-solid fa-filter filter__icon'></i>
             </button>
@@ -186,7 +279,11 @@ export default function Filter() {
                     <li className='filter__list-item' key={categoryIndex}>
                         <Link
                             to=''
-                            className='filter__link'
+                            className={
+                                category.isSelected
+                                    ? 'filter__link filter__link--active'
+                                    : 'filter__link'
+                            }
                             onClick={event =>
                                 categoryIsClicked(event, categoryIndex)
                             }
@@ -200,7 +297,7 @@ export default function Filter() {
                         </Link>
                         <ul
                             className={
-                                category.isActive
+                                category.isOpened
                                     ? 'filter__submenu filter__submenu--active'
                                     : 'filter__submenu'
                             }
@@ -209,7 +306,7 @@ export default function Filter() {
                                 (subcategory, subcategoryIndex) => (
                                     <li
                                         className={
-                                            subcategory.isActive
+                                            subcategory.isOpened
                                                 ? 'filter__list-item filter__list-item--active'
                                                 : 'filter__list-item'
                                         }
@@ -217,7 +314,11 @@ export default function Filter() {
                                     >
                                         <Link
                                             to=''
-                                            className='filter__link'
+                                            className={
+                                                subcategory.isSelected
+                                                    ? 'filter__link filter__link--active'
+                                                    : 'filter__link'
+                                            }
                                             onClick={event =>
                                                 subcategoryIsClicked(
                                                     event,
@@ -246,7 +347,7 @@ export default function Filter() {
                                                         <Link
                                                             to=''
                                                             className={
-                                                                productKind.isActive
+                                                                productKind.isSelected
                                                                     ? 'filter__link filter__link--active'
                                                                     : 'filter__link'
                                                             }
