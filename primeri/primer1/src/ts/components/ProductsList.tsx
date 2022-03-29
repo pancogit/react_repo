@@ -10,7 +10,6 @@ import {
 import { Products, ProductType } from '../slices/productsSlice';
 
 import {
-    setCurrentPage,
     setNumberOfPages,
     setNumberOfResults,
     ShopPageState,
@@ -62,32 +61,23 @@ export default function ProductsList() {
 
         // use sorted products only if it's not default sorting
         if (sortedProducts !== null && sortingType !== 'DEFAULT') {
-            let productsPerPage = getSortedProductsPerPage(sortedProducts);
+            let productsPerPage = getProductsPerPage(sortedProducts);
             products = createProductsList(productsPerPage);
         }
 
         // filter products using shop page filters
         // search for them only if filters are applied
-        // also dispatch number of filtered results, pages and current page
+        // show first few number of products only on the first page
         if (
             filters.category.name &&
             filters.category.path &&
             filteredProducts !== null
         ) {
-            products = createProductsList(filteredProducts);
+            let productsPerPage = getProductsPerPage(filteredProducts);
+            products = createProductsList(productsPerPage);
         }
 
         return products;
-    }
-
-    // dispatch number of results, number of pages and set current page
-    // to the first page after filters are applied
-    function dispatchFilteredNumberOfResults(numberOfResults: number) {
-        let numberOfPages = getNumberOfPages(numberOfResults);
-
-        dispatch(setNumberOfResults(numberOfResults));
-        dispatch(setNumberOfPages(numberOfPages));
-        dispatch(setCurrentPage(1));
     }
 
     // create list of products
@@ -172,7 +162,9 @@ export default function ProductsList() {
         setSearchResults(foundProducts);
     }, [allProducts, numberOfProductsPerPage, currentPage]);
 
-    function getSortedProductsPerPage(products: Products) {
+    // get products for current page for given products array
+    // it can return up to maximum number of predefined products per page
+    function getProductsPerPage(products: Products) {
         let productsPerPage: Products = [];
         let numberOfProducts = 0;
 
@@ -199,9 +191,38 @@ export default function ProductsList() {
         return productsPerPage;
     }
 
+    // get number of pages for given number of results
+    const getNumberOfPages = useCallback(
+        (numberOfResults: number) => {
+            let numberOfPages = numberOfResults / numberOfProductsPerPage;
+
+            // if it's real number with remainder, then increase number of pages by 1
+            if (numberOfPages % 1) {
+                numberOfPages = numberOfPages - (numberOfPages % 1) + 1;
+            }
+
+            return numberOfPages;
+        },
+        [numberOfProductsPerPage]
+    );
+
+    // update number of results and number of pages of products
+    const updateNumberOfResultsPages = useCallback(
+        (numberOfResults: number | null) => {
+            if (numberOfResults !== null) {
+                let numberOfPages = getNumberOfPages(numberOfResults);
+
+                dispatch(setNumberOfResults(numberOfResults));
+                dispatch(setNumberOfPages(numberOfPages));
+            }
+        },
+        [dispatch, getNumberOfPages]
+    );
+
     // filter products using shop page filters and set results in the local state
     const filterProducts = useCallback(() => {
         let filteredProducts: Products = [];
+        let numberOfProducts: number | null;
 
         allProducts.forEach(categories => {
             // path for category is always at the root of the images folder
@@ -254,7 +275,15 @@ export default function ProductsList() {
 
         // set filtered results in the local state
         setFilteredProducts(filteredProducts);
-    }, [allProducts, filters]);
+
+        // set number of results if products are filtered or not
+        if (filters.category.name !== null && filters.category.path !== null)
+            numberOfProducts = filteredProducts.length;
+        else numberOfProducts = numberOfResults;
+
+        // update number of results and number of pages when products are filtered
+        updateNumberOfResultsPages(numberOfProducts);
+    }, [allProducts, filters, updateNumberOfResultsPages, numberOfResults]);
 
     const sortProductsByType = useCallback(
         (sortingType: SortOptionType, products: Products) => {
@@ -304,18 +333,25 @@ export default function ProductsList() {
         let products: Products;
         let sortedProducts: Products = [];
 
-        // iterate through all categories and subcategories to find products
-        for (let i = 0; i < allProducts.length; i++) {
-            subcategories = allProducts[i].subcategories;
+        // if filters are used, then sort filtered products
+        if (filters.category.name !== null && filters.category.path !== null) {
+            if (filteredProducts !== null) sortedProducts = filteredProducts;
+        }
+        // if filters are not used, then sort all products
+        else {
+            // iterate through all categories and subcategories to find products
+            for (let i = 0; i < allProducts.length; i++) {
+                subcategories = allProducts[i].subcategories;
 
-            for (let j = 0; j < subcategories.length; j++) {
-                submenus = subcategories[j].submenu;
+                for (let j = 0; j < subcategories.length; j++) {
+                    submenus = subcategories[j].submenu;
 
-                for (let k = 0; k < submenus.length; k++) {
-                    products = submenus[k].products;
+                    for (let k = 0; k < submenus.length; k++) {
+                        products = submenus[k].products;
 
-                    for (let l = 0; l < products.length; l++) {
-                        sortedProducts.push(products[l]);
+                        for (let l = 0; l < products.length; l++) {
+                            sortedProducts.push(products[l]);
+                        }
                     }
                 }
             }
@@ -324,7 +360,13 @@ export default function ProductsList() {
         // sort products and set in local state
         sortProductsByType(sortingType, sortedProducts);
         setSortedProducts(sortedProducts);
-    }, [allProducts, sortProductsByType, sortingType]);
+    }, [
+        allProducts,
+        sortProductsByType,
+        sortingType,
+        filteredProducts,
+        filters,
+    ]);
 
     function sortByName(products: Products, direction: SortDirection) {
         let tempProduct: ProductType;
@@ -411,15 +453,6 @@ export default function ProductsList() {
         filterProducts();
     }, [filters, filterProducts]);
 
-    /*
-    // dispatch number of results, pages and current page when
-    // filtered results are changed
-    useEffect(() => {
-        if (filteredProducts)
-            dispatchFilteredNumberOfResults(filteredProducts.length);
-    }, [filteredProducts]);
-    */
-
     function getNumberOfSearchedResults() {
         let numberOfResults = 0;
 
@@ -430,30 +463,18 @@ export default function ProductsList() {
         return numberOfResults;
     }
 
-    // get number of pages for given number of results
-    let getNumberOfPages = useCallback(
-        (numberOfResults: number) => {
-            let numberOfPages = numberOfResults / numberOfProductsPerPage;
-
-            // if it's real number with remainder, then increase number of pages by 1
-            if (numberOfPages % 1) {
-                numberOfPages = numberOfPages - (numberOfPages % 1) + 1;
-            }
-
-            return numberOfPages;
-        },
-        [numberOfProductsPerPage]
-    );
-
     // update number of results and number of pages after component is rendered
     useEffect(() => {
         if (numberOfResults) {
-            let numberOfPages = getNumberOfPages(numberOfResults);
-
-            dispatch(setNumberOfResults(numberOfResults));
-            dispatch(setNumberOfPages(numberOfPages));
+            updateNumberOfResultsPages(numberOfResults);
         }
-    }, [dispatch, numberOfProductsPerPage, numberOfResults, getNumberOfPages]);
+    }, [
+        dispatch,
+        numberOfProductsPerPage,
+        numberOfResults,
+        getNumberOfPages,
+        updateNumberOfResultsPages,
+    ]);
 
     // when page is changed, search for new products for that page
     useEffect(() => {

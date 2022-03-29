@@ -155,6 +155,14 @@ export default function Pagination() {
 
                 {pagesNumbers && showPagesNumbers
                     ? pagesNumbers.map((pageNumber, index) => {
+                          // don't render page if it's out of bounds of existing pages
+                          if (
+                              shopPage.numberOfPages &&
+                              index >= shopPage.numberOfPages
+                          ) {
+                              return null;
+                          }
+
                           let isActiveButton =
                               shopPage.currentPage === pagesNumbers[index];
 
