@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import Cart from '../../components/Cart';
@@ -9,9 +9,14 @@ import Search from '../../components/Search';
 import SelectList, { SortOptionType } from '../../components/SelectList';
 import TagsCloud from '../../components/TagsCloud';
 import TopProducts from '../../components/TopProducts';
-import { closeCategories } from '../../slices/categoriesSlice';
+import {
+    CategoryState,
+    closeCategories,
+    setCategoriesFlags,
+} from '../../slices/categoriesSlice';
 
 import {
+    setCategoriesFilters,
     setCurrentPage,
     setSortingType,
     ShopPageState,
@@ -24,6 +29,12 @@ export default function ShopPage() {
         StoreState,
         ShopPageState
     >(state => state.shopPage);
+
+    const categories = useSelector<StoreState, CategoryState>(
+        state => state.categories
+    );
+
+    const queryStringsCategoriesSet = useRef(false);
 
     const dispatch = useDispatch<DispatchType>();
     const [searchParams, setSearchParams] = useSearchParams();
@@ -109,6 +120,122 @@ export default function ShopPage() {
             }
         }
     }, [dispatch, searchParams, setSearchParams, sortType]);
+
+    // split query strings separated by comma (,)
+    const splitQueryStrings = useCallback((queryStrings: string[]) => {
+        let queryStringsArray: string[] = [];
+
+        queryStrings.forEach(query => {
+            let tokens = query.split(',');
+            queryStringsArray.push(...tokens);
+        });
+
+        return queryStringsArray;
+    }, []);
+
+    // extract categories filter name and path from query strings using
+    // selected category, subcategory or submenu and dispatch it to the store
+    const dispatchCategoriesFilter = useCallback(
+        (
+            selectedCategory: string | null,
+            selectedSubcategory: string | null,
+            selectedSubmenu: string | null
+        ) => {
+            if (selectedCategory || selectedSubcategory || selectedSubmenu) {
+                let selectedMenu: string = '';
+
+                // find which links is selected
+                if (selectedCategory) selectedMenu = selectedCategory;
+                else if (selectedSubcategory)
+                    selectedMenu = selectedSubcategory;
+                else if (selectedSubmenu) selectedMenu = selectedSubmenu;
+
+                let categoriesFilterName = '';
+                let categoriesFilterPath = '/';
+                let splitted = selectedMenu.split('/');
+                let tokens: string[] = [];
+
+                // remove whitespaces from tokens
+                splitted.forEach(split => {
+                    if (split !== '') tokens.push(split);
+                });
+
+                // get categories filter name and path
+                tokens.forEach((token, index) => {
+                    // if it's not last token, then build filter path
+                    if (index < tokens.length - 1) {
+                        categoriesFilterPath += `${token}/`;
+                    }
+
+                    // it's last token, then set filter capitalize name
+                    else {
+                        categoriesFilterName =
+                            token[0].toUpperCase() + token.slice(1);
+                    }
+                });
+
+                // dispatch shop page filters for categories
+                dispatch(
+                    setCategoriesFilters(
+                        categoriesFilterPath,
+                        categoriesFilterName
+                    )
+                );
+
+                return;
+            }
+        },
+        [dispatch]
+    );
+
+    // read category filters from query strings and dispatch it to the store
+    // to update selected and opened flags for store categories slice
+    useEffect(() => {
+        // set query strings for categories only once when page component is
+        // mounted and when categories exist in the store
+        if (categories.length && !queryStringsCategoriesSet.current) {
+            queryStringsCategoriesSet.current = true;
+
+            // read query strings from url
+            let selectedCategory = searchParams.get('selected-categories');
+            let openedCategories = searchParams.getAll('opened-categories');
+            let selectedSubcategory = searchParams.get(
+                'selected-subcategories'
+            );
+            let openedSubcategories = searchParams.getAll(
+                'opened-subcategories'
+            );
+            let selectedSubmenu = searchParams.get('selected-submenus');
+
+            // split query strings from array if they exist
+            let openedCategoriesArray = splitQueryStrings(openedCategories);
+            let openedSubcategoriesArray =
+                splitQueryStrings(openedSubcategories);
+
+            // dispatch selected and opened flags for category filters
+            dispatch(
+                setCategoriesFlags(
+                    selectedCategory,
+                    openedCategoriesArray,
+                    selectedSubcategory,
+                    openedSubcategoriesArray,
+                    selectedSubmenu
+                )
+            );
+
+            dispatchCategoriesFilter(
+                selectedCategory,
+                selectedSubcategory,
+                selectedSubmenu
+            );
+        }
+    }, [
+        categories,
+        splitQueryStrings,
+        dispatch,
+        searchParams,
+        dispatchCategoriesFilter,
+    ]);
 
     function hamburgerMenuClicked() {
         setHamburgerMenuActive(!hamburgerMenuActive);

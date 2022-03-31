@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 import {
     CategoryState,
@@ -13,12 +13,21 @@ import { setCategoriesFilters } from '../slices/shopPageSlice';
 import { DispatchType, StoreState } from '../store/store';
 import Slider from './Slider';
 
+interface SelectedOpenedCategories {
+    selectedCategories: string[];
+    openedCategories: string[];
+    selectedSubcategories: string[];
+    openedSubcategories: string[];
+    selectedSubmenus: string[];
+}
+
 export default function Filter() {
     const categories = useSelector<StoreState, CategoryState>(
         state => state.categories
     );
 
     const dispatch = useDispatch<DispatchType>();
+    const [searchParams, setSearchParams] = useSearchParams();
 
     function categoryIsClicked(
         event: React.MouseEvent<HTMLAnchorElement>,
@@ -200,6 +209,9 @@ export default function Filter() {
         dispatch(
             setCategoriesFilters(menuSelectedItemPath, menuSelectedItemName)
         );
+
+        // set query strings to save state of filters in the url
+        setQueryStringsForFilters();
     }
 
     // return path and name of clicked menu item or null if it's not found
@@ -255,6 +267,119 @@ export default function Filter() {
             menuSelectedItemName,
             menuSelectedItemPath,
         };
+    }
+
+    // when filters are applied, set query strings for filters to remember state in the url
+    function setQueryStringsForFilters() {
+        const categoriesObject: SelectedOpenedCategories = {
+            selectedCategories: [],
+            openedCategories: [],
+            selectedSubcategories: [],
+            openedSubcategories: [],
+            selectedSubmenus: [],
+        };
+
+        // find all selected or opened items
+        findSelectedOpenedCategories(categoriesObject);
+
+        // set query strings for found selected or opened items
+        setQueryStringsForCategories(categoriesObject);
+
+        return 0;
+    }
+
+    // search through all categories, subcategories and submenus and find
+    // selected and opened items and save them to the arrays
+    function findSelectedOpenedCategories(
+        categoriesObject: SelectedOpenedCategories
+    ) {
+        const {
+            selectedCategories,
+            openedCategories,
+            selectedSubcategories,
+            openedSubcategories,
+            selectedSubmenus,
+        } = categoriesObject;
+
+        categories.forEach(category => {
+            if (category.isSelected) selectedCategories.push(category.path);
+            if (category.isOpened) openedCategories.push(category.path);
+
+            category.subcategories.forEach(subcategory => {
+                if (subcategory.isSelected)
+                    selectedSubcategories.push(subcategory.path);
+                if (subcategory.isOpened)
+                    openedSubcategories.push(subcategory.path);
+
+                // for submenu, save path with subcategory path concatenated with
+                // the submenu name with lower case letters
+                subcategory.submenu.forEach(submenu => {
+                    if (submenu.isSelected)
+                        selectedSubmenus.push(
+                            `${subcategory.path}${submenu.name.toLowerCase()}`
+                        );
+                });
+            });
+        });
+    }
+
+    // set query strings for categories, subcategories and submenus
+    // for selected and opened items
+    function setQueryStringsForCategories(
+        categoriesObject: SelectedOpenedCategories
+    ) {
+        const {
+            selectedCategories,
+            openedCategories,
+            selectedSubcategories,
+            openedSubcategories,
+            selectedSubmenus,
+        } = categoriesObject;
+
+        if (selectedCategories.length) {
+            searchParams.set(
+                'selected-categories',
+                selectedCategories.toString()
+            );
+        }
+        // if selected category is empty, remove any existing selected
+        // category from some previous setting
+        else {
+            searchParams.delete('selected-categories');
+        }
+
+        if (openedCategories.length) {
+            searchParams.set('opened-categories', openedCategories.toString());
+        } else {
+            searchParams.delete('opened-categories');
+        }
+
+        if (selectedSubcategories.length) {
+            searchParams.set(
+                'selected-subcategories',
+                selectedSubcategories.toString()
+            );
+        } else {
+            searchParams.delete('selected-subcategories');
+        }
+
+        if (openedSubcategories.length) {
+            searchParams.set(
+                'opened-subcategories',
+                openedSubcategories.toString()
+            );
+        } else {
+            searchParams.delete('opened-subcategories');
+        }
+
+        if (selectedSubmenus.length) {
+            searchParams.set('selected-submenus', selectedSubmenus.toString());
+        } else {
+            searchParams.delete('selected-submenus');
+        }
+
+        // set query strings to the url
+        setSearchParams(searchParams);
     }
 
     return (

@@ -220,6 +220,7 @@ export default function ProductsList() {
     );
 
     // filter products using shop page filters and set results in the local state
+    // also update number of results and number of pages after component is mounted
     const filterProducts = useCallback(() => {
         let filteredProducts: Products = [];
         let numberOfProducts: number | null;
@@ -448,7 +449,7 @@ export default function ProductsList() {
         sortProducts();
     }, [sortingType, sortProducts]);
 
-    // filter products when any filter is changed
+    // filter products when any filter is changed or when component is mounted
     useEffect(() => {
         filterProducts();
     }, [filters, filterProducts]);
@@ -462,19 +463,6 @@ export default function ProductsList() {
 
         return numberOfResults;
     }
-
-    // update number of results and number of pages after component is rendered
-    useEffect(() => {
-        if (numberOfResults) {
-            updateNumberOfResultsPages(numberOfResults);
-        }
-    }, [
-        dispatch,
-        numberOfProductsPerPage,
-        numberOfResults,
-        getNumberOfPages,
-        updateNumberOfResultsPages,
-    ]);
 
     // when page is changed, search for new products for that page
     useEffect(() => {

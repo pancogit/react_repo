@@ -29,6 +29,14 @@ interface Submenu {
     isSelected: boolean;
 }
 
+interface SelectedOpenedFlags {
+    selectedCategory: string | null;
+    openedCategories: string[];
+    selectedSubcategory: string | null;
+    openedSubcategories: string[];
+    selectedSubmenu: string | null;
+}
+
 export type Subcategories = Subcategory[];
 export type Submenus = Submenu[];
 type State = Category[];
@@ -55,21 +63,77 @@ const categoriesSlice = createSlice({
             return action.payload;
         },
 
-        // close all categories, subcategories and submenus by clearing all their flags
-        closeCategories(state) {
-            state.forEach(category => {
-                category.isSelected = false;
-                category.isOpened = false;
+        // update selected and opened flags from given strings arrays
+        setCategoriesFlags: {
+            reducer(state, action: PayloadAction<SelectedOpenedFlags>) {
+                // first clear all flags before setting new flags
+                clearCategoriesFlags(state);
 
-                category.subcategories.forEach(subcategory => {
-                    subcategory.isSelected = false;
-                    subcategory.isOpened = false;
+                state.forEach(category => {
+                    // set selected flag for category
+                    if (action.payload.selectedCategory === category.path) {
+                        category.isSelected = true;
+                    }
 
-                    subcategory.submenu.forEach(submenu => {
-                        submenu.isSelected = false;
+                    // set opened flags for categories
+                    action.payload.openedCategories.forEach(openCategory => {
+                        if (openCategory === category.path)
+                            category.isOpened = true;
+                    });
+
+                    category.subcategories.forEach(subcategory => {
+                        // set selected flag for subcategory
+                        if (
+                            action.payload.selectedSubcategory ===
+                            subcategory.path
+                        ) {
+                            subcategory.isSelected = true;
+                        }
+
+                        // set opened flags for subcategories
+                        action.payload.openedSubcategories.forEach(
+                            openSubcategory => {
+                                if (openSubcategory === subcategory.path)
+                                    subcategory.isOpened = true;
+                            }
+                        );
+
+                        // set selected flag for submenu
+                        subcategory.submenu.forEach(submenu => {
+                            if (
+                                action.payload.selectedSubmenu ===
+                                subcategory.path + submenu.name.toLowerCase()
+                            ) {
+                                submenu.isSelected = true;
+                            }
+                        });
                     });
                 });
-            });
+            },
+
+            // convert string arrays arguments to the payload object with the same fields
+            prepare(
+                selectedCategory: string | null,
+                openedCategories: string[],
+                selectedSubcategory: string | null,
+                openedSubcategories: string[],
+                selectedSubmenu: string | null
+            ) {
+                return {
+                    payload: {
+                        selectedCategory,
+                        openedCategories,
+                        selectedSubcategory,
+                        openedSubcategories,
+                        selectedSubmenu,
+                    },
+                };
+            },
+        },
+
+        // close all categories, subcategories and submenus by clearing all their flags
+        closeCategories(state) {
+            clearCategoriesFlags(state);
         },
     },
 
@@ -100,6 +164,23 @@ const categoriesSlice = createSlice({
     },
 });
 
+function clearCategoriesFlags(state: State) {
+    state.forEach(category => {
+        category.isSelected = false;
+        category.isOpened = false;
+
+        category.subcategories.forEach(subcategory => {
+            subcategory.isSelected = false;
+            subcategory.isOpened = false;
+
+            subcategory.submenu.forEach(submenu => {
+                submenu.isSelected = false;
+            });
+        });
+    });
+}
+
 export const categoriesReducer = categoriesSlice.reducer;
 
-export const { setCategories, closeCategories } = categoriesSlice.actions;
+export const { setCategories, closeCategories, setCategoriesFlags } =
+    categoriesSlice.actions;
