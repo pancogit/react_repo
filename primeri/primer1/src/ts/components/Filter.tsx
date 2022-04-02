@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useSearchParams } from 'react-router-dom';
 
@@ -8,7 +8,10 @@ import {
     Subcategories,
     Submenus,
 } from '../slices/categoriesSlice';
-import { setCategoriesFilters } from '../slices/shopPageSlice';
+import {
+    setCategoriesFilters,
+    setPriceRangeFilters,
+} from '../slices/shopPageSlice';
 
 import { DispatchType, StoreState } from '../store/store';
 import Slider from './Slider';
@@ -28,6 +31,16 @@ export default function Filter() {
 
     const dispatch = useDispatch<DispatchType>();
     const [searchParams, setSearchParams] = useSearchParams();
+
+    // filter pounds prices will be updated via reference by slider and not by state
+    // because it's very rapid change and can cause performance issues
+    // update prices range by ref all the time while it's changing and when filter
+    // is dispatched to the store, then update global state with prices range
+    const filterPoundsRef = useRef<HTMLParagraphElement | null>(null);
+
+    // minimum and maximum price for current left and right sliders
+    const currentMinimumPrice = useRef<number>(0);
+    const currentMaximumPrice = useRef<number>(0);
 
     function categoryIsClicked(
         event: React.MouseEvent<HTMLAnchorElement>,
@@ -206,8 +219,17 @@ export default function Filter() {
         const { menuSelectedItemName, menuSelectedItemPath } =
             findClickedMenuItem();
 
+        // dispatch categories
         dispatch(
             setCategoriesFilters(menuSelectedItemPath, menuSelectedItemName)
+        );
+
+        // dispatch prices range
+        dispatch(
+            setPriceRangeFilters([
+                currentMinimumPrice.current,
+                currentMaximumPrice.current,
+            ])
         );
 
         // set query strings to save state of filters in the url
@@ -284,6 +306,9 @@ export default function Filter() {
 
         // set query strings for found selected or opened items
         setQueryStringsForCategories(categoriesObject);
+
+        // set query strings for minimum and maximum price for filters
+        setQueryStringsForPrices();
 
         return 0;
     }
@@ -382,16 +407,51 @@ export default function Filter() {
         setSearchParams(searchParams);
     }
 
+    // set query strings for minimum and maximum price for filters
+    function setQueryStringsForPrices() {
+        searchParams.set(
+            'prices',
+            `${currentMinimumPrice.current},${currentMaximumPrice.current}`
+        );
+
+        // set query string to the url
+        setSearchParams(searchParams);
+    }
+
+    // when minimum and maximum prices are set in slider, then update filter pounds on page
+    // by updating the reference of dom element
+    // it's done by ref because of very rapid change, to not render filter component all the time
+    // filter component will update global store with state only when filter button is pressed
+    function updateFilterPoundsPrices(
+        minimumPrice: number,
+        maximumPrice: number
+    ) {
+        // save minimum and maximum price in local refs
+        currentMinimumPrice.current = minimumPrice;
+        currentMaximumPrice.current = maximumPrice;
+
+        // update prices on page via refs
+        if (filterPoundsRef.current) {
+            filterPoundsRef.current.innerHTML = `&pound;${currentMinimumPrice.current} - &pound;${currentMaximumPrice.current}`;
+        }
+    }
+
     return (
         <div className='filter'>
             <h3 className='filter__heading shop-page__aside-heading'>
                 Filter by Price
             </h3>
             <div className='filter__slider'>
-                <Slider />
+                <Slider
+                    minimumPrice={0}
+                    maximumPrice={1000}
+                    updateFilterPoundsPrices={updateFilterPoundsPrices}
+                />
                 <div className='filter__price-wrapper'>
                     <p className='filter__price'>Price:</p>
-                    <p className='filter__pounds'>&pound;75 - &pound;300</p>
+                    <p className='filter__pounds' ref={filterPoundsRef}>
+                        &pound;75 - &pound;300
+                    </p>
                 </div>
             </div>
             <button className='filter__button' onClick={applyFilters}>

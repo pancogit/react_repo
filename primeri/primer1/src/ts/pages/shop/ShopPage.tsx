@@ -18,6 +18,7 @@ import {
 import {
     setCategoriesFilters,
     setCurrentPage,
+    setPriceRangeFilters,
     setSortingType,
     ShopPageState,
 } from '../../slices/shopPageSlice';
@@ -34,7 +35,10 @@ export default function ShopPage() {
         state => state.categories
     );
 
+    // query strings for categories / prices must be set only once during page reload
+    // or when it's returned back from another page to the shop page
     const queryStringsCategoriesSet = useRef(false);
+    const queryStringsPricesSet = useRef(false);
 
     const dispatch = useDispatch<DispatchType>();
     const [searchParams, setSearchParams] = useSearchParams();
@@ -236,6 +240,40 @@ export default function ShopPage() {
         searchParams,
         dispatchCategoriesFilter,
     ]);
+
+    // read prices filters from query strings and dispatch it to the store
+    // when shop page is reloaded or returned back to the shop page from another page
+    useEffect(() => {
+        const pricesFilter = searchParams.get('prices');
+
+        if (pricesFilter && !queryStringsPricesSet.current) {
+            let tokens = pricesFilter.split(',');
+            let removePricesFromUrl = false;
+
+            queryStringsPricesSet.current = true;
+
+            // if there are two price values, then see if they are
+            // numbers and dispatch it to the global store,
+            // otherwise remove it from query string
+            if (tokens.length === 2) {
+                let minimumPrice = Number(tokens[0]);
+                let maximumPrice = Number(tokens[1]);
+
+                if (!isNaN(minimumPrice) && !isNaN(maximumPrice)) {
+                    dispatch(
+                        setPriceRangeFilters([minimumPrice, maximumPrice])
+                    );
+                } else removePricesFromUrl = true;
+            }
+            // there are no two prices, remove it from query string
+            else removePricesFromUrl = true;
+
+            if (removePricesFromUrl) {
+                searchParams.delete('prices');
+                setSearchParams(searchParams);
+            }
+        }
+    }, [dispatch, searchParams, setSearchParams]);
 
     function hamburgerMenuClicked() {
         setHamburgerMenuActive(!hamburgerMenuActive);

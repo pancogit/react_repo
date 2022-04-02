@@ -9,7 +9,14 @@ interface ButtonsClasses {
 
 type SliderTrackSize = 'LeftSliderTrackSide' | 'RightSliderTrackSide';
 
-export default function Slider() {
+interface Props {
+    minimumPrice: number;
+    maximumPrice: number;
+
+    updateFilterPoundsPrices(minimumPrice: number, maximumPrice: number): void;
+}
+
+export default function Slider(props: Props) {
     // detect if left or right button is dragged or not
     const [leftButtonDragged, setLeftButtonDragged] = useState(false);
     const [rightButtonDragged, setRightButtonDragged] = useState(false);
@@ -38,6 +45,10 @@ export default function Slider() {
     const currentSliderLeftCoordinate = useRef<number>(50);
     const currentSliderRightCoordinate = useRef<number>(155);
     const slidersCoordinatesMinimumDifference = useRef<number>(20);
+
+    // minimum and maximum price for current left and right sliders
+    const currentMinimumPrice = useRef<number>(props.minimumPrice);
+    const currentMaximumPrice = useRef<number>(props.maximumPrice);
 
     const {
         leftButtonTopClass,
@@ -161,6 +172,9 @@ export default function Slider() {
                 buttonBottom,
                 sliderRangeBorderWidth
             );
+
+            // set minimum and maximum price for given left / right sliders positions
+            setPrices();
         }
     }
 
@@ -445,6 +459,45 @@ export default function Slider() {
 
             // save right slider coordinate in local reference
             currentSliderRightCoordinate.current = newSliderCoordinate;
+        }
+    }
+
+    // set minimum and maximum price for given left / right sliders positions
+    function setPrices() {
+        if (sliderRange.current) {
+            let minimumSliderWidth = currentSliderLeftCoordinate.current;
+            let maximumSliderWidth = currentSliderRightCoordinate.current;
+            let { sliderRangeWidth } = getSliderRangeBorderWidth();
+
+            // find percentage of width for minimum / maximum slider width
+            let minimumSliderPercentage =
+                (100 * minimumSliderWidth) / sliderRangeWidth;
+            let maximumSliderPercentage =
+                (100 * maximumSliderWidth) / sliderRangeWidth;
+
+            // don't underflow / overflow percentages values by pixels inconsistency
+            if (minimumSliderPercentage < 0) minimumSliderPercentage = 0;
+            if (maximumSliderPercentage > 100) maximumSliderPercentage = 100;
+
+            // convert minimum / maximum width percentage to the minimum / maximum price
+            let priceDifference = props.maximumPrice - props.minimumPrice;
+
+            currentMinimumPrice.current = Math.round(
+                props.minimumPrice +
+                    (minimumSliderPercentage * priceDifference) / 100
+            );
+
+            currentMaximumPrice.current = Math.round(
+                props.minimumPrice +
+                    (maximumSliderPercentage * priceDifference) / 100
+            );
+
+            // update minimum and maximum prices on page using refs
+            // it will skip rendering filter component all the time and skip performance issues
+            props.updateFilterPoundsPrices(
+                currentMinimumPrice.current,
+                currentMaximumPrice.current
+            );
         }
     }
 
