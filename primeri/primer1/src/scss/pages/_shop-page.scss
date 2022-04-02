@@ -16,6 +16,7 @@
         @media screen and (max-width: variables.$shop_page_aside_medium_screen) {
             position: absolute;
             padding: variables.$shop_page_aside_padding_medium;
+            padding-left: variables.$shop_page_aside_padding_left_medium;
             width: variables.$shop_page_aside_width_medium;
             background-color: colors.$shop_page_aside_background_color_medium;
             z-index: variables.$shop_page_aside_z_index_medium;

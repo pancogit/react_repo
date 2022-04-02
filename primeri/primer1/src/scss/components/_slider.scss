@@ -5,6 +5,8 @@
 @use 'sass:math';
 
 .slider {
+    position: relative;
+
     &__buttons {
         height: variables.$slider_buttons_height;
 
@@ -22,6 +24,7 @@
         border-radius: variables.$slider_button_border_radius;
         background-color: colors.$slider_button_background_color;
         cursor: pointer;
+        outline: none;
 
         position: absolute;
 
@@ -152,5 +155,13 @@
         &--right {
             right: variables.$slider_track_right;
         }
+    }
+
+    &__area {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: variables.$slider_area_top;
+        bottom: variables.$slider_area_top;
     }
 }
