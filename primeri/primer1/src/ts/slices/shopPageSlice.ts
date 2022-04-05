@@ -12,7 +12,7 @@ interface State {
 
 interface FiltersType {
     category: CategoryFilter;
-    priceRange: PriceRangeFilter;
+    priceRange: PriceRangeObject;
 }
 
 interface CategoryFilter {
@@ -20,12 +20,27 @@ interface CategoryFilter {
     name: string | null;
 }
 
-type PriceRangeFilter = [number, number];
+interface PriceRangeObject {
+    prices: PriceRangeFilter | null;
+    minMaxPrices: PriceRangeFilter;
+    defaultPrices: PriceRangeFilter;
+    slidersCoordinatesMinimumDifference: number;
+}
+
+export type PriceRangeFilter = [number, number];
 
 const initialState: State = {
     numberOfProductsPerPage: 12,
     sortingType: 'DEFAULT',
-    filters: { category: { name: null, path: null }, priceRange: [75, 300] },
+    filters: {
+        category: { name: null, path: null },
+        priceRange: {
+            prices: null,
+            minMaxPrices: [0, 1000],
+            defaultPrices: [75, 300],
+            slidersCoordinatesMinimumDifference: 20,
+        },
+    },
 };
 
 export type { State as ShopPageState };
@@ -64,7 +79,7 @@ const shopPageSlice = createSlice({
         },
 
         setPriceRangeFilters(state, action: PayloadAction<PriceRangeFilter>) {
-            state.filters.priceRange = action.payload;
+            state.filters.priceRange.prices = action.payload;
         },
     },
 });

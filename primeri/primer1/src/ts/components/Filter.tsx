@@ -9,6 +9,7 @@ import {
     Submenus,
 } from '../slices/categoriesSlice';
 import {
+    PriceRangeFilter,
     setCategoriesFilters,
     setPriceRangeFilters,
 } from '../slices/shopPageSlice';
@@ -41,6 +42,16 @@ export default function Filter() {
     // minimum and maximum price for current left and right sliders
     const currentMinimumPrice = useRef<number>(0);
     const currentMaximumPrice = useRef<number>(0);
+
+    // minimum and maximum predefined price for sliders
+    const minMaxDefinedPrice = useSelector<StoreState, PriceRangeFilter>(
+        state => state.shopPage.filters.priceRange.minMaxPrices
+    );
+
+    // default prices for sliders
+    const defaultPrices = useSelector<StoreState, PriceRangeFilter>(
+        state => state.shopPage.filters.priceRange.defaultPrices
+    );
 
     function categoryIsClicked(
         event: React.MouseEvent<HTMLAnchorElement>,
@@ -443,14 +454,14 @@ export default function Filter() {
             </h3>
             <div className='filter__slider'>
                 <Slider
-                    minimumPrice={0}
-                    maximumPrice={1000}
+                    minimumPrice={minMaxDefinedPrice[0]}
+                    maximumPrice={minMaxDefinedPrice[1]}
                     updateFilterPoundsPrices={updateFilterPoundsPrices}
                 />
                 <div className='filter__price-wrapper'>
                     <p className='filter__price'>Price:</p>
                     <p className='filter__pounds' ref={filterPoundsRef}>
-                        &pound;75 - &pound;300
+                        &pound;{defaultPrices[0]} - &pound;{defaultPrices[1]}
                     </p>
                 </div>
             </div>

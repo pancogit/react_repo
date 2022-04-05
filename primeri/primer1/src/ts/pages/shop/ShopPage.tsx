@@ -16,6 +16,7 @@ import {
 } from '../../slices/categoriesSlice';
 
 import {
+    PriceRangeFilter,
     setCategoriesFilters,
     setCurrentPage,
     setPriceRangeFilters,
@@ -50,6 +51,18 @@ export default function ShopPage() {
 
     // last type of sorting read from query string
     const [sortType, setSortType] = useState<SortOptionType | null>(null);
+
+    // minimum and maximum predefined price for sliders
+    const minMaxDefinedPrices = useSelector<StoreState, PriceRangeFilter>(
+        state => state.shopPage.filters.priceRange.minMaxPrices
+    );
+
+    // minimum predefined difference between left and right slider
+    const slidersCoordinatesMinimumDifference = useSelector<StoreState, number>(
+        state =>
+            state.shopPage.filters.priceRange
+                .slidersCoordinatesMinimumDifference
+    );
 
     let showingResults =
         numberOfPages &&
@@ -252,14 +265,22 @@ export default function ShopPage() {
 
             queryStringsPricesSet.current = true;
 
-            // if there are two price values, then see if they are
-            // numbers and dispatch it to the global store,
+            // if there are two price values, then see if they are numbers and in scope
+            // of predefined prices and dispatch it to the global store,
             // otherwise remove it from query string
             if (tokens.length === 2) {
                 let minimumPrice = Number(tokens[0]);
                 let maximumPrice = Number(tokens[1]);
+                let pricesDifference = maximumPrice - minimumPrice;
 
-                if (!isNaN(minimumPrice) && !isNaN(maximumPrice)) {
+                if (
+                    !isNaN(minimumPrice) &&
+                    !isNaN(maximumPrice) &&
+                    minimumPrice >= minMaxDefinedPrices[0] &&
+                    maximumPrice >= minMaxDefinedPrices[0] &&
+                    maximumPrice <= minMaxDefinedPrices[1] &&
+                    pricesDifference >= slidersCoordinatesMinimumDifference
+                ) {
                     dispatch(
                         setPriceRangeFilters([minimumPrice, maximumPrice])
                     );
@@ -273,7 +294,13 @@ export default function ShopPage() {
                 setSearchParams(searchParams);
             }
         }
-    }, [dispatch, searchParams, setSearchParams]);
+    }, [
+        dispatch,
+        searchParams,
+        setSearchParams,
+        minMaxDefinedPrices,
+        slidersCoordinatesMinimumDifference,
+    ]);
 
     function hamburgerMenuClicked() {
         setHamburgerMenuActive(!hamburgerMenuActive);
