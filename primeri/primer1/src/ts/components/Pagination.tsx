@@ -145,6 +145,9 @@ export default function Pagination() {
         lastPage,
     ]);
 
+    // don't render pagination if there are no results
+    if (!shopPage.numberOfResults) return null;
+
     return (
         <div className='pagination'>
             <div className='pagination__border'></div>

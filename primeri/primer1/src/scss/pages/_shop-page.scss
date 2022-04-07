@@ -164,4 +164,12 @@
             display: block;
         }
     }
+
+    &__message {
+        margin-top: variables.$shop_page_message_margin_top;
+        text-align: center;
+        font-size: variables.$shop_page_message_font_size;
+        font-style: italic;
+        color: colors.$shop_page_message_color;
+    }
 }

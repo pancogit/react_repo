@@ -184,10 +184,17 @@ export default function ShopPage() {
                         categoriesFilterPath += `${token}/`;
                     }
 
-                    // it's last token, then set filter capitalize name
+                    // it's last token, then set filter capitalize name for each word
                     else {
-                        categoriesFilterName =
-                            token[0].toUpperCase() + token.slice(1);
+                        // split words with whitespaces and capitalize each word
+                        token.split(/\s+/).forEach((word, index, array) => {
+                            categoriesFilterName +=
+                                word[0].toUpperCase() + word.slice(1);
+
+                            // if it's not last word, then add one whitespace to separate words
+                            if (index !== array.length - 1)
+                                categoriesFilterName += ' ';
+                        });
                     }
                 });
 

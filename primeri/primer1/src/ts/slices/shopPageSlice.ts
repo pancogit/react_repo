@@ -36,8 +36,8 @@ const initialState: State = {
         category: { name: null, path: null },
         priceRange: {
             prices: null,
-            minMaxPrices: [0, 1000],
-            defaultPrices: [75, 300],
+            minMaxPrices: [0, 300],
+            defaultPrices: [0, 150],
             slidersCoordinatesMinimumDifference: 20,
         },
     },

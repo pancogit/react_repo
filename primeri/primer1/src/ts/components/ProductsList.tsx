@@ -10,13 +10,14 @@ import {
 import { Products, ProductType } from '../slices/productsSlice';
 
 import {
+    PriceRangeFilter,
     setNumberOfPages,
     setNumberOfResults,
     ShopPageState,
 } from '../slices/shopPageSlice';
 
 import { DispatchType, StoreState } from '../store/store';
-import Product from './Product';
+import Product, { Price } from './Product';
 import { SortOptionType } from './SelectList';
 
 type SortDirection = 'ASCENDING' | 'DESCENDING';
@@ -26,10 +27,17 @@ export default function ProductsList() {
         state => state.products
     );
 
-    const { numberOfProductsPerPage, currentPage, filters } = useSelector<
-        StoreState,
-        ShopPageState
-    >(state => state.shopPage);
+    const {
+        numberOfProductsPerPage,
+        currentPage,
+        filters,
+        numberOfResults: numberOfAllResults,
+    } = useSelector<StoreState, ShopPageState>(state => state.shopPage);
+
+    // filter for product prices
+    const pricesFilter = useSelector<StoreState, PriceRangeFilter | null>(
+        state => state.shopPage.filters.priceRange.prices
+    );
 
     // how to sort products
     const sortingType = useSelector<StoreState, SortOptionType>(
@@ -48,6 +56,44 @@ export default function ProductsList() {
     const [searchResults, setSearchResults] = useState<Products>([]);
     const dispatch = useDispatch<DispatchType>();
 
+    // for given price, apply price filter and return true if it's passed or false if it's not
+    // see if given price is between minimum and maximum price filter value
+    const tryPriceFilter = useCallback(
+        (price: Price) => {
+            if (pricesFilter) {
+                // it's single price
+                if (typeof price.new === 'number') {
+                    if (
+                        price.new >= pricesFilter[0] &&
+                        price.new <= pricesFilter[1]
+                    ) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+                // then there are two prices, both values must be good
+                else {
+                    if (
+                        price.new[0] >= pricesFilter[0] &&
+                        price.new[0] <= pricesFilter[1] &&
+                        price.new[1] >= pricesFilter[0] &&
+                        price.new[1] <= pricesFilter[1]
+                    ) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+            // price filter is not set
+            else {
+                return true;
+            }
+        },
+        [pricesFilter]
+    );
+
     let numberOfResults: number | null = null;
     const productsList = getProductsElements();
 
@@ -65,13 +111,15 @@ export default function ProductsList() {
             products = createProductsList(productsPerPage);
         }
 
-        // filter products using shop page filters
+        // filter products using shop page filters (either category or price filters)
         // search for them only if filters are applied
         // show first few number of products only on the first page
         if (
-            filters.category.name &&
-            filters.category.path &&
-            filteredProducts !== null
+            filteredProducts !== null &&
+            ((filters.category.name && filters.category.path) ||
+                (filters.priceRange.prices &&
+                    filters.priceRange.prices[0] !== undefined &&
+                    filters.priceRange.prices[1] !== undefined))
         ) {
             let productsPerPage = getProductsPerPage(filteredProducts);
             products = createProductsList(productsPerPage);
@@ -178,11 +226,26 @@ export default function ProductsList() {
         for (let i = 0; i < products.length; i++) {
             if (numberOfProductsToSkip) numberOfProductsToSkip--;
             else {
-                numberOfProducts++;
+                let saveProduct = true;
+
+                // if filter for prices is set, then increment found number
+                // of products only if price filter is passed
+                if (pricesFilter !== null) {
+                    let priceFilterPassed = tryPriceFilter(products[i].price);
+
+                    if (priceFilterPassed) numberOfProducts++;
+
+                    saveProduct = priceFilterPassed;
+                } else {
+                    numberOfProducts++;
+                }
 
                 // save first several products, not all products at once because
                 // pagination is used for more products
-                if (numberOfProducts <= numberOfProductsPerPage) {
+                if (
+                    saveProduct &&
+                    numberOfProducts <= numberOfProductsPerPage
+                ) {
                     productsPerPage.push(products[i]);
                 }
             }
@@ -224,48 +287,78 @@ export default function ProductsList() {
     const filterProducts = useCallback(() => {
         let filteredProducts: Products = [];
         let numberOfProducts: number | null;
+        let priceFilterPassed = false;
+
+        // if categories filters are not set, then look for prices filters and if they
+        // are used then search for all products because just prices filters are set
+        // and no one category menu item is selected
+        let searchAllProducts =
+            !(filters.category.name && filters.category.path) &&
+            filters.priceRange.prices &&
+            filters.priceRange.prices[0] !== undefined &&
+            filters.priceRange.prices[1] !== undefined;
 
         allProducts.forEach(categories => {
             // path for category is always at the root of the images folder
+            // look for category filters or if they are not set then look for prices filters
             if (
-                filters.category.name &&
-                filters.category.path &&
-                filters.category.name === categories.kind &&
-                filters.category.path === '/images/'
+                (filters.category.name &&
+                    filters.category.path &&
+                    filters.category.name === categories.kind &&
+                    filters.category.path === '/images/') ||
+                searchAllProducts
             ) {
-                // filtered products are found, save them
+                // filtered products are found, save them only if price filter is passed also
                 categories.subcategories.forEach(subcategory => {
                     subcategory.submenu.forEach(submenus => {
                         submenus.products.forEach(product => {
-                            filteredProducts.push(product);
+                            priceFilterPassed = tryPriceFilter(product.price);
+
+                            if (priceFilterPassed)
+                                filteredProducts.push(product);
                         });
                     });
                 });
             } else {
                 categories.subcategories.forEach(subcategories => {
                     if (
-                        filters.category.name &&
-                        filters.category.path &&
-                        filters.category.name === subcategories.name &&
-                        filters.category.path === categories.path
+                        (filters.category.name &&
+                            filters.category.path &&
+                            filters.category.name === subcategories.name &&
+                            filters.category.path === categories.path) ||
+                        searchAllProducts
                     ) {
-                        // filtered products are found, save them
+                        // filtered products are found, save them only if
+                        // price filter is passed also
                         subcategories.submenu.forEach(submenus => {
                             submenus.products.forEach(product => {
-                                filteredProducts.push(product);
+                                priceFilterPassed = tryPriceFilter(
+                                    product.price
+                                );
+
+                                if (priceFilterPassed)
+                                    filteredProducts.push(product);
                             });
                         });
                     } else {
                         subcategories.submenu.forEach(submenus => {
                             if (
-                                filters.category.name &&
-                                filters.category.path &&
-                                filters.category.name === submenus.name &&
-                                filters.category.path === subcategories.path
+                                (filters.category.name &&
+                                    filters.category.path &&
+                                    filters.category.name === submenus.name &&
+                                    filters.category.path ===
+                                        subcategories.path) ||
+                                searchAllProducts
                             ) {
                                 // filtered products are found, save them
+                                // only if price filter is passed also
                                 submenus.products.forEach(product => {
-                                    filteredProducts.push(product);
+                                    priceFilterPassed = tryPriceFilter(
+                                        product.price
+                                    );
+
+                                    if (priceFilterPassed)
+                                        filteredProducts.push(product);
                                 });
                             }
                         });
@@ -278,13 +371,26 @@ export default function ProductsList() {
         setFilteredProducts(filteredProducts);
 
         // set number of results if products are filtered or not
-        if (filters.category.name !== null && filters.category.path !== null)
+        // also see if products exist
+        // if category filters are not applied, then look for price filters
+        if (
+            allProducts.length &&
+            ((filters.category.name !== null &&
+                filters.category.path !== null) ||
+                searchAllProducts)
+        )
             numberOfProducts = filteredProducts.length;
         else numberOfProducts = numberOfResults;
 
         // update number of results and number of pages when products are filtered
         updateNumberOfResultsPages(numberOfProducts);
-    }, [allProducts, filters, updateNumberOfResultsPages, numberOfResults]);
+    }, [
+        allProducts,
+        filters,
+        updateNumberOfResultsPages,
+        numberOfResults,
+        tryPriceFilter,
+    ]);
 
     const sortProductsByType = useCallback(
         (sortingType: SortOptionType, products: Products) => {
@@ -335,7 +441,14 @@ export default function ProductsList() {
         let sortedProducts: Products = [];
 
         // if filters are used, then sort filtered products
-        if (filters.category.name !== null && filters.category.path !== null) {
+        // either category or price filters can be used
+        if (
+            (filters.category.name !== null &&
+                filters.category.path !== null) ||
+            (filters.priceRange.prices &&
+                filters.priceRange.prices[0] !== undefined &&
+                filters.priceRange.prices[1] !== undefined)
+        ) {
             if (filteredProducts !== null) sortedProducts = filteredProducts;
         }
         // if filters are not used, then sort all products
@@ -473,5 +586,13 @@ export default function ProductsList() {
         }
     }, [currentPage, searchProducts]);
 
-    return <div className='shop-page__products'>{productsList}</div>;
+    return (
+        <div className='shop-page__products'>
+            {numberOfAllResults === 0 ? (
+                <div className='shop-page__message'>There are no products</div>
+            ) : (
+                productsList
+            )}
+        </div>
+    );
 }

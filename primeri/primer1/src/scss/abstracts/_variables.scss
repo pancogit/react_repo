@@ -200,7 +200,7 @@ $shop_page_aside_medium_screen: 56rem;
 $shop_page_aside_padding_medium: 1rem;
 $shop_page_aside_padding_left_medium: 1.3rem;
 $shop_page_aside_width_medium: 15rem;
-$shop_page_aside_z_index_medium: 1500;
+$shop_page_aside_z_index_medium: 3500;
 $shop_page_aside_border_width_medium: 0.2rem;
 $shop_page_aside_border_radius: 0.4rem;
 $shop_page_aside_box_shadow_medium: 2px 2px 4px 0px;
@@ -230,6 +230,8 @@ $shop_page_hamburger_top: -1.8rem;
 $shop_page_hamburger_transition: 0.5s;
 $shop_page_filters_flex_medium: 100%;
 $shop_page_filters_margin_bottom_small: 0.7rem;
+$shop_page_message_margin_top: 1rem;
+$shop_page_message_font_size: 1.1rem;
 
 // cart
 $cart_margin_top: 1rem;
