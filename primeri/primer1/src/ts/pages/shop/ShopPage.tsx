@@ -27,10 +27,8 @@ import {
 import { DispatchType, StoreState } from '../../store/store';
 
 export default function ShopPage() {
-    const { numberOfPages, currentPage, numberOfResults } = useSelector<
-        StoreState,
-        ShopPageState
-    >(state => state.shopPage);
+    const { numberOfPages, currentPage, numberOfResults, numberOfTopProducts } =
+        useSelector<StoreState, ShopPageState>(state => state.shopPage);
 
     const categories = useSelector<StoreState, CategoryState>(
         state => state.categories
@@ -381,7 +379,7 @@ export default function ShopPage() {
                 <Search />
                 <Cart />
                 <Filter />
-                <TopProducts />
+                <TopProducts numberOfTopProducts={numberOfTopProducts} />
                 <TagsCloud />
             </aside>
 

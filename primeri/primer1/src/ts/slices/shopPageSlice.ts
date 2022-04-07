@@ -8,6 +8,7 @@ interface State {
     readonly numberOfProductsPerPage: number;
     sortingType: SortOptionType;
     filters: FiltersType;
+    numberOfTopProducts: number;
 }
 
 interface FiltersType {
@@ -41,6 +42,7 @@ const initialState: State = {
             slidersCoordinatesMinimumDifference: 20,
         },
     },
+    numberOfTopProducts: 3,
 };
 
 export type { State as ShopPageState };

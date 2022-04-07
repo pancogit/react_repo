@@ -8,6 +8,8 @@ interface TagCloud {
 
 type State = TagCloud[];
 
+export type { State as TagsCloudState };
+
 interface AsyncData {
     tagsCloud: State;
 }
