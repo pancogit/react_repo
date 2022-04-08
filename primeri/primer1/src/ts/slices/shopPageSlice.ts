@@ -83,6 +83,16 @@ const shopPageSlice = createSlice({
         setPriceRangeFilters(state, action: PayloadAction<PriceRangeFilter>) {
             state.filters.priceRange.prices = action.payload;
         },
+
+        clearAllFilters(state) {
+            // clear categories filters
+            state.filters.category.name = null;
+            state.filters.category.path = null;
+
+            // set prices to default one
+            state.filters.priceRange.prices =
+                state.filters.priceRange.defaultPrices;
+        },
     },
 });
 
@@ -95,4 +105,5 @@ export const {
     setSortingType,
     setCategoriesFilters,
     setPriceRangeFilters,
+    clearAllFilters,
 } = shopPageSlice.actions;

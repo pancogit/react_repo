@@ -1,4 +1,11 @@
-export type Colors = 'Black' | 'White' | 'Red' | 'Blue' | 'Green' | 'Yellow';
+export type Colors =
+    | 'Black'
+    | 'White'
+    | 'Red'
+    | 'Blue'
+    | 'Green'
+    | 'Yellow'
+    | 'Default';
 
 export default function ColorSelect() {
     return (

@@ -25,7 +25,11 @@ interface SelectedOpenedCategories {
     selectedSubmenus: string[];
 }
 
-export default function Filter() {
+interface Props {
+    closeHamburgerMenu(): void;
+}
+
+export default function Filter(props: Props) {
     const categories = useSelector<StoreState, CategoryState>(
         state => state.categories
     );
@@ -245,6 +249,10 @@ export default function Filter() {
 
         // set query strings to save state of filters in the url
         setQueryStringsForFilters();
+
+        // when filter button is clicked also close hamburger menu
+        // if it's opened via mobile
+        props.closeHamburgerMenu();
     }
 
     // return path and name of clicked menu item or null if it's not found

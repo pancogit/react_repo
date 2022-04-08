@@ -16,6 +16,7 @@ import {
 } from '../../slices/categoriesSlice';
 
 import {
+    clearAllFilters,
     PriceRangeFilter,
     setCategoriesFilters,
     setCurrentPage,
@@ -318,9 +319,11 @@ export default function ShopPage() {
     // when shop page is leaved and component unmounted, then clear all categories,
     // subcategories and submenus flags because menu for filters should be cleared
     // when shop page is leaved
+    // also clear all filters when page is leaved
     useEffect(() => {
         return () => {
             dispatch(closeCategories());
+            dispatch(clearAllFilters());
         };
     }, [dispatch]);
 
@@ -378,7 +381,7 @@ export default function ShopPage() {
             <aside className={hamburgerMenuClass} ref={hamburgerAsideRef}>
                 <Search />
                 <Cart />
-                <Filter />
+                <Filter closeHamburgerMenu={closeHamburgerMenu} />
                 <TopProducts numberOfTopProducts={numberOfTopProducts} />
                 <TagsCloud />
             </aside>

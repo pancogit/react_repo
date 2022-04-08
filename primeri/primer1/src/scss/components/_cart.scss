@@ -155,6 +155,16 @@
         align-items: center;
         padding: variables.$cart_total_padding;
     }
+
+    &__empty {
+        padding: variables.$cart_item_padding;
+        border-top-style: solid;
+        border-top-width: variables.$cart_item_border_width;
+        border-top-color: colors.$cart_item_border_color;
+        font-style: italic;
+        font-size: variables.$cart_empty_font_size;
+        text-align: center;
+    }
 }
 
 // small animation for cart icon

@@ -1,6 +1,16 @@
+import { EntityState } from '@reduxjs/toolkit';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { CartProduct, selectAllCartProducts } from '../slices/cartSlice';
+import { StoreState } from '../store/store';
 
 export default function Cart() {
+    const cart = useSelector<StoreState, EntityState<CartProduct>>(
+        state => state.cart
+    );
+
+    const cartProducts = selectAllCartProducts(cart);
+
     return (
         <div className='cart cart--margin'>
             <div className='cart__header'>
@@ -12,62 +22,72 @@ export default function Cart() {
                 </Link>
             </div>
             <div className='cart__items'>
-                <div className='cart__item'>
-                    <div className='cart__image-wrapper'>
-                        <Link
-                            to='/products/mens/shirts/01'
-                            className='cart__item-link'
+                {cartProducts.length ? (
+                    cartProducts.map(singleProduct => (
+                        <div
+                            className='cart__item'
+                            key={singleProduct.product.id}
                         >
-                            <img
-                                src='/images/mens/shirts/01.jpg'
-                                alt='cart product'
-                                className='cart__image'
-                                width={80}
-                                height='auto'
-                            />
-                        </Link>
-                    </div>
-                    <div className='cart__info'>
-                        <Link
-                            to='/products/mens/shirts/01'
-                            className='cart__item-link'
-                        >
-                            <p className='cart__name'>Ninja Silhouette</p>
-                        </Link>
-                        <p className='cart__order'>
-                            <span className='cart__quantity'>2 x</span>
-                            <span className='cart__pounds'>&pound;12.00</span>
-                        </p>
-                    </div>
-                </div>
-                <div className='cart__item'>
-                    <div className='cart__image-wrapper'>
-                        <Link
-                            to='/products/mens/shirts/02'
-                            className='cart__item-link'
-                        >
-                            <img
-                                src='/images/mens/shirts/02.jpg'
-                                alt='cart product'
-                                className='cart__image'
-                                width={80}
-                                height='auto'
-                            />
-                        </Link>
-                    </div>
-                    <div className='cart__info'>
-                        <Link
-                            to='/products/mens/shirts/02'
-                            className='cart__item-link'
-                        >
-                            <p className='cart__name'>Ship Your Idea</p>
-                        </Link>
-                        <p className='cart__order'>
-                            <span className='cart__quantity'>1 x</span>
-                            <span className='cart__pounds'>&pound;12.00</span>
-                        </p>
-                    </div>
-                </div>
+                            <div className='cart__image-wrapper'>
+                                <Link
+                                    to={singleProduct.product.link}
+                                    className='cart__item-link'
+                                >
+                                    <img
+                                        src={singleProduct.product.path}
+                                        alt='cart product'
+                                        className='cart__image'
+                                        width={80}
+                                        height='auto'
+                                    />
+                                </Link>
+                            </div>
+                            <div className='cart__info'>
+                                <Link
+                                    to={singleProduct.product.link}
+                                    className='cart__item-link'
+                                >
+                                    <p className='cart__name'>
+                                        {singleProduct.product.name}
+                                    </p>
+                                </Link>
+                                <p className='cart__order'>
+                                    <span className='cart__quantity'>
+                                        {singleProduct.quantity} x
+                                    </span>
+
+                                    <span className='cart__pounds'>
+                                        {typeof singleProduct.product.price
+                                            .new === 'number' ? (
+                                            <>
+                                                &pound;{' '}
+                                                {
+                                                    singleProduct.product.price
+                                                        .new
+                                                }
+                                            </>
+                                        ) : (
+                                            <>
+                                                &pound;
+                                                {
+                                                    singleProduct.product.price
+                                                        .new[0]
+                                                }{' '}
+                                                - &pound;
+                                                {
+                                                    singleProduct.product.price
+                                                        .new[1]
+                                                }
+                                            </>
+                                        )}
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    ))
+                ) : (
+                    <div className='cart__empty'>Cart is empty</div>
+                )}
             </div>
             <div className='cart__total'>
                 <p className='cart__subtotal'>Subtotal:</p>

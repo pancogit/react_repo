@@ -137,6 +137,7 @@ export default function ProductsList() {
             productsList.push(
                 <Product
                     key={product.id}
+                    id={product.id}
                     sale={product.sale}
                     heading={product.name}
                     price={{
@@ -146,6 +147,7 @@ export default function ProductsList() {
                     image={product.path}
                     link={product.link}
                     numberOfStars={product.starsRated}
+                    product={product}
                 />
             );
         });

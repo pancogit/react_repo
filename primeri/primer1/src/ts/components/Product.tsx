@@ -1,14 +1,25 @@
+import { EntityState } from '@reduxjs/toolkit';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import {
+    addCartProduct,
+    CartProduct,
+    selectByIdCartProduct,
+} from '../slices/cartSlice';
+import { ProductType } from '../slices/productsSlice';
+import { DispatchType, StoreState } from '../store/store';
 import Stars from './Stars';
 
 interface Props {
+    id: string;
     heading: string;
     price: Price;
     sale?: boolean;
     image: string;
-    addedToCart?: boolean;
     link: string;
     numberOfStars: number;
+    product: ProductType;
 }
 
 export interface Price {
@@ -18,14 +29,26 @@ export interface Price {
 
 export default function Product(props: Props) {
     const {
+        id,
         heading,
         price,
         sale = false,
         image,
-        addedToCart = false,
         link,
         numberOfStars,
+        product,
     } = props;
+
+    const [addedToCart, setAddedToCart] = useState(false);
+
+    const cart = useSelector<StoreState, EntityState<CartProduct>>(
+        state => state.cart
+    );
+
+    // find product by id
+    const cartProduct = selectByIdCartProduct(cart, id);
+
+    const dispatch = useDispatch<DispatchType>();
 
     // choose between added to cart button and normal buy button
     const addButton = addedToCart ? (
@@ -38,7 +61,7 @@ export default function Product(props: Props) {
             </button>
         </Link>
     ) : (
-        <button className='product__button'>
+        <button className='product__button' onClick={addProductToCart}>
             <p className='product__price'>
                 {price.old && (
                     <span className='product__old-price'>
@@ -59,6 +82,23 @@ export default function Product(props: Props) {
             <i className='fa-solid fa-cart-plus product__cart'></i>
         </button>
     );
+
+    function addProductToCart() {
+        dispatch(
+            addCartProduct({
+                color: 'Default',
+                size: 'Default',
+                quantity: 1,
+                product,
+            })
+        );
+    }
+
+    // when product is added or removed from the cart, change local state of product
+    useEffect(() => {
+        if (cartProduct) setAddedToCart(true);
+        else setAddedToCart(false);
+    }, [cartProduct]);
 
     return (
         <article className='product'>
