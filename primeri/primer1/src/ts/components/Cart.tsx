@@ -1,15 +1,12 @@
-import { EntityState } from '@reduxjs/toolkit';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { CartProduct, selectAllCartProducts } from '../slices/cartSlice';
+import { CartState, selectAllCartProducts } from '../slices/cartSlice';
 import { StoreState } from '../store/store';
 
 export default function Cart() {
-    const cart = useSelector<StoreState, EntityState<CartProduct>>(
-        state => state.cart
-    );
+    const cart = useSelector<StoreState, CartState>(state => state.cart);
 
-    const cartProducts = selectAllCartProducts(cart);
+    const cartProducts = selectAllCartProducts(cart.cartProductsEntityAdapter);
 
     return (
         <div className='cart cart--margin'>
@@ -55,31 +52,8 @@ export default function Cart() {
                                     <span className='cart__quantity'>
                                         {singleProduct.quantity} x
                                     </span>
-
                                     <span className='cart__pounds'>
-                                        {typeof singleProduct.product.price
-                                            .new === 'number' ? (
-                                            <>
-                                                &pound;{' '}
-                                                {
-                                                    singleProduct.product.price
-                                                        .new
-                                                }
-                                            </>
-                                        ) : (
-                                            <>
-                                                &pound;
-                                                {
-                                                    singleProduct.product.price
-                                                        .new[0]
-                                                }{' '}
-                                                - &pound;
-                                                {
-                                                    singleProduct.product.price
-                                                        .new[1]
-                                                }
-                                            </>
-                                        )}
+                                        &pound; {singleProduct.price}
                                     </span>
                                 </p>
                             </div>
@@ -91,7 +65,7 @@ export default function Cart() {
             </div>
             <div className='cart__total'>
                 <p className='cart__subtotal'>Subtotal:</p>
-                <p className='cart__price'>&pound;36.00</p>
+                <p className='cart__price'>&pound;{cart.totalPrice}</p>
             </div>
             <div className='cart__buttons'>
                 <Link to='/shop-cart' className='cart__buttons-link'>

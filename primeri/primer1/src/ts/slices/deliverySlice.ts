@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getAsyncData } from './asyncData';
 
-interface Delivery {
+export interface Delivery {
     kind: string;
     cost: number;
 }

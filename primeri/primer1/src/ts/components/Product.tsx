@@ -1,10 +1,9 @@
-import { EntityState } from '@reduxjs/toolkit';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
     addCartProduct,
-    CartProduct,
+    CartState,
     selectByIdCartProduct,
 } from '../slices/cartSlice';
 import { ProductType } from '../slices/productsSlice';
@@ -12,13 +11,6 @@ import { DispatchType, StoreState } from '../store/store';
 import Stars from './Stars';
 
 interface Props {
-    id: string;
-    heading: string;
-    price: Price;
-    sale?: boolean;
-    image: string;
-    link: string;
-    numberOfStars: number;
     product: ProductType;
 }
 
@@ -27,26 +19,18 @@ export interface Price {
     new: number | [number, number];
 }
 
-export default function Product(props: Props) {
-    const {
-        id,
-        heading,
-        price,
-        sale = false,
-        image,
-        link,
-        numberOfStars,
-        product,
-    } = props;
+export default function Product({ product }: Props) {
+    const { id, name, price, sale, path, link, starsRated } = product;
 
     const [addedToCart, setAddedToCart] = useState(false);
 
-    const cart = useSelector<StoreState, EntityState<CartProduct>>(
-        state => state.cart
-    );
+    const cart = useSelector<StoreState, CartState>(state => state.cart);
 
     // find product by id
-    const cartProduct = selectByIdCartProduct(cart, id);
+    const cartProduct = selectByIdCartProduct(
+        cart.cartProductsEntityAdapter,
+        id
+    );
 
     const dispatch = useDispatch<DispatchType>();
 
@@ -84,12 +68,20 @@ export default function Product(props: Props) {
     );
 
     function addProductToCart() {
+        let defaultPrice: number;
+
+        // dispatch price as default one when it's added from product component
+        if (typeof product.price.new === 'number')
+            defaultPrice = product.price.new;
+        else defaultPrice = product.price.new[0];
+
         dispatch(
             addCartProduct({
                 color: 'Default',
                 size: 'Default',
                 quantity: 1,
                 product,
+                price: defaultPrice,
             })
         );
     }
@@ -105,7 +97,7 @@ export default function Product(props: Props) {
             <Link to={link} className='product__image-wrapper'>
                 <div
                     className='product__image'
-                    style={{ backgroundImage: `url(${image})`, color: 'white' }}
+                    style={{ backgroundImage: `url(${path})`, color: 'white' }}
                 ></div>
                 {sale && (
                     <img
@@ -118,9 +110,9 @@ export default function Product(props: Props) {
             <div className='product__bottom'>
                 <div className='product__info'>
                     <Link to={link} className='product__heading-wrapper'>
-                        <h4 className='product__heading'>{heading}</h4>
+                        <h4 className='product__heading'>{name}</h4>
                     </Link>
-                    <Stars numberOfStars={numberOfStars} />
+                    <Stars numberOfStars={starsRated} />
                 </div>
                 {addButton}
             </div>

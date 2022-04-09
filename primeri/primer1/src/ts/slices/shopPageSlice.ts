@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SortOptionType } from '../components/SelectList';
+import { Products } from './productsSlice';
 
 interface State {
     numberOfResults?: number;
@@ -9,6 +10,7 @@ interface State {
     sortingType: SortOptionType;
     filters: FiltersType;
     numberOfTopProducts: number;
+    searchedProducts: Products | null;
 }
 
 interface FiltersType {
@@ -43,6 +45,7 @@ const initialState: State = {
         },
     },
     numberOfTopProducts: 3,
+    searchedProducts: null,
 };
 
 export type { State as ShopPageState };
@@ -65,6 +68,10 @@ const shopPageSlice = createSlice({
 
         setSortingType(state, action: PayloadAction<SortOptionType>) {
             state.sortingType = action.payload;
+        },
+
+        clearSortingType(state) {
+            state.sortingType = 'DEFAULT';
         },
 
         setCategoriesFilters: {
@@ -93,6 +100,14 @@ const shopPageSlice = createSlice({
             state.filters.priceRange.prices =
                 state.filters.priceRange.defaultPrices;
         },
+
+        setSearchedProducts(state, action: PayloadAction<Products>) {
+            state.searchedProducts = action.payload;
+        },
+
+        clearSearchedProducts(state) {
+            state.searchedProducts = null;
+        },
     },
 });
 
@@ -103,7 +118,10 @@ export const {
     setNumberOfPages,
     setNumberOfResults,
     setSortingType,
+    clearSortingType,
     setCategoriesFilters,
     setPriceRangeFilters,
     clearAllFilters,
+    setSearchedProducts,
+    clearSearchedProducts,
 } = shopPageSlice.actions;

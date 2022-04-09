@@ -134,22 +134,7 @@ export default function ProductsList() {
 
         // iterate through all search results of products and create products
         products.forEach(product => {
-            productsList.push(
-                <Product
-                    key={product.id}
-                    id={product.id}
-                    sale={product.sale}
-                    heading={product.name}
-                    price={{
-                        old: product.price.old,
-                        new: product.price.new,
-                    }}
-                    image={product.path}
-                    link={product.link}
-                    numberOfStars={product.starsRated}
-                    product={product}
-                />
-            );
+            productsList.push(<Product key={product.id} product={product} />);
         });
 
         return productsList;

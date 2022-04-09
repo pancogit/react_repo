@@ -379,7 +379,7 @@ export default function ShopPage() {
                 ref={hamburgerIconRef}
             ></i>
             <aside className={hamburgerMenuClass} ref={hamburgerAsideRef}>
-                <Search />
+                <Search closeHamburgerMenu={closeHamburgerMenu} />
                 <Cart />
                 <Filter closeHamburgerMenu={closeHamburgerMenu} />
                 <TopProducts numberOfTopProducts={numberOfTopProducts} />

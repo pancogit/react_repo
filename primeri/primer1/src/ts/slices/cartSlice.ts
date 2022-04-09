@@ -1,10 +1,15 @@
 import {
     createEntityAdapter,
     createSlice,
+    EntityState,
     PayloadAction,
 } from '@reduxjs/toolkit';
+
+import { WritableDraft } from 'immer/dist/internal';
+
 import { Colors } from '../components/ColorSelect';
 import { Sizes } from '../components/SizeSelect';
+import { Delivery } from './deliverySlice';
 import { ProductType } from './productsSlice';
 
 export interface CartProduct {
@@ -12,6 +17,7 @@ export interface CartProduct {
     quantity: number;
     color: Colors;
     size: Sizes;
+    price: number;
 }
 
 export interface CartProductChangePayload<Type> {
@@ -19,32 +25,60 @@ export interface CartProductChangePayload<Type> {
     changer: Type;
 }
 
+interface State {
+    cartProductsEntityAdapter: EntityState<CartProduct>;
+    totalPrice: number;
+    delivery?: Delivery;
+}
+
+export type { State as CartState };
+
 // create entity adapter for easy products searching via products IDs
 // create id selector for product id, it will be key to the entity adapter map
 const entityAdapter = createEntityAdapter<CartProduct>({
     selectId: idSelector => idSelector.product.id,
 });
 
-const initialState = entityAdapter.getInitialState();
+const entityAdapterState = entityAdapter.getInitialState();
+
+const initialState: State = {
+    totalPrice: 0,
+    cartProductsEntityAdapter: entityAdapterState,
+};
 
 const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
         addCartProduct(state, action: PayloadAction<CartProduct>) {
-            let productFound = state.entities[action.payload.product.id];
+            let productFound =
+                state.cartProductsEntityAdapter.entities[
+                    action.payload.product.id
+                ];
 
             if (!productFound) {
-                entityAdapter.addOne(state, action.payload);
+                entityAdapter.addOne(
+                    state.cartProductsEntityAdapter,
+                    action.payload
+                );
+
+                updateTotalPrice(state);
             }
         },
 
         removeCartProduct(state, action: PayloadAction<string>) {
-            entityAdapter.removeOne(state, action.payload);
+            entityAdapter.removeOne(
+                state.cartProductsEntityAdapter,
+                action.payload
+            );
+
+            updateTotalPrice(state);
         },
 
         removeAllCartProducts(state) {
-            entityAdapter.removeAll(state);
+            entityAdapter.removeAll(state.cartProductsEntityAdapter);
+
+            updateTotalPrice(state);
         },
 
         // change quantity for given cart product
@@ -54,9 +88,14 @@ const cartSlice = createSlice({
                 action: PayloadAction<CartProductChangePayload<number>>
             ) {
                 const { productId, changer } = action.payload;
-                const productFound = state.entities[productId];
+                const productFound =
+                    state.cartProductsEntityAdapter.entities[productId];
 
-                if (productFound) productFound.quantity = changer;
+                if (productFound) {
+                    productFound.quantity = changer;
+
+                    updateTotalPrice(state);
+                }
             },
 
             // add function for creating payload
@@ -72,9 +111,14 @@ const cartSlice = createSlice({
                 action: PayloadAction<CartProductChangePayload<Colors>>
             ) {
                 const { productId, changer } = action.payload;
-                const productFound = state.entities[productId];
+                const productFound =
+                    state.cartProductsEntityAdapter.entities[productId];
 
-                if (productFound) productFound.color = changer;
+                if (productFound) {
+                    productFound.color = changer;
+
+                    updateTotalPrice(state);
+                }
             },
 
             // add function for creating payload
@@ -90,9 +134,14 @@ const cartSlice = createSlice({
                 action: PayloadAction<CartProductChangePayload<Sizes>>
             ) {
                 const { productId, changer } = action.payload;
-                const productFound = state.entities[productId];
+                const productFound =
+                    state.cartProductsEntityAdapter.entities[productId];
 
-                if (productFound) productFound.size = changer;
+                if (productFound) {
+                    productFound.size = changer;
+
+                    updateTotalPrice(state);
+                }
             },
 
             // add function for creating payload
@@ -108,9 +157,14 @@ const cartSlice = createSlice({
                 action: PayloadAction<CartProductChangePayload<number>>
             ) {
                 const { productId, changer } = action.payload;
-                const productFound = state.entities[productId];
+                const productFound =
+                    state.cartProductsEntityAdapter.entities[productId];
 
-                if (productFound) productFound.product.starsRated = changer;
+                if (productFound) {
+                    productFound.product.starsRated = changer;
+
+                    updateTotalPrice(state);
+                }
             },
 
             // add function for creating payload
@@ -120,6 +174,18 @@ const cartSlice = createSlice({
         },
     },
 });
+
+// when products are added / removed / modified, etc, then update total price for cart products
+function updateTotalPrice(state: WritableDraft<State>) {
+    let totalPrice = 0;
+    const allProducts = selectAllCartProducts(state.cartProductsEntityAdapter);
+
+    allProducts.forEach(product => {
+        totalPrice += product.price * product.quantity;
+    });
+
+    state.totalPrice = totalPrice;
+}
 
 export const cartSliceReducer = cartSlice.reducer;
 
