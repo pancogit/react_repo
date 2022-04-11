@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     PriceRangeFilter,
     setPriceRangeFilters,
+    setSlidersInitialization,
 } from '../slices/shopPageSlice';
 import { DispatchType, StoreState } from '../store/store';
 
@@ -53,6 +54,11 @@ export default function Slider(props: Props) {
     // from the store if exists and apply it to the slider component
     const priceRange = useSelector<StoreState, PriceRangeFilter | null>(
         state => state.shopPage.filters.priceRange.prices
+    );
+
+    // initialize sliders again when flag is set
+    const slidersInitialization = useSelector<StoreState, boolean>(
+        state => state.shopPage.initializeSliders
     );
 
     const [pricesLoaded, setPricesLoaded] = useState(false);
@@ -540,65 +546,130 @@ export default function Slider(props: Props) {
     }, [priceRange, props, pricesLoaded]);
 
     // convert left and right slider coordinates from numbers to the pixels
-    function convertSliderCoordinates() {
-        let minimumPriceNumbers = 0;
-        let maximumPriceNumbers = 0;
-        let minimumPricePixels = 0;
-        let maximumPricePixels = 0;
+    const convertSliderCoordinates = useCallback(
+        (useDefaultValues: boolean = false) => {
+            let minimumPriceNumbers = 0;
+            let maximumPriceNumbers = 0;
+            let minimumPricePixels = 0;
+            let maximumPricePixels = 0;
 
-        // use set price range either from query string or from slider component
-        if (priceRange) {
-            minimumPriceNumbers = priceRange[0];
-            maximumPriceNumbers = priceRange[1];
-        }
+            // use set price range either from query string or from slider component
+            if (priceRange && !useDefaultValues) {
+                minimumPriceNumbers = priceRange[0];
+                maximumPriceNumbers = priceRange[1];
+            }
 
-        // use default values for prices instead
-        else {
-            minimumPriceNumbers = defaultPrices[0];
-            maximumPriceNumbers = defaultPrices[1];
-        }
+            // use default values for prices instead
+            else {
+                minimumPriceNumbers = defaultPrices[0];
+                maximumPriceNumbers = defaultPrices[1];
+            }
 
-        let { sliderRangeWidth, sliderRangeBorderWidth } =
-            getSliderRangeBorderWidth();
+            let { sliderRangeWidth, sliderRangeBorderWidth } =
+                getSliderRangeBorderWidth();
 
-        let priceDifference = props.maximumPrice - props.minimumPrice;
-        let minimumPriceDifference = minimumPriceNumbers - props.minimumPrice;
-        let maximumPriceDifference = maximumPriceNumbers - props.minimumPrice;
+            let priceDifference = props.maximumPrice - props.minimumPrice;
+            let minimumPriceDifference =
+                minimumPriceNumbers - props.minimumPrice;
+            let maximumPriceDifference =
+                maximumPriceNumbers - props.minimumPrice;
 
-        // get percentages for minimum and maximum prices
-        let minimumPricePercentage =
-            (100 * minimumPriceDifference) / priceDifference;
-        let maximumPricePercentage =
-            (100 * maximumPriceDifference) / priceDifference;
+            // get percentages for minimum and maximum prices
+            let minimumPricePercentage =
+                (100 * minimumPriceDifference) / priceDifference;
+            let maximumPricePercentage =
+                (100 * maximumPriceDifference) / priceDifference;
 
-        // convert left and right coordinates from numbers to pixels using
-        // numbers percentages and css width of slider
-        minimumPricePixels = (minimumPricePercentage * sliderRangeWidth) / 100;
-        maximumPricePixels = (maximumPricePercentage * sliderRangeWidth) / 100;
+            // convert left and right coordinates from numbers to pixels using
+            // numbers percentages and css width of slider
+            minimumPricePixels =
+                (minimumPricePercentage * sliderRangeWidth) / 100;
+            maximumPricePixels =
+                (maximumPricePercentage * sliderRangeWidth) / 100;
 
-        // if minimum price is really minimum, then move it a little to the left
-        // for the width of container track left border
-        if (!minimumPricePixels) minimumPricePixels = -sliderRangeBorderWidth;
+            // if minimum price is really minimum, then move it a little to the left
+            // for the width of container track left border
+            if (!minimumPricePixels)
+                minimumPricePixels = -sliderRangeBorderWidth;
 
-        return {
-            minimumPricePixels,
-            maximumPricePixels,
-            minimumPriceNumbers,
-            maximumPriceNumbers,
-        };
-    }
+            return {
+                minimumPricePixels,
+                maximumPricePixels,
+                minimumPriceNumbers,
+                maximumPriceNumbers,
+            };
+        },
+        [defaultPrices, priceRange, props.maximumPrice, props.minimumPrice]
+    );
 
     // initialize slider coodinates (lines, buttons and track) either from
     // query string or by using default slider values from the global store
     useEffect(() => {
         if (!draggingStarted) {
+            initializeSliders();
+        }
+    });
+
+    // initialize left and right coordinates for slider track
+    const initializeTrackCoordinates = useCallback(
+        (minimumPricePixels: number, maximumPricePixels: number) => {
+            if (sliderTrack.current) {
+                sliderTrack.current.style.left = minimumPricePixels + 'px';
+
+                const { sliderRangeWidth } = getSliderRangeBorderWidth();
+
+                // for right coodinate calculate offset from the right edge of the track container
+                sliderTrack.current.style.right =
+                    sliderRangeWidth - maximumPricePixels + 'px';
+            }
+
+            // also initialize left and right sliders coordinate in pixels
+            currentSliderLeftCoordinate.current = minimumPricePixels;
+            currentSliderRightCoordinate.current = maximumPricePixels;
+        },
+        []
+    );
+
+    // set minimum and maximum price for given left / right sliders positions in numbers
+    const setPricesFromNumbers = useCallback(
+        (minimumPriceNumbers: number, maximumPriceNumbers: number) => {
+            // save minimum and maximum price for current left and right sliders in numbers
+            currentMinimumPrice.current = minimumPriceNumbers;
+            currentMaximumPrice.current = maximumPriceNumbers;
+
+            // update prices on page and filter component also
+            props.updateFilterPoundsPrices(
+                minimumPriceNumbers,
+                maximumPriceNumbers
+            );
+
+            // dispatch prices to the global store if they are changed
+            if (
+                priceRange === null ||
+                (priceRange &&
+                    minimumPriceNumbers !== priceRange[0] &&
+                    maximumPriceNumbers !== priceRange[1])
+            ) {
+                dispatch(
+                    setPriceRangeFilters([
+                        minimumPriceNumbers,
+                        maximumPriceNumbers,
+                    ])
+                );
+            }
+        },
+        [dispatch, priceRange, props]
+    );
+
+    const initializeSliders = useCallback(
+        (useDefaultValues: boolean = false) => {
             // get left and right slider coordinates for the slider initialization
             const {
                 minimumPricePixels,
                 maximumPricePixels,
                 minimumPriceNumbers,
                 maximumPriceNumbers,
-            } = convertSliderCoordinates();
+            } = convertSliderCoordinates(useDefaultValues);
 
             // initialize coordinates for left and right sliders
             initializeSlidersCoordinates(
@@ -617,8 +688,13 @@ export default function Slider(props: Props) {
 
             // set minimum and maximum price for given left / right sliders positions in numbers
             setPricesFromNumbers(minimumPriceNumbers, maximumPriceNumbers);
-        }
-    });
+        },
+        [
+            convertSliderCoordinates,
+            initializeTrackCoordinates,
+            setPricesFromNumbers,
+        ]
+    );
 
     // initialize coordinates for left and right sliders
     function initializeSlidersCoordinates(
@@ -657,54 +733,6 @@ export default function Slider(props: Props) {
         }
     }
 
-    // initialize left and right coordinates for slider track
-    function initializeTrackCoordinates(
-        minimumPricePixels: number,
-        maximumPricePixels: number
-    ) {
-        if (sliderTrack.current) {
-            sliderTrack.current.style.left = minimumPricePixels + 'px';
-
-            const { sliderRangeWidth } = getSliderRangeBorderWidth();
-
-            // for right coodinate calculate offset from the right edge of the track container
-            sliderTrack.current.style.right =
-                sliderRangeWidth - maximumPricePixels + 'px';
-        }
-
-        // also initialize left and right sliders coordinate in pixels
-        currentSliderLeftCoordinate.current = minimumPricePixels;
-        currentSliderRightCoordinate.current = maximumPricePixels;
-    }
-
-    // set minimum and maximum price for given left / right sliders positions in numbers
-    function setPricesFromNumbers(
-        minimumPriceNumbers: number,
-        maximumPriceNumbers: number
-    ) {
-        // save minimum and maximum price for current left and right sliders in numbers
-        currentMinimumPrice.current = minimumPriceNumbers;
-        currentMaximumPrice.current = maximumPriceNumbers;
-
-        // update prices on page and filter component also
-        props.updateFilterPoundsPrices(
-            minimumPriceNumbers,
-            maximumPriceNumbers
-        );
-
-        // dispatch prices to the global store if they are changed
-        if (
-            priceRange === null ||
-            (priceRange &&
-                minimumPriceNumbers !== priceRange[0] &&
-                maximumPriceNumbers !== priceRange[1])
-        ) {
-            dispatch(
-                setPriceRangeFilters([minimumPriceNumbers, maximumPriceNumbers])
-            );
-        }
-    }
-
     // detect mouse dragging in some area around buttons
     function buttonDragging(event: React.MouseEvent<HTMLDivElement>) {
         if (leftButtonDragged) {
@@ -739,6 +767,15 @@ export default function Slider(props: Props) {
 
         return () => window.removeEventListener('mouseup', buttonDragEnd);
     }, [leftButtonDragged, rightButtonDragged]);
+
+    // initialize sliders on the page also when flag is set in the global store
+    // that means some other component force sliders initialization (example search component)
+    useEffect(() => {
+        if (slidersInitialization) {
+            initializeSliders(true);
+            dispatch(setSlidersInitialization(false));
+        }
+    }, [slidersInitialization, initializeSliders, dispatch]);
 
     return (
         <div className='slider' onMouseMove={buttonDragging}>

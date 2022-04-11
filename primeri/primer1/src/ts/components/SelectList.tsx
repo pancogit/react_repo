@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
-import { setSortingType } from '../slices/shopPageSlice';
+import {
+    clearSearchedProducts,
+    setCurrentPage,
+    setSortingType,
+} from '../slices/shopPageSlice';
 import { DispatchType, StoreState } from '../store/store';
 
 export type SortOptionType =
@@ -97,6 +101,19 @@ export default function SelectList() {
     function optionIsClicked(optionType: SortOptionType) {
         dispatch(setSortingType(optionType));
         setIsOpen(false);
+
+        const searchResults = searchParams.get('search');
+
+        // if search results exist in query string, then remove search results
+        // and also clear search results from the global store
+        if (searchResults !== null) {
+            searchParams.delete('search');
+            dispatch(clearSearchedProducts());
+        }
+
+        // set current page to the first one and remove query strings for current page
+        searchParams.delete('page');
+        dispatch(setCurrentPage(1));
 
         // set query string for sorting
         searchParams.set('sorting', optionType.toLowerCase());

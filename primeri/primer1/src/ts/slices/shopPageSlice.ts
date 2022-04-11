@@ -11,6 +11,7 @@ interface State {
     filters: FiltersType;
     numberOfTopProducts: number;
     searchedProducts: Products | null;
+    initializeSliders: boolean;
 }
 
 interface FiltersType {
@@ -46,6 +47,7 @@ const initialState: State = {
     },
     numberOfTopProducts: 3,
     searchedProducts: null,
+    initializeSliders: false,
 };
 
 export type { State as ShopPageState };
@@ -108,6 +110,10 @@ const shopPageSlice = createSlice({
         clearSearchedProducts(state) {
             state.searchedProducts = null;
         },
+
+        setSlidersInitialization(state, action: PayloadAction<boolean>) {
+            state.initializeSliders = action.payload;
+        },
     },
 });
 
@@ -124,4 +130,5 @@ export const {
     clearAllFilters,
     setSearchedProducts,
     clearSearchedProducts,
+    setSlidersInitialization,
 } = shopPageSlice.actions;

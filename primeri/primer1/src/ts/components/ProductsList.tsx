@@ -32,6 +32,7 @@ export default function ProductsList() {
         currentPage,
         filters,
         numberOfResults: numberOfAllResults,
+        searchedProducts,
     } = useSelector<StoreState, ShopPageState>(state => state.shopPage);
 
     // filter for product prices
@@ -103,26 +104,34 @@ export default function ProductsList() {
     function getProductsElements() {
         let products: JSX.Element[] = [];
 
-        if (productsLoaded) products = createProductsList(searchResults);
-
-        // use sorted products only if it's not default sorting
-        if (sortedProducts !== null && sortingType !== 'DEFAULT') {
-            let productsPerPage = getProductsPerPage(sortedProducts);
+        // if there are any search results, then don't use any filters
+        if (searchedProducts) {
+            let productsPerPage = getProductsPerPage(searchedProducts);
             products = createProductsList(productsPerPage);
         }
+        // then filters are used without search results
+        else {
+            if (productsLoaded) products = createProductsList(searchResults);
 
-        // filter products using shop page filters (either category or price filters)
-        // search for them only if filters are applied
-        // show first few number of products only on the first page
-        if (
-            filteredProducts !== null &&
-            ((filters.category.name && filters.category.path) ||
-                (filters.priceRange.prices &&
-                    filters.priceRange.prices[0] !== undefined &&
-                    filters.priceRange.prices[1] !== undefined))
-        ) {
-            let productsPerPage = getProductsPerPage(filteredProducts);
-            products = createProductsList(productsPerPage);
+            // use sorted products only if it's not default sorting
+            if (sortedProducts !== null && sortingType !== 'DEFAULT') {
+                let productsPerPage = getProductsPerPage(sortedProducts);
+                products = createProductsList(productsPerPage);
+            }
+
+            // filter products using shop page filters (either category or price filters)
+            // search for them only if filters are applied
+            // show first few number of products only on the first page
+            if (
+                filteredProducts !== null &&
+                ((filters.category.name && filters.category.path) ||
+                    (filters.priceRange.prices &&
+                        filters.priceRange.prices[0] !== undefined &&
+                        filters.priceRange.prices[1] !== undefined))
+            ) {
+                let productsPerPage = getProductsPerPage(filteredProducts);
+                products = createProductsList(productsPerPage);
+            }
         }
 
         return products;
@@ -241,32 +250,20 @@ export default function ProductsList() {
         return productsPerPage;
     }
 
-    // get number of pages for given number of results
-    const getNumberOfPages = useCallback(
-        (numberOfResults: number) => {
-            let numberOfPages = numberOfResults / numberOfProductsPerPage;
-
-            // if it's real number with remainder, then increase number of pages by 1
-            if (numberOfPages % 1) {
-                numberOfPages = numberOfPages - (numberOfPages % 1) + 1;
-            }
-
-            return numberOfPages;
-        },
-        [numberOfProductsPerPage]
-    );
-
     // update number of results and number of pages of products
     const updateNumberOfResultsPages = useCallback(
         (numberOfResults: number | null) => {
             if (numberOfResults !== null) {
-                let numberOfPages = getNumberOfPages(numberOfResults);
+                let numberOfPages = getNumberOfPages(
+                    numberOfResults,
+                    numberOfProductsPerPage
+                );
 
                 dispatch(setNumberOfResults(numberOfResults));
                 dispatch(setNumberOfPages(numberOfPages));
             }
         },
-        [dispatch, getNumberOfPages]
+        [dispatch, numberOfProductsPerPage]
     );
 
     // filter products using shop page filters and set results in the local state
@@ -550,9 +547,11 @@ export default function ProductsList() {
     }, [sortingType, sortProducts]);
 
     // filter products when any filter is changed or when component is mounted
+    // if search results are used, then don't filter anything because filters are not used
+    // search results and filtes are exclusive, only one can be applied at the same time
     useEffect(() => {
-        filterProducts();
-    }, [filters, filterProducts]);
+        if (searchedProducts === null) filterProducts();
+    }, [filters, filterProducts, searchedProducts]);
 
     function getNumberOfSearchedResults() {
         let numberOfResults = 0;
@@ -582,4 +581,19 @@ export default function ProductsList() {
             )}
         </div>
     );
+}
+
+// get number of pages for given number of results and products per page
+export function getNumberOfPages(
+    numberOfResults: number,
+    numberOfProductsPerPage: number
+) {
+    let numberOfPages = numberOfResults / numberOfProductsPerPage;
+
+    // if it's real number with remainder, then increase number of pages by 1
+    if (numberOfPages % 1) {
+        numberOfPages = numberOfPages - (numberOfPages % 1) + 1;
+    }
+
+    return numberOfPages;
 }

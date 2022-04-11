@@ -8,9 +8,12 @@ import {
     Subcategories,
     Submenus,
 } from '../slices/categoriesSlice';
+
 import {
+    clearSearchedProducts,
     PriceRangeFilter,
     setCategoriesFilters,
+    setCurrentPage,
     setPriceRangeFilters,
 } from '../slices/shopPageSlice';
 
@@ -247,12 +250,32 @@ export default function Filter(props: Props) {
             ])
         );
 
+        removeSearchResults();
+        resetCurrentPage();
+
         // set query strings to save state of filters in the url
         setQueryStringsForFilters();
 
         // when filter button is clicked also close hamburger menu
         // if it's opened via mobile
         props.closeHamburgerMenu();
+    }
+
+    // when filters are applied, then search results should be completely removed
+    // from both query string and from global store
+    function removeSearchResults() {
+        searchParams.delete('search');
+        setSearchParams(searchParams);
+
+        dispatch(clearSearchedProducts());
+    }
+
+    // set current page to the first one and remove query strings for current page
+    function resetCurrentPage() {
+        searchParams.delete('page');
+        setSearchParams(searchParams);
+
+        dispatch(setCurrentPage(1));
     }
 
     // return path and name of clicked menu item or null if it's not found

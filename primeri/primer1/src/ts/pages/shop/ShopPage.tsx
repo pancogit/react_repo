@@ -5,10 +5,11 @@ import Cart from '../../components/Cart';
 import Filter from '../../components/Filter';
 import Pagination from '../../components/Pagination';
 import ProductsList from '../../components/ProductsList';
-import Search from '../../components/Search';
+import Search, { searchProductsWithName } from '../../components/Search';
 import SelectList, { SortOptionType } from '../../components/SelectList';
 import TagsCloud from '../../components/TagsCloud';
 import TopProducts from '../../components/TopProducts';
+
 import {
     CategoryState,
     closeCategories,
@@ -17,10 +18,13 @@ import {
 
 import {
     clearAllFilters,
+    clearSearchedProducts,
+    clearSortingType,
     PriceRangeFilter,
     setCategoriesFilters,
     setCurrentPage,
     setPriceRangeFilters,
+    setSearchedProducts,
     setSortingType,
     ShopPageState,
 } from '../../slices/shopPageSlice';
@@ -34,6 +38,13 @@ export default function ShopPage() {
     const categories = useSelector<StoreState, CategoryState>(
         state => state.categories
     );
+
+    const allProducts = useSelector<StoreState, CategoryState>(
+        state => state.products
+    );
+
+    // query string for search results
+    const searchQueryString = useRef<string>('');
 
     // query strings for categories / prices must be set only once during page reload
     // or when it's returned back from another page to the shop page
@@ -319,11 +330,12 @@ export default function ShopPage() {
     // when shop page is leaved and component unmounted, then clear all categories,
     // subcategories and submenus flags because menu for filters should be cleared
     // when shop page is leaved
-    // also clear all filters when page is leaved
+    // also clear all filters and search results when page is leaved
     useEffect(() => {
         return () => {
             dispatch(closeCategories());
             dispatch(clearAllFilters());
+            dispatch(clearSearchedProducts());
         };
     }, [dispatch]);
 
@@ -370,6 +382,47 @@ export default function ShopPage() {
 
         return () => window.removeEventListener('click', windowIsClicked);
     }, []);
+
+    // detect search results in query string when component is mounted and search for products
+    // also remove other filters from query strings and also clear them all
+    // because search results and filters are exclusive, only one can be applied
+    useEffect(() => {
+        const searchResults = searchParams.get('search');
+
+        // remove all query strings for filters if search results are used
+        // also clear all filters from the global store and dispatch search results
+        if (
+            searchResults !== null &&
+            searchResults !== searchQueryString.current &&
+            allProducts.length
+        ) {
+            // remember last query string for search results
+            searchQueryString.current = searchResults;
+
+            searchParams.delete('sorting');
+            searchParams.delete('prices');
+            searchParams.delete('selected-categories');
+            searchParams.delete('opened-categories');
+            searchParams.delete('selected-subcategories');
+            searchParams.delete('opened-subcategories');
+            searchParams.delete('selected-submenus');
+
+            setSearchParams(searchParams);
+
+            dispatch(clearSearchedProducts());
+            dispatch(closeCategories());
+            dispatch(clearAllFilters());
+            dispatch(clearSortingType());
+
+            // search for products and dispatch it to the global store
+            const allSearchedProducts = searchProductsWithName(
+                searchResults,
+                allProducts
+            );
+
+            dispatch(setSearchedProducts(allSearchedProducts));
+        }
+    }, [searchParams, setSearchParams, dispatch, allProducts]);
 
     return (
         <div className='shop-page'>

@@ -1,14 +1,21 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { CategoryState, closeCategories } from '../slices/categoriesSlice';
 import { Products, ProductType } from '../slices/productsSlice';
+
 import {
     clearAllFilters,
     clearSortingType,
+    setNumberOfPages,
+    setNumberOfResults,
     setSearchedProducts,
+    setSlidersInitialization,
+    ShopPageState,
 } from '../slices/shopPageSlice';
+
 import { DispatchType, StoreState } from '../store/store';
+import { getNumberOfPages } from './ProductsList';
 
 interface Props {
     closeHamburgerMenu: () => void;
@@ -23,6 +30,11 @@ export default function Search({ closeHamburgerMenu }: Props) {
     const products = useSelector<StoreState, CategoryState>(
         state => state.products
     );
+
+    const { searchedProducts, numberOfProductsPerPage } = useSelector<
+        StoreState,
+        ShopPageState
+    >(state => state.shopPage);
 
     const dispatch = useDispatch<DispatchType>();
     const [searchParams, setSearchParams] = useSearchParams();
@@ -44,63 +56,22 @@ export default function Search({ closeHamburgerMenu }: Props) {
         if (event.key === 'Enter') searchForProduct();
     }
 
-    const findProducts = useCallback(() => {
-        let productName: string;
-        let searchedName: string;
-        let currentProduct: ProductType;
-        let foundProducts: Products = [];
-
-        // try to find products
-        for (let i = 0; i < products.length; i++) {
-            for (let j = 0; j < products[i].subcategories.length; j++) {
-                for (
-                    let k = 0;
-                    k < products[i].subcategories[j].submenu.length;
-                    k++
-                ) {
-                    for (
-                        let m = 0;
-                        m <
-                        products[i].subcategories[j].submenu[k].products.length;
-                        m++
-                    ) {
-                        currentProduct =
-                            products[i].subcategories[j].submenu[k].products[m];
-
-                        // convert names to the lowercases because case sensitivity
-                        // is not important for names comparing
-                        // also remove trailing whitespaces, it doesn't matter at all
-                        productName = currentProduct.name.toLowerCase().trim();
-
-                        searchedName = inputValue.toLowerCase().trim();
-
-                        // if names are the same or if one name contains another or vice-versa
-                        // then product is found, and save them
-                        if (
-                            productName === searchedName ||
-                            productName.includes(searchedName) ||
-                            searchedName.includes(productName)
-                        ) {
-                            foundProducts.push(currentProduct);
-                        }
-                    }
-                }
-            }
-        }
-
-        return foundProducts;
-    }, [inputValue, products]);
-
     // search through products to find searched product
     useEffect(() => {
         if (searchProduct) {
-            let foundProducts: Products = findProducts();
+            let foundProducts: Products = searchProductsWithName(
+                inputValue,
+                products
+            );
 
             // dispatch found products to the global store and clear all filters from the shop page
             dispatch(setSearchedProducts(foundProducts));
             dispatch(closeCategories());
             dispatch(clearAllFilters());
             dispatch(clearSortingType());
+
+            // reset sliders coordinates
+            dispatch(setSlidersInitialization(true));
 
             // searching for product is finished and clear search input
             setSearchProduct(false);
@@ -115,10 +86,24 @@ export default function Search({ closeHamburgerMenu }: Props) {
         dispatch,
         inputValue,
         products,
-        findProducts,
         searchParams,
         setSearchParams,
     ]);
+
+    // when search results are set, then dispatch number of search results and pages to the global store
+    useEffect(() => {
+        if (searchedProducts !== null) {
+            let numberOfSearchResults = searchedProducts.length;
+
+            const numberOfPages = getNumberOfPages(
+                numberOfSearchResults,
+                numberOfProductsPerPage
+            );
+
+            dispatch(setNumberOfResults(numberOfSearchResults));
+            dispatch(setNumberOfPages(numberOfPages));
+        }
+    }, [searchedProducts, dispatch, numberOfProductsPerPage]);
 
     // remove all query strings for categories, prices, current page and sorting
     function clearQueryStrings() {
@@ -163,4 +148,54 @@ export default function Search({ closeHamburgerMenu }: Props) {
             </label>
         </div>
     );
+}
+
+// search for products with given name
+export function searchProductsWithName(
+    searchValue: string,
+    products: CategoryState
+) {
+    let productName: string;
+    let searchedName: string;
+    let currentProduct: ProductType;
+    let foundProducts: Products = [];
+
+    // try to find products
+    for (let i = 0; i < products.length; i++) {
+        for (let j = 0; j < products[i].subcategories.length; j++) {
+            for (
+                let k = 0;
+                k < products[i].subcategories[j].submenu.length;
+                k++
+            ) {
+                for (
+                    let m = 0;
+                    m < products[i].subcategories[j].submenu[k].products.length;
+                    m++
+                ) {
+                    currentProduct =
+                        products[i].subcategories[j].submenu[k].products[m];
+
+                    // convert names to the lowercases because case sensitivity
+                    // is not important for names comparing
+                    // also remove trailing whitespaces, it doesn't matter at all
+                    productName = currentProduct.name.toLowerCase().trim();
+
+                    searchedName = searchValue.toLowerCase().trim();
+
+                    // if names are the same or if one name contains another or vice-versa
+                    // then product is found, and save them
+                    if (
+                        productName === searchedName ||
+                        productName.includes(searchedName) ||
+                        searchedName.includes(productName)
+                    ) {
+                        foundProducts.push(currentProduct);
+                    }
+                }
+            }
+        }
+    }
+
+    return foundProducts;
 }
