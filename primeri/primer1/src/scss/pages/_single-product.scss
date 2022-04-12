@@ -138,4 +138,33 @@
     &__description {
         margin-top: variables.$single_product_sale_margin_top;
     }
+
+    &__message {
+        font-weight: bold;
+        font-style: italic;
+        font-size: variables.$single_product_message_font_size;
+        text-align: center;
+        color: colors.$single_product_message_color;
+    }
+
+    &__spinner-box {
+        text-align: center;
+    }
+
+    &__spinner {
+        font-size: variables.$single_product_spinner_font_size;
+        color: colors.$single_product_spinner_color;
+
+        // set small animation with spinner rotations
+        animation-name: spinner-animation;
+        animation-duration: variables.$single_product_spinner_animation_duration;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    }
+}
+
+@keyframes spinner-animation {
+    100% {
+        transform: rotate(variables.$single_product_spinner_animation_rotation);
+    }
 }

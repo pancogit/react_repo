@@ -32,7 +32,7 @@ interface SizesObject {
     price: number;
 }
 
-interface CommentsObject {
+export interface CommentsObject {
     numberOfComments: number;
     allComments: AllComments;
 }
@@ -43,7 +43,7 @@ interface SingleComment {
 }
 
 type SizesObjectArray = SizesObject[];
-type AllComments = SingleComment;
+type AllComments = SingleComment[];
 
 export type Products = Product[];
 

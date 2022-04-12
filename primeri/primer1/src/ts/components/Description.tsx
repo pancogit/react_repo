@@ -1,4 +1,11 @@
-export default function Description() {
+import { CommentsObject } from '../slices/productsSlice';
+
+interface Props {
+    description: string;
+    comments: CommentsObject;
+}
+
+export default function Description({ comments, description }: Props) {
     return (
         <div className='description'>
             <div className='description__tabs'>
@@ -7,87 +14,26 @@ export default function Description() {
                     Description
                 </span>
                 <span className='description__tab description__tab--right'>
-                    Discussion (8)
+                    Discussion ({comments.numberOfComments})
                 </span>
                 <span className='description__tab-right'></span>
             </div>
             <div className='description__content'>
                 <h2 className='description__header'>Product Description</h2>
-                <p className='description__text'>
-                    Pellentesque habitant morbi tristique senectus et netus et
-                    malesuada fames ac turpis egestas. Vestibulum tortor quam,
-                    feugiat vitae, ultricies eget, tempor sit amet, ante. Donec
-                    eu libero sit amet quam egestas semper. Aenean ultricies mi
-                    vitae est. Mauris placerat eleifend leo.
-                </p>
+                <p className='description__text'>{description}</p>
             </div>
             <div className='description__content' style={{ display: 'none' }}>
                 <h2 className='description__header'>Product Discussion</h2>
-                <p className='description__comment'>
-                    <span className='description__username'>Laura Dalaloy</span>
-                    <span className='description__comment-text'>
-                        I feel like these days, anything ca be part of luxury
-                        fashion. What I find unfortunate is the lack sometimes
-                        of appreciation for the culture and know how to think.
-                        Because there is no more merit about what we qualify as
-                        luxurious.
-                    </span>
-                </p>
-                <p className='description__comment'>
-                    <span className='description__username'>Laura Dalaloy</span>
-                    <span className='description__comment-text'>
-                        I sound like an old lady lol
-                    </span>
-                </p>
-                <p className='description__comment'>
-                    <span className='description__username'>
-                        Sophie Bernard
-                    </span>
-                    <span className='description__comment-text'>
-                        No I think it's extremely important as there are people
-                        withing this community who still care for culture and
-                        runway while others focus on other sections of the
-                        subculture!
-                    </span>
-                </p>
-                <p className='description__comment'>
-                    <span className='description__username'>Raihan Miah</span>
-                    <span className='description__comment-text'>
-                        What the hell is this political compass
-                    </span>
-                </p>
-                <p className='description__comment'>
-                    <span className='description__username'>
-                        Sophie Bernard
-                    </span>
-                    <span className='description__comment-text'>
-                        The image I posted? It pokes fun and tries to navigate
-                        the groups within streetwear/luxury fashion today. It
-                        was featured on famous magazine a year or two ago.
-                    </span>
-                </p>
-                <p className='description__comment'>
-                    <span className='description__username'>Luka Dawuud</span>
-                    <span className='description__comment-text'>
-                        a good chard indeed
-                    </span>
-                </p>
-                <p className='description__comment'>
-                    <span className='description__username'>
-                        Georgiev Nikola
-                    </span>
-                    <span className='description__comment-text'>
-                        woudn't agree
-                    </span>
-                </p>
-                <p className='description__comment'>
-                    <span className='description__username'>
-                        Wingi Le Coshi
-                    </span>
-                    <span className='description__comment-text'>
-                        What are you talking about??
-                    </span>
-                </p>
+                {comments.allComments.map((comment, index) => (
+                    <p className='description__comment' key={index}>
+                        <span className='description__username'>
+                            {comment.author}
+                        </span>
+                        <span className='description__comment-text'>
+                            {comment.text}
+                        </span>
+                    </p>
+                ))}
             </div>
         </div>
     );

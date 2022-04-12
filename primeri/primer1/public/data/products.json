@@ -281,7 +281,7 @@
                                         "new": 14
                                     },
                                     "sale": true,
-                                    "text": "",
+                                    "text": "In in lacus ac nisi ultrices gravida in a mi. Morbi pharetra dignissim metus non semper. Suspendisse hendrerit tempor ipsum a luctus. Curabitur in lacus vulputate, sollicitudin felis a, interdum justo. Nullam semper mattis lorem, a placerat risus egestas eget. Nulla at nunc ut lectus auctor dignissim bibendum ac ex. Duis a volutpat sapien. Suspendisse euismod a dolor mollis aliquam. Sed sapien dui, tempor finibus vestibulum mollis, eleifend id enim. Vestibulum nibh eros, volutpat ac vestibulum sit amet, maximus sit amet neque. Nullam pretium nibh vitae quam hendrerit, vitae mollis erat pharetra. Phasellus tincidunt mauris ipsum, at dignissim sem rutrum sit amet. In nunc metus, porttitor ut ante vel, posuere aliquet odio.",
                                     "colors": ["Black", "White"],
                                     "sizes": [
                                         { "name": "XS", "price": 14 },
@@ -4533,7 +4533,7 @@
                                         "new": 64
                                     },
                                     "sale": true,
-                                    "text": "",
+                                    "text": "Morbi felis nisl, dignissim eget mi ut, interdum malesuada est. Nullam consequat maximus tortor vel commodo. Vestibulum sed leo ex. Sed venenatis cursus arcu. Sed in rutrum neque, sit amet molestie sem. Suspendisse potenti. Maecenas luctus lacus at iaculis pretium. Quisque imperdiet imperdiet faucibus. Vestibulum eros nisl, venenatis id porttitor nec, rhoncus at enim. Aenean iaculis tellus id ligula pulvinar, non accumsan ex euismod. Sed facilisis nibh quis enim luctus vehicula. Cras eget feugiat enim, et commodo ligula. Etiam dapibus viverra felis eu blandit. Vestibulum in iaculis dui, dictum rhoncus velit. Aenean malesuada nisl vel neque semper mollis. Phasellus vel odio sit amet purus facilisis pretium eget at felis.",
                                     "colors": ["Black", "White"],
                                     "sizes": [
                                         { "name": "36", "price": 64 },
@@ -4632,7 +4632,7 @@
                                         "new": [44, 58]
                                     },
                                     "sale": false,
-                                    "text": "",
+                                    "text": "Sed ac mollis nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus. Phasellus tincidunt augue sit amet bibendum ullamcorper. Vestibulum gravida rutrum ante sit amet vehicula. Praesent faucibus, enim eu cursus rhoncus, magna augue ultrices magna, a placerat quam lacus quis lorem. Donec venenatis leo id tortor ullamcorper, id lobortis ante posuere. Donec eu ornare odio, sed molestie magna. Maecenas nisi eros, interdum id dapibus eget, laoreet at neque. Etiam eget odio ut arcu gravida egestas ac vitae neque. Proin mattis vel tortor ut blandit. Vestibulum posuere ut nulla a hendrerit. Curabitur turpis libero, euismod sit amet orci nec, posuere feugiat elit. Vivamus nec malesuada est, id finibus erat. Mauris a diam id odio iaculis porttitor.",
                                     "colors": [
                                         "Black",
                                         "White",
@@ -6797,7 +6797,7 @@
                                         "new": 35
                                     },
                                     "sale": false,
-                                    "text": "",
+                                    "text": "Integer tincidunt diam vehicula commodo mollis. Duis sit amet leo venenatis, facilisis nisi quis, viverra turpis. Donec congue velit vel eros convallis molestie. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean congue nisi vel nunc aliquam mollis. Duis rutrum, nibh ullamcorper varius condimentum, neque augue rutrum sapien, maximus dictum ipsum ligula ut sapien. Phasellus quis ullamcorper risus. Maecenas at vestibulum ligula, sed commodo est. Integer vel suscipit orci. Quisque placerat commodo ligula, ac egestas urna dapibus sed. Curabitur sed faucibus erat.",
                                     "colors": ["Black", "Blue", "Yellow"],
                                     "sizes": [
                                         { "name": "36''", "price": 35 },
