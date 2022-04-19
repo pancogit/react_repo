@@ -120,6 +120,16 @@
             background-color: colors.$single_product_add_cart_border_color_hover;
             border-color: colors.$single_product_add_cart_border_color_hover;
         }
+
+        &--added {
+            border-color: colors.$single_product_add_cart_added_border_color;
+            background-color: colors.$single_product_add_cart_added_border_color;
+
+            &:hover {
+                border-color: colors.$single_product_add_cart_added_border_color_hover;
+                background-color: colors.$single_product_add_cart_added_border_color_hover;
+            }
+        }
     }
 
     &__sale {
@@ -135,8 +145,8 @@
         }
     }
 
-    &__description {
-        margin-top: variables.$single_product_sale_margin_top;
+    &__description-wrapper {
+        padding-top: variables.$single_product_description_padding_top;
     }
 
     &__message {
@@ -160,6 +170,15 @@
         animation-duration: variables.$single_product_spinner_animation_duration;
         animation-timing-function: linear;
         animation-iteration-count: infinite;
+    }
+
+    &__cart-error-message {
+        margin-top: variables.$single_product_cart_error_message_margin_top;
+        margin-bottom: variables.$single_product_cart_error_message_margin_bottom;
+        font-weight: bold;
+        font-size: variables.$single_product_cart_error_message_font_size;
+        color: colors.$single_product_cart_error_message_color;
+        text-align: center;
     }
 }
 

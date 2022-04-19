@@ -1,14 +1,26 @@
-import { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
-import ColorSelect from '../components/ColorSelect';
-import Description from '../components/Description';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import ColorSelect, { Color } from '../components/ColorSelect';
+import Description, { DescriptionTab } from '../components/Description';
 import Quantity from '../components/Quantity';
 import SizeSelect from '../components/SizeSelect';
 import Stars from '../components/Stars';
 import { CategoryState } from '../slices/categoriesSlice';
-import { StoreState } from '../store/store';
-import { ProductType } from '../slices/productsSlice';
+import { DispatchType, StoreState } from '../store/store';
+import { ProductType, SizesObject } from '../slices/productsSlice';
+import { Price } from '../components/Product';
+
+import {
+    addCartProduct,
+    CartProduct,
+    changeCartPriceQuantity,
+    changeCartProductColor,
+    changeCartProductQuantity,
+    changeCartProductSize,
+} from '../slices/cartSlice';
+
+import { Dictionary } from '@reduxjs/toolkit';
 
 // ':category/:kind/:specific'
 type UrlParams = 'category' | 'kind' | 'specific';
@@ -16,6 +28,7 @@ type UrlParams = 'category' | 'kind' | 'specific';
 export default function SingleProduct() {
     // read url parameters and create product link path
     const params = useParams<UrlParams>();
+
     const productLink = useRef<string>(
         `/products/${params.category}/${params.kind}/${params.specific}`
     );
@@ -24,8 +37,72 @@ export default function SingleProduct() {
         state => state.products
     );
 
+    // current products in shopping cart
+    const cartProducts = useSelector<StoreState, Dictionary<CartProduct>>(
+        state => state.cart.cartProductsEntityAdapter.entities
+    );
+
+    const dispatch = useDispatch<DispatchType>();
+    const navigate = useNavigate();
+
+    // it's set if product is inside shopping cart, otherwise it's null
+    const [productInCart, setProductInCart] = useState<CartProduct | null>(
+        null
+    );
+
+    const searchProductInCart = useRef(false);
+
+    // if color or size is not set before updating product in cart, then show error message
+    const [cartProductErrorMessage, setCartProductErrorMessage] = useState<
+        string | undefined
+    >(undefined);
+
+    const addCartButtonClass = productInCart
+        ? 'single-product__add-cart single-product__add-cart--added'
+        : 'single-product__add-cart';
+
     const [singleProduct, setSingleProduct] = useState<ProductType>();
     const [productNotFound, setProductNotFound] = useState(false);
+
+    const [currentColor, setCurrentColor] = useState<Color>('Default');
+
+    const [currentSize, setCurrentSize] = useState<SizesObject>({
+        name: 'Default',
+        price: 0,
+    });
+
+    const [currentQuantity, setCurrentQuantity] = useState<number>(1);
+
+    // current tab for description component
+    const [descriptionTab, setDescriptionTab] =
+        useState<DescriptionTab>('Description');
+
+    const descriptionRef = useRef<HTMLDivElement | null>(null);
+
+    function setColor(color: Color) {
+        setCurrentColor(color);
+    }
+
+    function setSize(size: SizesObject) {
+        setCurrentSize(size);
+    }
+
+    function setQuantity(quantity: number) {
+        setCurrentQuantity(quantity);
+    }
+
+    function openDiscussionTab() {
+        setDescriptionTab('Discussion');
+
+        // when link for customer reviews is clicked, scroll page down to the discussion tab
+        // do smooth scroll to discussion tab and align scroll to the top of the discussion tab
+        if (descriptionRef.current) {
+            descriptionRef.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+            });
+        }
+    }
 
     // find product for current product link
     useEffect(() => {
@@ -81,6 +158,142 @@ export default function SingleProduct() {
         if (!productFound) setProductNotFound(true);
     }, [allProducts, singleProduct]);
 
+    function createNewPriceElement(price: Price): JSX.Element {
+        let newPrice = getNewPrice(price);
+
+        // if size is not selected and price is array, then use default values from array
+        if (currentSize.name === 'Default' && typeof newPrice !== 'number') {
+            return (
+                <span className='single-product__new-price'>
+                    &pound;{newPrice[0]} - &pound;
+                    {newPrice[1]}
+                </span>
+            );
+        }
+
+        // if size is selected then use price for selected size value
+        // or if size is not selected then use default price as simple number
+        else {
+            return (
+                <span className='single-product__new-price'>
+                    &pound;{newPrice}
+                </span>
+            );
+        }
+    }
+
+    // if size is not selected, then return default value
+    // otherwise return price for selected size value
+    function getNewPrice(price: Price): number | [number, number] {
+        if (currentSize.name === 'Default') return price.new;
+        else return currentSize.price;
+    }
+
+    // search through cart products and try to find current product
+    // if current product on page is in the cart then return it, otherwise return null
+    const findProductInCart = useCallback(() => {
+        // first get cart products names from map
+        const productsNames = Object.getOwnPropertyNames(cartProducts);
+        let cartProductObj: CartProduct | undefined;
+
+        for (let i = 0; i < productsNames.length; i++) {
+            cartProductObj = cartProducts[productsNames[i]];
+
+            if (cartProductObj && singleProduct) {
+                if (cartProductObj.product.id === singleProduct.id)
+                    return cartProductObj;
+            }
+        }
+
+        // current product on page is not found in the cart
+        return null;
+    }, [cartProducts, singleProduct]);
+
+    // see if current product on page is inside shopping cart
+    useEffect(() => {
+        let productFound: CartProduct | null;
+
+        // search for product in cart only once
+        if (!searchProductInCart.current && singleProduct) {
+            searchProductInCart.current = true;
+            productFound = findProductInCart();
+
+            setProductInCart(productFound);
+
+            // set current color, size and quantity of found product in cart
+            if (productFound) {
+                setColor(productFound.color);
+
+                // find size info of current product on page and set it to the local state
+                for (let i = 0; i < singleProduct.sizes.length; i++) {
+                    if (singleProduct.sizes[i].name === productFound.size) {
+                        setSize({ ...singleProduct.sizes[i] });
+                    }
+                }
+
+                // set product quantity from the shop cart to the local state
+                setQuantity(productFound.quantity);
+            }
+        }
+    }, [cartProducts, singleProduct, findProductInCart]);
+
+    // update product color, size or quantity in shopping cart or show
+    // error if not all default values are set
+    function updateProductInCart() {
+        let colorSet = currentColor !== 'Default';
+        let sizeSet = currentSize.name !== 'Default';
+        let errorMessage: string | undefined;
+
+        // set error message if exist
+        if (!colorSet && !sizeSet) errorMessage = 'Set color and size';
+        else if (!colorSet) errorMessage = 'Set color';
+        else if (!sizeSet) errorMessage = 'Set size';
+
+        setCartProductErrorMessage(errorMessage);
+
+        // dispatch product color, size and quantity to the store only if there are no errors
+        // also redirect to the main shop page and remove current page from history stack
+        if (!errorMessage) {
+            updateCartProduct();
+            navigate('/shop-page', { replace: true });
+        }
+    }
+
+    // dispatch product including product color, size and quantity to the store
+    function updateCartProduct() {
+        if (singleProduct) {
+            let newPrice = getNewPrice(singleProduct.price);
+
+            // if price is array, then use minimum price
+            if (typeof newPrice !== 'number') newPrice = newPrice[0];
+
+            // try to add new product if it's not already in the cart
+            dispatch(
+                addCartProduct({
+                    product: singleProduct,
+                    color: 'Default',
+                    price: 0,
+                    quantity: 1,
+                    size: 'Default',
+                })
+            );
+
+            // update color
+            dispatch(changeCartProductColor(singleProduct.id, currentColor));
+
+            // update size
+            dispatch(changeCartProductSize(singleProduct.id, currentSize.name));
+
+            // update quantity
+            dispatch(
+                changeCartProductQuantity(singleProduct.id, currentQuantity)
+            );
+
+            // update price
+            dispatch(changeCartPriceQuantity(singleProduct.id, newPrice));
+        }
+    }
+
     // if current product is found, then render it
     if (singleProduct) {
         const {
@@ -92,7 +305,11 @@ export default function SingleProduct() {
             price,
             text,
             description,
+            colors,
+            sizes,
         } = singleProduct;
+
+        let newPrice: JSX.Element = createNewPriceElement(price);
 
         return (
             <div className='single-product'>
@@ -123,6 +340,7 @@ export default function SingleProduct() {
                             <Link
                                 to=''
                                 className='single-product__reviews-link'
+                                onClick={openDiscussionTab}
                             >
                                 ({comments.numberOfComments} customer reviews)
                             </Link>
@@ -133,16 +351,7 @@ export default function SingleProduct() {
                                     &pound;{price.old}
                                 </span>
                             )}
-                            {typeof price.new === 'number' ? (
-                                <span className='single-product__new-price'>
-                                    &pound;{price.new}
-                                </span>
-                            ) : (
-                                <span className='single-product__new-price'>
-                                    &pound;{price.new[0]} - &pound;
-                                    {price.new[1]}
-                                </span>
-                            )}
+                            {newPrice}
                         </div>
                         <p className='single-product__text'>{text}</p>
                         <div className='single-product__list'>
@@ -150,7 +359,11 @@ export default function SingleProduct() {
                                 Color
                             </span>
                             <div className='single-product__list-select'>
-                                <ColorSelect />
+                                <ColorSelect
+                                    colors={colors}
+                                    currentColor={currentColor}
+                                    setColor={setColor}
+                                />
                             </div>
                         </div>
                         <div className='single-product__list'>
@@ -158,22 +371,45 @@ export default function SingleProduct() {
                                 Size
                             </span>
                             <div className='single-product__list-select'>
-                                <SizeSelect />
+                                <SizeSelect
+                                    sizes={sizes}
+                                    currentSize={currentSize.name}
+                                    setSize={setSize}
+                                />
                             </div>
                         </div>
                         <div className='single-product__quantity'>
-                            <Quantity />
-                            <button className='single-product__add-cart'>
-                                Add to cart
+                            <Quantity
+                                currentQuantity={currentQuantity}
+                                setQuantity={setQuantity}
+                                maximumQuantity={10}
+                            />
+                            <button
+                                className={addCartButtonClass}
+                                onClick={updateProductInCart}
+                            >
+                                {productInCart ? 'In cart' : 'Add to cart'}
                             </button>
                         </div>
+                        {cartProductErrorMessage && (
+                            <p className='single-product__cart-error-message'>
+                                {cartProductErrorMessage}
+                            </p>
+                        )}
                     </div>
                 </div>
-                <div className='single-product__description'>
-                    <Description
-                        description={description}
-                        comments={comments}
-                    />
+                <div
+                    className='single-product__description-wrapper'
+                    ref={descriptionRef}
+                >
+                    <div className='single-product__description'>
+                        <Description
+                            description={description}
+                            comments={comments}
+                            currentTab={descriptionTab}
+                            changeTab={setDescriptionTab}
+                        />
+                    </div>
                 </div>
             </div>
         );

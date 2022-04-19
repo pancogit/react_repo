@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Colors } from '../components/ColorSelect';
-import { Sizes } from '../components/SizeSelect';
+import { Color } from '../components/ColorSelect';
+import { Size } from '../components/SizeSelect';
 import { getAsyncData } from './asyncData';
 import { CategoryState } from './categoriesSlice';
 
@@ -13,7 +13,7 @@ interface Product {
     price: Price;
     sale: boolean;
     text: string;
-    colors: Colors;
+    colors: Color[];
     sizes: SizesObjectArray;
     productCode: number;
     description: string;
@@ -27,8 +27,8 @@ interface Price {
     new: number | [number, number];
 }
 
-interface SizesObject {
-    name: Sizes;
+export interface SizesObject {
+    name: Size;
     price: number;
 }
 
@@ -42,7 +42,7 @@ interface SingleComment {
     text: string;
 }
 
-type SizesObjectArray = SizesObject[];
+export type SizesObjectArray = SizesObject[];
 type AllComments = SingleComment[];
 
 export type Products = Product[];

@@ -7,16 +7,16 @@ import {
 
 import { WritableDraft } from 'immer/dist/internal';
 
-import { Colors } from '../components/ColorSelect';
-import { Sizes } from '../components/SizeSelect';
+import { Color } from '../components/ColorSelect';
+import { Size } from '../components/SizeSelect';
 import { Delivery } from './deliverySlice';
 import { ProductType } from './productsSlice';
 
 export interface CartProduct {
     product: ProductType;
     quantity: number;
-    color: Colors;
-    size: Sizes;
+    color: Color;
+    size: Size;
     price: number;
 }
 
@@ -108,7 +108,7 @@ const cartSlice = createSlice({
         changeCartProductColor: {
             reducer(
                 state,
-                action: PayloadAction<CartProductChangePayload<Colors>>
+                action: PayloadAction<CartProductChangePayload<Color>>
             ) {
                 const { productId, changer } = action.payload;
                 const productFound =
@@ -122,7 +122,7 @@ const cartSlice = createSlice({
             },
 
             // add function for creating payload
-            prepare(productId: string, changer: Colors) {
+            prepare(productId: string, changer: Color) {
                 return { payload: { productId, changer } };
             },
         },
@@ -131,7 +131,7 @@ const cartSlice = createSlice({
         changeCartProductSize: {
             reducer(
                 state,
-                action: PayloadAction<CartProductChangePayload<Sizes>>
+                action: PayloadAction<CartProductChangePayload<Size>>
             ) {
                 const { productId, changer } = action.payload;
                 const productFound =
@@ -145,7 +145,7 @@ const cartSlice = createSlice({
             },
 
             // add function for creating payload
-            prepare(productId: string, changer: Sizes) {
+            prepare(productId: string, changer: Size) {
                 return { payload: { productId, changer } };
             },
         },
@@ -162,6 +162,29 @@ const cartSlice = createSlice({
 
                 if (productFound) {
                     productFound.product.starsRated = changer;
+
+                    updateTotalPrice(state);
+                }
+            },
+
+            // add function for creating payload
+            prepare(productId: string, changer: number) {
+                return { payload: { productId, changer } };
+            },
+        },
+
+        // change price for given cart product
+        changeCartPriceQuantity: {
+            reducer(
+                state,
+                action: PayloadAction<CartProductChangePayload<number>>
+            ) {
+                const { productId, changer } = action.payload;
+                const productFound =
+                    state.cartProductsEntityAdapter.entities[productId];
+
+                if (productFound) {
+                    productFound.price = changer;
 
                     updateTotalPrice(state);
                 }
@@ -197,6 +220,7 @@ export const {
     changeCartProductColor,
     changeCartProductSize,
     changeCartProductStarsRating,
+    changeCartPriceQuantity,
 } = cartSlice.actions;
 
 // export selectors for created entity adapter

@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
+
 import {
     clearSearchedProducts,
     setCurrentPage,
     setSortingType,
 } from '../slices/shopPageSlice';
+
 import { DispatchType, StoreState } from '../store/store';
 
 export type SortOptionType =

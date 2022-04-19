@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
-import { Colors } from './ColorSelect';
+import { Color } from './ColorSelect';
 import QuantitySelect from './QuantitySelect';
-import { Sizes } from './SizeSelect';
+import { Size } from './SizeSelect';
 
 interface Props {
     image: Image;
     heading: string;
-    color: Colors;
-    size: Sizes;
+    color: Color;
+    size: Size;
     productCode: number;
     price: number;
 }
