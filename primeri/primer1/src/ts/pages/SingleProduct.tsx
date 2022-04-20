@@ -109,9 +109,8 @@ export default function SingleProduct() {
         let currentProduct: ProductType;
         let productFound = false;
 
-        // don't search again if product is already found or if products
-        // are still not set to the global store
-        if (singleProduct || !allProducts.length) return;
+        // don't search if products are still not set to the global store
+        if (!allProducts.length) return;
 
         // search for current single product
         for (let i = 0; i < allProducts.length; i++) {
@@ -307,6 +306,7 @@ export default function SingleProduct() {
             description,
             colors,
             sizes,
+            id,
         } = singleProduct;
 
         let newPrice: JSX.Element = createNewPriceElement(price);
@@ -336,6 +336,7 @@ export default function SingleProduct() {
                             <Stars
                                 isEditable={true}
                                 numberOfStars={starsRated}
+                                productId={id}
                             />
                             <Link
                                 to=''

@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Color } from '../components/ColorSelect';
 import { Size } from '../components/SizeSelect';
 import { getAsyncData } from './asyncData';
-import { CategoryState } from './categoriesSlice';
+import { CategoryState, Subcategories, Submenus } from './categoriesSlice';
 
 interface Product {
     id: string;
@@ -42,6 +42,11 @@ interface SingleComment {
     text: string;
 }
 
+interface StarsRatingPayload {
+    productId: string;
+    starsRating: number;
+}
+
 export type SizesObjectArray = SizesObject[];
 type AllComments = SingleComment[];
 
@@ -62,7 +67,56 @@ const initialState: CategoryState = [];
 const productsSlice = createSlice({
     name: 'products',
     initialState,
-    reducers: {},
+    reducers: {
+        updateProductStarsRating: {
+            reducer(state, action: PayloadAction<StarsRatingPayload>) {
+                let productFound = false;
+                let product: Product;
+                let subcategories: Subcategories;
+                let submenu: Submenus;
+                let products: Products;
+
+                // search through products and when product is found, update stars rating
+                for (let i = 0; i < state.length; i++) {
+                    if (productFound) break;
+
+                    subcategories = state[i].subcategories;
+
+                    for (let j = 0; j < subcategories.length; j++) {
+                        if (productFound) break;
+
+                        submenu = subcategories[j].submenu;
+
+                        for (let k = 0; k < submenu.length; k++) {
+                            if (productFound) break;
+
+                            products = submenu[k].products;
+
+                            for (let m = 0; m < products.length; m++) {
+                                if (productFound) break;
+
+                                product = products[m];
+
+                                // if product is found, update stars rating and finish the search
+                                if (product.id === action.payload.productId) {
+                                    product.starsRated =
+                                        action.payload.starsRating;
+
+                                    productFound = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+
+            // create payload from function arguments
+            prepare(productId: string, starsRating: number) {
+                return { payload: { productId, starsRating } };
+            },
+        },
+    },
 
     extraReducers: builder => {
         builder.addCase(
@@ -75,3 +129,4 @@ const productsSlice = createSlice({
 });
 
 export const productsReducer = productsSlice.reducer;
+export const { updateProductStarsRating } = productsSlice.actions;

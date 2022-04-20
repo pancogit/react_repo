@@ -20,6 +20,7 @@
     opacity: 0;
     visibility: hidden;
     cursor: auto;
+    z-index: variables.$top_back_z_index;
 
     // set small transition for opacity to slowly show icon
     transition: opacity variables.$top_back_transition;
