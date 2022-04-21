@@ -70,7 +70,7 @@ $navigation_hamburger_close_transform_hover: 90deg;
 $navigation_hamburger_close_top: 1rem;
 $navigation_hamburger_close_right: 1.5rem;
 $navigation_hamburger_close_z_index: 20000;
-$navigation_list_hamburger_z_index: 10000;
+$navigation_list_hamburger_z_index: 20000;
 $navigation_arrow_margin_left: 0.6rem;
 $navigation_arrow_margin_right: 0.1rem;
 $navigation_arrow_font_size: 0.7rem;
@@ -175,15 +175,20 @@ $breadcrumbs_list_transition: 1s;
 
 // top-back
 $top_back_padding: 0.7rem 0.6rem;
+$top_back_padding_small: 0.5rem 0.4rem;
 $top_back_bottom: 1rem;
 $top_back_left: 0.5rem;
 $top_back_border_radius: 0.15rem;
 $top_back_transition: 0.35s;
 $top_back_z_index: 10000;
 $top_back_active_opacity: 1;
+$top_back_small_screen_width: 28rem;
 $top_back_text_font_size: 0.8rem;
+$top_back_text_font_size_small: 0.65rem;
 $top_back_icon_margin_bottom: 0.5rem;
+$top_back_icon_margin_bottom_small: 0.3rem;
 $top_back_icon_font_size: 0.9rem;
+$top_back_icon_font_size_small: 0.6rem;
 
 // search
 $search_border_width: 0.13rem;

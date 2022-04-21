@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import ColorSelect, { Color } from '../components/ColorSelect';
 import Description, { DescriptionTab } from '../components/Description';
 import Quantity from '../components/Quantity';
@@ -14,7 +14,7 @@ import { Price } from '../components/Product';
 import {
     addCartProduct,
     CartProduct,
-    changeCartPriceQuantity,
+    changeCartProductPrice,
     changeCartProductColor,
     changeCartProductQuantity,
     changeCartProductSize,
@@ -44,6 +44,7 @@ export default function SingleProduct() {
 
     const dispatch = useDispatch<DispatchType>();
     const navigate = useNavigate();
+    const location = useLocation();
 
     // it's set if product is inside shopping cart, otherwise it's null
     const [productInCart, setProductInCart] = useState<CartProduct | null>(
@@ -242,6 +243,7 @@ export default function SingleProduct() {
         let colorSet = currentColor !== 'Default';
         let sizeSet = currentSize.name !== 'Default';
         let errorMessage: string | undefined;
+        let redirectLink = '';
 
         // set error message if exist
         if (!colorSet && !sizeSet) errorMessage = 'Set color and size';
@@ -252,9 +254,15 @@ export default function SingleProduct() {
 
         // dispatch product color, size and quantity to the store only if there are no errors
         // also redirect to the main shop page and remove current page from history stack
+        // if it's coming from shop cart page, that means product is edited and then redirect
+        // to the shop cart page instead
         if (!errorMessage) {
             updateCartProduct();
-            navigate('/shop-page', { replace: true });
+
+            if (location.state === '/shop-cart') redirectLink = '/shop-cart';
+            else redirectLink = '/shop-page';
+
+            navigate(redirectLink, { replace: true });
         }
     }
 
@@ -289,7 +297,7 @@ export default function SingleProduct() {
             );
 
             // update price
-            dispatch(changeCartPriceQuantity(singleProduct.id, newPrice));
+            dispatch(changeCartProductPrice(singleProduct.id, newPrice));
         }
     }
 

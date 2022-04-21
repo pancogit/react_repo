@@ -65,6 +65,16 @@
             background-color: colors.$order_checkout_border_color_hover;
             border-color: colors.$order_checkout_border_color_hover;
         }
+
+        &--disabled {
+            cursor: auto;
+        }
+
+        &--disabled,
+        &--disabled:hover {
+            background-color: colors.$order_background_color_disabled;
+            border-color: colors.$order_background_color_disabled;
+        }
     }
 
     &__promotion {
@@ -78,6 +88,15 @@
 
         &:hover {
             color: colors.$order_promotion_color_hover;
+        }
+
+        &--disabled {
+            cursor: auto;
+        }
+
+        &--disabled,
+        &--disabled:hover {
+            color: colors.$order_color;
         }
     }
 

@@ -8,6 +8,8 @@ export interface Delivery {
 
 type State = Delivery[];
 
+export type { State as DeliveryState };
+
 interface AsyncData {
     delivery: State;
 }

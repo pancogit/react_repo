@@ -1,32 +1,62 @@
-import { Link } from 'react-router-dom';
-import { Color } from './ColorSelect';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import QuantitySelect from './QuantitySelect';
-import { Size } from './SizeSelect';
+
+import {
+    CartProduct as CartProductState,
+    changeCartProductQuantity,
+    removeCartProduct,
+} from '../slices/cartSlice';
+
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { DispatchType } from '../store/store';
 
 interface Props {
-    image: Image;
-    heading: string;
-    color: Color;
-    size: Size;
-    productCode: number;
-    price: number;
+    cartProduct: CartProductState;
 }
 
-interface Image {
-    link: string;
-    path: string;
-}
+export default function CartProduct({ cartProduct }: Props) {
+    const { color, size, price, quantity } = cartProduct;
+    const { link, path, name, productCode, id } = cartProduct.product;
 
-export default function CartProduct(props: Props) {
-    const { image, heading, color, size, productCode, price } = props;
+    // current product quantity
+    const [productQuantity, setProductQuantity] = useState(quantity);
+
+    const dispatch = useDispatch<DispatchType>();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const totalPrice = quantity * price;
+
+    // set current selected quantity and dispatch it to the store
+    function setQuantity(quantity: number) {
+        setProductQuantity(quantity);
+        dispatch(changeCartProductQuantity(id, quantity));
+    }
+
+    function removeProduct() {
+        dispatch(removeCartProduct(id));
+    }
+
+    // when product is edited, save current url location to the location state
+    // because when product edit is finished, it can redirect to the cart product page again
+    function editProduct(
+        event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+        link: string
+    ) {
+        // prevent default link behaviour and redirect to the link manually
+        event.preventDefault();
+
+        navigate(link, { state: location.pathname });
+    }
 
     return (
         <div className='cart-product cart-product--margin'>
             <div className='cart-product__image-wrapper'>
                 <div className='cart-product__image-box'>
-                    <Link to={image.link} className='cart-product__image-link'>
+                    <Link to={link} className='cart-product__image-link'>
                         <img
-                            src={image.path}
+                            src={path}
                             alt='cart product'
                             className='cart-product__image'
                         />
@@ -34,8 +64,8 @@ export default function CartProduct(props: Props) {
                 </div>
 
                 <div className='cart-product__info'>
-                    <Link to={image.link} className='cart-product__link'>
-                        <h3 className='cart-product__heading'>{heading}</h3>
+                    <Link to={link} className='cart-product__link'>
+                        <h3 className='cart-product__heading'>{name}</h3>
                     </Link>
                     <div className='cart-product__types'>
                         <span className='cart-product__type'>Color:</span>
@@ -57,19 +87,26 @@ export default function CartProduct(props: Props) {
             </div>
 
             <div className='cart-product__quantity'>
-                <QuantitySelect />
-                <div className='cart-product__edit'>Remove</div>
+                <QuantitySelect
+                    quantity={productQuantity}
+                    maximumQuantity={10}
+                    setQuantity={setQuantity}
+                />
+                <div className='cart-product__edit' onClick={removeProduct}>
+                    Remove
+                </div>
             </div>
             <div className='cart-product__cost'>
                 <div className='cart-product__money'>&pound;{price}</div>
             </div>
             <div className='cart-product__cost'>
                 <div className='cart-product__money cart-product__money--margin'>
-                    &pound;70.00
+                    &pound;{totalPrice}
                 </div>
                 <Link
-                    to={image.link}
+                    to={link}
                     className='cart-product__edit cart-product__edit--left'
+                    onClick={event => editProduct(event, link)}
                 >
                     Edit
                 </Link>

@@ -38,12 +38,26 @@
         cursor: pointer;
     }
 
+    // change component for small screens
+    @media screen and (max-width: variables.$top_back_small_screen_width) {
+        padding: variables.$top_back_padding_small;
+    }
+
     &__text {
         font-size: variables.$top_back_text_font_size;
+
+        @media screen and (max-width: variables.$top_back_small_screen_width) {
+            font-size: variables.$top_back_text_font_size_small;
+        }
     }
 
     &__icon {
         margin-bottom: variables.$top_back_icon_margin_bottom;
         font-size: variables.$top_back_icon_font_size;
+
+        @media screen and (max-width: variables.$top_back_small_screen_width) {
+            font-size: variables.$top_back_icon_font_size_small;
+            margin-bottom: variables.$top_back_icon_margin_bottom_small;
+        }
     }
 }

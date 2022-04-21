@@ -28,7 +28,16 @@ export interface CartProductChangePayload<Type> {
 interface State {
     cartProductsEntityAdapter: EntityState<CartProduct>;
     totalPrice: number;
-    delivery?: Delivery;
+    orders: OrdersType;
+}
+
+type OrdersType = OrderType[];
+
+interface OrderType {
+    products: CartProduct[];
+    delivery: Delivery;
+    orderPrice: number;
+    promotionalCode?: string;
 }
 
 export type { State as CartState };
@@ -44,6 +53,7 @@ const entityAdapterState = entityAdapter.getInitialState();
 const initialState: State = {
     totalPrice: 0,
     cartProductsEntityAdapter: entityAdapterState,
+    orders: [],
 };
 
 const cartSlice = createSlice({
@@ -174,7 +184,7 @@ const cartSlice = createSlice({
         },
 
         // change price for given cart product
-        changeCartPriceQuantity: {
+        changeCartProductPrice: {
             reducer(
                 state,
                 action: PayloadAction<CartProductChangePayload<number>>
@@ -193,6 +203,30 @@ const cartSlice = createSlice({
             // add function for creating payload
             prepare(productId: string, changer: number) {
                 return { payload: { productId, changer } };
+            },
+        },
+
+        // save each checkout order
+        checkoutCartProducts: {
+            reducer(state, action: PayloadAction<OrderType>) {
+                state.orders.push(action.payload);
+            },
+
+            // create payload from function arguments
+            prepare(
+                products: CartProduct[],
+                delivery: Delivery,
+                orderPrice: number,
+                promotionalCode?: string
+            ) {
+                return {
+                    payload: {
+                        products,
+                        delivery,
+                        orderPrice,
+                        promotionalCode,
+                    },
+                };
             },
         },
     },
@@ -220,7 +254,8 @@ export const {
     changeCartProductColor,
     changeCartProductSize,
     changeCartProductStarsRating,
-    changeCartPriceQuantity,
+    changeCartProductPrice,
+    checkoutCartProducts,
 } = cartSlice.actions;
 
 // export selectors for created entity adapter

@@ -1,8 +1,25 @@
+import { EntityState } from '@reduxjs/toolkit';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CartProduct from '../../components/CartProduct';
 import Order from '../../components/Order';
 
+import {
+    CartProduct as CartProductState,
+    selectAllCartProducts,
+} from '../../slices/cartSlice';
+
+import { StoreState } from '../../store/store';
+
 export default function ShopCart() {
+    const cartProductsEntityAdapter = useSelector<
+        StoreState,
+        EntityState<CartProductState>
+    >(state => state.cart.cartProductsEntityAdapter);
+
+    // get all cart products with entity adapter pre defined selector
+    const cartProducts = selectAllCartProducts(cartProductsEntityAdapter);
+
     return (
         <div className='shop-cart'>
             <div className='shop-cart__content-wrapper'>
@@ -23,28 +40,12 @@ export default function ShopCart() {
                         </h3>
                     </div>
                     <div className='shop-cart__items'>
-                        <CartProduct
-                            image={{
-                                link: '/products/mens/jackets/01',
-                                path: '/images/mens/jackets/01.jpg',
-                            }}
-                            heading='Hommed Light Jumper'
-                            color='Blue'
-                            size='XS'
-                            productCode={185721}
-                            price={35}
-                        />
-                        <CartProduct
-                            image={{
-                                link: '/products/mens/jackets/09',
-                                path: '/images/mens/jackets/09.jpeg',
-                            }}
-                            heading='Jacket Men'
-                            color='Black'
-                            size='L'
-                            productCode={548865}
-                            price={55}
-                        />
+                        {cartProducts.map(singleProduct => (
+                            <CartProduct
+                                key={singleProduct.product.id}
+                                cartProduct={singleProduct}
+                            />
+                        ))}
                     </div>
                 </div>
                 <div className='shop-cart__order-wrapper'>
