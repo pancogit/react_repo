@@ -1,6 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { setCurrentPage } from '../slices/shopPageSlice';
+import { DispatchType } from '../store/store';
 
 export default function Searchbar() {
     const [openSearch, setOpenSearch] = useState(false);
@@ -15,9 +18,10 @@ export default function Searchbar() {
         : 'searchbar';
 
     const navigate = useNavigate();
+    const dispatch = useDispatch<DispatchType>();
 
-    // open search box if it's not opened or redirect to the search page
-    // if search box is opened
+    // open search box if it's not opened or redirect to the
+    // search page if search box is opened
     function buttonIsClicked() {
         if (!openSearch) setOpenSearch(true);
         else goToSearchPage();
@@ -25,13 +29,14 @@ export default function Searchbar() {
 
     function goToSearchPage() {
         const searchResult = searchValue.trim();
-        let queryString = '/search';
-
-        // if search result is not empty, then append them to the query string
-        if (searchResult !== '') queryString += `?result=${searchResult}`;
+        const queryString = `/search?result=${searchResult}`;
 
         // close and clear search box
         closeClearSearch();
+
+        // if search is finished, dispatch current page to the first one
+        // because on every search current page should be reset
+        dispatch(setCurrentPage(1));
 
         navigate(queryString);
     }

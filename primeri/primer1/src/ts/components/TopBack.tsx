@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
 export default function TopBack() {
     const [showButton, setShowButton] = useState(false);
@@ -33,9 +32,9 @@ export default function TopBack() {
     }
 
     return (
-        <Link to='#' className={topBackClass} onClick={scrollToTop}>
+        <button className={topBackClass} onClick={scrollToTop}>
             <i className='fa-solid fa-arrow-up top-back__icon'></i>
             <span className='top-back__text'>Top</span>
-        </Link>
+        </button>
     );
 }
